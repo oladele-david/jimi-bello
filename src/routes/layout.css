@@ -1,2 +1,113 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+
+@import '@fontsource/raleway/400.css';
+@import '@fontsource/raleway/600.css';
+@import '@fontsource/raleway/700.css';
+
+/* JBC brand tokens — sourced from JBC_Brand_Manual.pdf pages 10-13.
+   Palette is deliberately three colours only: Dark Liver, Maximum Red, White.
+   Secondary text/dividers use opacity tints of Dark Liver (the manual's own
+   "50% Black" / "70% Black" treatment) rather than any invented neutral. */
+@theme {
+	--color-jbc-black: #262626;
+	--color-jbc-red: #d61b0c;
+	--color-jbc-white: #ffffff;
+
+	/* Opacity tints only — no new hues enter the system here. */
+	--color-jbc-black-70: rgba(38, 38, 38, 0.7);
+	--color-jbc-black-50: rgba(38, 38, 38, 0.5);
+	--color-jbc-black-15: rgba(38, 38, 38, 0.15);
+	--color-jbc-white-70: rgba(255, 255, 255, 0.7);
+	--color-jbc-white-50: rgba(255, 255, 255, 0.5);
+	--color-jbc-white-15: rgba(255, 255, 255, 0.15);
+
+	--font-sans: 'Raleway', ui-sans-serif, system-ui, sans-serif;
+
+	/* Type scale — brand manual: H1 Bold 36px+, H2 SemiBold 24px,
+	   body large Regular 18px, body Regular 16px. Desktop values scale up. */
+	--text-eyebrow: 0.75rem;
+	--text-eyebrow--line-height: 1.2;
+	--text-body: 1rem;
+	--text-body--line-height: 1.7;
+	--text-body-lg: 1.125rem;
+	--text-body-lg--line-height: 1.7;
+	--text-h2: 1.5rem;
+	--text-h2--line-height: 1.25;
+	--text-h2-lg: 2.5rem;
+	--text-h2-lg--line-height: 1.15;
+	--text-h1: 2.25rem;
+	--text-h1--line-height: 1.1;
+	--text-hero: clamp(2.75rem, 8vw, 6rem);
+	--text-hero--line-height: 0.98;
+
+	/* Section rhythm — 120px+ vertical spacing on desktop */
+	--spacing-section: 5rem;
+	--spacing-section-lg: 8.5rem;
+
+	/* Logo constraints, enforced in Logo.svelte */
+	--jbc-logo-min-width: 65px;
+
+	/* Scroll-reveal and hover easing. Restrained, no overshoot. */
+	--ease-out-brand: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+		/* Anchor targets must clear the fixed header. */
+		scroll-padding-top: 6rem;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		background-color: var(--color-jbc-white);
+		color: var(--color-jbc-black);
+		font-family: var(--font-sans);
+		font-size: var(--text-body);
+		line-height: 1.7;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	::selection {
+		background-color: var(--color-jbc-red);
+		color: var(--color-jbc-white);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-jbc-red);
+		outline-offset: 3px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+}
+
+@utility eyebrow {
+	font-size: var(--text-eyebrow);
+	font-weight: 600;
+	letter-spacing: 0.24em;
+	text-transform: uppercase;
+	line-height: 1.2;
+}
+
+@utility shell {
+	width: 100%;
+	max-width: 84rem;
+	margin-inline: auto;
+	padding-inline: 1.5rem;
+
+	@media (width >= 64rem) {
+		padding-inline: 3rem;
+	}
+}
