@@ -82,11 +82,23 @@
 </script>
 
 <span
-	class={['jbc-logo', className]}
+	class={[
+		/* Minimum size enforced twice: the derived value sets the target, and
+		   min-w stops any flex or grid parent squeezing below the 65px floor.
+		   Clear space travels with the mark as padding, so nav items, images and
+		   page edges cannot crowd it regardless of where the logo is placed —
+		   box-content keeps that padding outside the declared width. */
+		'box-content inline-block w-[var(--jbc-logo-width)] min-w-[var(--jbc-logo-min-width)]',
+		'p-[var(--jbc-logo-clear-space)]',
+		/* Isolate the mark from inherited page typography. */
+		'[&_text]:[font-kerning:none]',
+		className
+	]}
 	style:--jbc-logo-width="{safeWidth}px"
 	style:--jbc-logo-clear-space={clearSpace}
 >
 	<svg
+		class="block h-auto w-full"
 		viewBox="0 0 {box.w} {box.h}"
 		role={title ? 'img' : 'presentation'}
 		aria-label={title || undefined}
@@ -163,28 +175,3 @@
 		{/if}
 	</svg>
 </span>
-
-<style>
-	.jbc-logo {
-		display: inline-block;
-		/* Minimum size enforced twice: the derived value sets the target, and
-		   min-width stops any flex or grid parent squeezing below 65px. */
-		width: var(--jbc-logo-width);
-		min-width: 65px;
-		/* Clear space travels with the mark, so nav items, images and page edges
-		   cannot crowd it regardless of where the logo is placed. */
-		padding: var(--jbc-logo-clear-space);
-		box-sizing: content-box;
-	}
-
-	.jbc-logo svg {
-		display: block;
-		width: 100%;
-		height: auto;
-	}
-
-	.jbc-logo text {
-		/* Isolate the mark from inherited page typography. */
-		font-kerning: none;
-	}
-</style>

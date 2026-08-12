@@ -19,25 +19,18 @@
 	position it absolutely behind content.
 -->
 <img
-	src={src}
+	{src}
 	alt=""
-	class={['skyline', className]}
+	class={[
+		/* object-cover + bottom origin matches the old SVG's
+		   preserveAspectRatio="xMidYMax slice". */
+		'pointer-events-none block h-full w-full object-cover object-bottom',
+		'opacity-[var(--skyline-opacity)]',
+		className
+	]}
 	aria-hidden="true"
 	draggable="false"
 	loading="lazy"
 	decoding="async"
 	style:--skyline-opacity={opacity}
 />
-
-<style>
-	.skyline {
-		display: block;
-		width: 100%;
-		height: 100%;
-		/* Matches the old SVG's preserveAspectRatio="xMidYMax slice". */
-		object-fit: cover;
-		object-position: center bottom;
-		opacity: var(--skyline-opacity);
-		pointer-events: none;
-	}
-</style>

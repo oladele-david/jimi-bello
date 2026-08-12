@@ -17,6 +17,18 @@
 		{ value: '140+', label: 'Rooms completed in Lagos' },
 		{ value: '10 yr', label: 'Structural warranty on our furniture' }
 	];
+
+	/**
+	 * The story's three paragraphs share one measure and colour. Spacing is left
+	 * to each `<p>`: the first one's top margin is responsive and a `mt-*` here
+	 * would need overriding, which puts two competing utilities in one class
+	 * list and leaves the outcome to Tailwind's sort order rather than to intent.
+	 */
+	const PROSE = 'max-w-[58ch] text-body-lg leading-[1.75] text-jbc-black-70';
+
+	/** Vision and Mission are typographically identical; only the copy differs. */
+	const VM_TITLE = 'mt-5 max-w-[20ch] text-h2 font-bold lg:text-[2.25rem]';
+	const VM_TEXT = 'mt-6 max-w-[48ch] text-body-lg leading-[1.75] text-jbc-white-70';
 </script>
 
 <svelte:head>
@@ -27,9 +39,9 @@
 	/>
 </svelte:head>
 
-<section class="hero">
+<section class="relative flex min-h-[68svh] items-end overflow-hidden bg-jbc-black">
 	<img
-		class="hero__image"
+		class="absolute inset-0 h-full w-full object-cover"
 		src={img(HERO, 1920, { ratio: 16 / 9 })}
 		srcset={srcset(HERO, { ratio: 16 / 9 })}
 		sizes="100vw"
@@ -39,77 +51,84 @@
 		fetchpriority="high"
 		decoding="async"
 	/>
-	<div class="hero__scrim" aria-hidden="true"></div>
-	<div class="hero__inner shell">
-		<p class="hero__eyebrow eyebrow">About</p>
-		<h1 class="hero__title">A design studio with a workshop attached.</h1>
+	<div class="scrim-page" aria-hidden="true"></div>
+	<div class="relative shell pb-16 text-jbc-white lg:pb-22">
+		<p class="eyebrow text-jbc-white-70">About</p>
+		<!-- Over photography the title runs past the shared page-head token. -->
+		<h1 class="mt-5 max-w-[18ch] text-h1 font-bold tracking-jbc-tight lg:text-[4.5rem]">
+			A design studio with a workshop attached.
+		</h1>
 	</div>
 </section>
 
-<section class="story">
-	<div class="story__inner shell">
-		<FadeUp class="story__lead">
-			<p class="story__pull">
+<section class="py-section lg:py-section-lg">
+	<div class="shell lg:grid lg:grid-cols-[1fr_1.15fr] lg:items-start lg:gap-x-20">
+		<FadeUp>
+			<p class="max-w-[22ch] text-h2-lg leading-[1.1] font-bold tracking-jbc-snug">
 				We started because too many good rooms were being finished with whatever happened to fit.
 			</p>
 		</FadeUp>
 
-		<FadeUp index={1} class="story__body">
-			<p>
+		<FadeUp index={1}>
+			<!-- Below lg the body follows the pull-quote and needs the gap; level
+			     with it in two columns, it must not. -->
+			<p class="{PROSE} mt-8 lg:mt-0">
 				JBC began as a two-person interior practice in Lagos, and for the first few years we did
 				what every studio does: draw the space, then spend weeks hunting for pieces that were nearly
 				the right size. Nearly is expensive. Nearly is what makes a finished room feel slightly off
 				without anyone being able to say why.
 			</p>
-			<p>
+			<p class="{PROSE} mt-6">
 				So we opened a workshop. Now when a wall is 2,340mm wide, the bookcase is 2,340mm wide. When
 				a client wants a four-poster bed and has a normal ceiling, we redraw the bed rather than
 				talk them out of it. The design and the making sit in the same building, which means the
 				drawings are honest about what can actually be built — and the build never quietly departs
 				from the drawing.
 			</p>
-			<p>
+			<p class="{PROSE} mt-6">
 				We work on homes and offices, on budgets from modest to considerable. Need budget-friendly
 				interiors done properly? That is a conversation we are happy to have, and one we have often.
 			</p>
-			<CTAButton href="/services" variant="outline" class="story__cta">What we do</CTAButton>
+			<CTAButton href="/services" variant="outline" class="mt-9">What we do</CTAButton>
 		</FadeUp>
 	</div>
 </section>
 
-<section class="numbers">
+<section class="pb-section lg:pb-section-lg">
 	<div class="shell">
-		<ul class="numbers__list">
+		<ul class="grid gap-10 border-t border-jbc-black-15 pt-10 md:grid-cols-3 md:gap-12">
 			{#each numbers as item, i (item.label)}
-				<FadeUp as="li" index={i} class="numbers__item">
-					<span class="numbers__value">{item.value}</span>
-					<span class="numbers__label">{item.label}</span>
+				<FadeUp as="li" index={i} class="grid gap-3">
+					<span class="text-[3rem] leading-none font-bold tracking-jbc-tight">{item.value}</span>
+					<span class="max-w-[24ch] text-body leading-[1.6] text-jbc-black-70">{item.label}</span>
 				</FadeUp>
 			{/each}
 		</ul>
 	</div>
 </section>
 
-<section class="vm dark-bg">
-	<div class="vm__motif" aria-hidden="true">
+<section class="dark-bg relative overflow-hidden bg-jbc-black text-jbc-white">
+	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[65%]" aria-hidden="true">
 		<Skyline theme="dark" opacity={0.18} />
 	</div>
 
-	<div class="vm__inner shell">
-		<FadeUp class="vm__block vm__block--vision">
-			<p class="vm__eyebrow eyebrow">Vision</p>
-			<h2 class="vm__title">Rooms in Lagos that were made for the people in them.</h2>
-			<p class="vm__text">
+	<!-- Offset, not matched: the two blocks are the same width but the second
+	     sits lower, so they read as a conversation, not a table. -->
+	<div class="relative shell grid gap-14 py-section lg:grid-cols-2 lg:gap-x-20 lg:py-section-lg">
+		<FadeUp>
+			<p class="eyebrow text-jbc-red">Vision</p>
+			<h2 class={VM_TITLE}>Rooms in Lagos that were made for the people in them.</h2>
+			<p class={VM_TEXT}>
 				We want made-to-measure to stop being a luxury word. A house full of pieces built for its
 				own walls should be an ordinary way to live, not a rare one — and the way there is to keep
 				the design and the making under one roof, where the cost of custom stops multiplying.
 			</p>
 		</FadeUp>
 
-		<FadeUp index={1} class="vm__block vm__block--mission">
-			<p class="vm__eyebrow eyebrow">Mission</p>
-			<h2 class="vm__title">Design it, build it, stand behind it.</h2>
-			<p class="vm__text">
+		<FadeUp index={1} class="lg:mt-24">
+			<p class="eyebrow text-jbc-red">Mission</p>
+			<h2 class={VM_TITLE}>Design it, build it, stand behind it.</h2>
+			<p class={VM_TEXT}>
 				Every project runs with one team from first sketch to handover: no design that cannot be
 				built, no builder inheriting someone else's drawing. Every piece that leaves our workshop is
 				signed, numbered and warranted for ten years — because a chair you can hand down is worth
@@ -119,10 +138,11 @@
 	</div>
 </section>
 
-<section class="workshop">
-	<div class="workshop__inner shell">
-		<FadeUp class="workshop__media">
+<section class="py-section lg:py-section-lg">
+	<div class="shell lg:grid lg:grid-cols-[0.95fr_1fr] lg:items-center lg:gap-x-20">
+		<FadeUp>
 			<img
+				class="block h-auto w-full bg-jbc-black-15"
 				src={img(WORKSHOP, 1024, { ratio: 4 / 5 })}
 				srcset={srcset(WORKSHOP, { ratio: 4 / 5 })}
 				sizes="(min-width: 64rem) 45vw, 100vw"
@@ -134,308 +154,19 @@
 			/>
 		</FadeUp>
 
-		<FadeUp index={1} class="workshop__copy">
-			<p class="workshop__eyebrow eyebrow">The workshop</p>
-			<h2 class="workshop__title">The part most studios have to outsource.</h2>
-			<p class="workshop__text">
+		<FadeUp index={1} class="mt-10 lg:mt-0">
+			<p class="eyebrow text-jbc-black-50">The workshop</p>
+			<h2 class="mt-5 max-w-[18ch] text-h2 font-semibold lg:text-h2-lg">
+				The part most studios have to outsource.
+			</h2>
+			<p class="mt-6 max-w-[52ch] text-body-lg leading-[1.75] text-jbc-black-70">
 				Beds, four-poster beds, chests of drawers, dining tables and chairs, bookcases, coffee
 				tables — drawn here, prototyped here, built here in solid timber. Prototypes are reviewed
 				with you before the full run, and nothing ships until the joinery is right.
 			</p>
-			<CTAButton href="/services#furniture-design" variant="outline" class="workshop__cta">
+			<CTAButton href="/services#furniture-design" variant="outline" class="mt-9">
 				Furniture design
 			</CTAButton>
 		</FadeUp>
 	</div>
 </section>
-
-<style>
-	/* ── Hero ─────────────────────────────────────────────────────────────── */
-
-	.hero {
-		position: relative;
-		display: flex;
-		align-items: flex-end;
-		min-height: 68svh;
-		min-height: 68vh;
-		overflow: hidden;
-		background-color: var(--color-jbc-black);
-	}
-
-	.hero__image {
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.hero__scrim {
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(
-			to top,
-			rgba(38, 38, 38, 0.85) 0%,
-			rgba(38, 38, 38, 0.5) 45%,
-			rgba(38, 38, 38, 0.42) 100%
-		);
-	}
-
-	.hero__inner {
-		position: relative;
-		padding-bottom: 4rem;
-		color: var(--color-jbc-white);
-	}
-
-	@media (width >= 64rem) {
-		.hero__inner {
-			padding-bottom: 5.5rem;
-		}
-	}
-
-	.hero__eyebrow {
-		color: var(--color-jbc-white-70);
-	}
-
-	.hero__title {
-		margin-top: 1.25rem;
-		max-width: 18ch;
-		font-size: var(--text-h1);
-		font-weight: 700;
-		line-height: 1.05;
-		letter-spacing: -0.02em;
-	}
-
-	@media (width >= 64rem) {
-		.hero__title {
-			font-size: 4.5rem;
-		}
-	}
-
-	/* ── Story ────────────────────────────────────────────────────────────── */
-
-	.story {
-		padding-block: var(--spacing-section);
-	}
-
-	@media (width >= 64rem) {
-		.story {
-			padding-block: var(--spacing-section-lg);
-		}
-
-		.story__inner {
-			display: grid;
-			grid-template-columns: 1fr 1.15fr;
-			column-gap: 5rem;
-			align-items: start;
-		}
-	}
-
-	.story__pull {
-		max-width: 22ch;
-		font-size: var(--text-h2-lg);
-		font-weight: 700;
-		line-height: 1.1;
-		letter-spacing: -0.015em;
-	}
-
-	.story :global(.story__body p) {
-		margin-top: 1.5rem;
-		max-width: 58ch;
-		color: var(--color-jbc-black-70);
-		font-size: var(--text-body-lg);
-		line-height: 1.75;
-	}
-
-	.story :global(.story__body p:first-child) {
-		margin-top: 2rem;
-	}
-
-	@media (width >= 64rem) {
-		.story :global(.story__body p:first-child) {
-			margin-top: 0;
-		}
-	}
-
-	.story :global(.story__cta) {
-		margin-top: 2.25rem;
-		padding: 1rem 2.25rem;
-	}
-
-	/* ── Numbers ──────────────────────────────────────────────────────────── */
-
-	.numbers {
-		padding-bottom: var(--spacing-section);
-	}
-
-	@media (width >= 64rem) {
-		.numbers {
-			padding-bottom: var(--spacing-section-lg);
-		}
-	}
-
-	.numbers__list {
-		display: grid;
-		gap: 2.5rem;
-		margin: 0;
-		padding: 2.5rem 0 0;
-		list-style: none;
-		border-top: 1px solid var(--color-jbc-black-15);
-	}
-
-	@media (width >= 48rem) {
-		.numbers__list {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-			gap: 3rem;
-		}
-	}
-
-	.numbers :global(.numbers__item) {
-		display: grid;
-		gap: 0.75rem;
-	}
-
-	.numbers__value {
-		font-size: 3rem;
-		font-weight: 700;
-		line-height: 1;
-		letter-spacing: -0.02em;
-	}
-
-	.numbers__label {
-		max-width: 24ch;
-		color: var(--color-jbc-black-70);
-		font-size: var(--text-body);
-		line-height: 1.6;
-	}
-
-	/* ── Vision & Mission ─────────────────────────────────────────────────── */
-
-	.vm {
-		position: relative;
-		overflow: hidden;
-		background-color: var(--color-jbc-black);
-		color: var(--color-jbc-white);
-	}
-
-	.vm__motif {
-		position: absolute;
-		inset: auto 0 0;
-		height: 65%;
-		pointer-events: none;
-	}
-
-	.vm__inner {
-		position: relative;
-		display: grid;
-		gap: 3.5rem;
-		padding-block: var(--spacing-section);
-	}
-
-	@media (width >= 64rem) {
-		.vm__inner {
-			/* Offset, not matched: the two blocks are different widths and the
-			   second sits lower, so they read as a conversation, not a table. */
-			grid-template-columns: 1fr 1fr;
-			column-gap: 5rem;
-			padding-block: var(--spacing-section-lg);
-		}
-
-		.vm :global(.vm__block--mission) {
-			margin-top: 6rem;
-		}
-	}
-
-	.vm__eyebrow {
-		color: var(--color-jbc-red);
-	}
-
-	.vm__title {
-		margin-top: 1.25rem;
-		max-width: 20ch;
-		font-size: var(--text-h2);
-		font-weight: 700;
-		line-height: 1.15;
-	}
-
-	@media (width >= 64rem) {
-		.vm__title {
-			font-size: 2.25rem;
-		}
-	}
-
-	.vm__text {
-		margin-top: 1.5rem;
-		max-width: 48ch;
-		color: var(--color-jbc-white-70);
-		font-size: var(--text-body-lg);
-		line-height: 1.75;
-	}
-
-	/* ── Workshop ─────────────────────────────────────────────────────────── */
-
-	.workshop {
-		padding-block: var(--spacing-section);
-	}
-
-	@media (width >= 64rem) {
-		.workshop {
-			padding-block: var(--spacing-section-lg);
-		}
-
-		.workshop__inner {
-			display: grid;
-			grid-template-columns: 0.95fr 1fr;
-			column-gap: 5rem;
-			align-items: center;
-		}
-	}
-
-	.workshop :global(.workshop__media img) {
-		display: block;
-		width: 100%;
-		height: auto;
-		background-color: var(--color-jbc-black-15);
-	}
-
-	.workshop :global(.workshop__copy) {
-		margin-top: 2.5rem;
-	}
-
-	@media (width >= 64rem) {
-		.workshop :global(.workshop__copy) {
-			margin-top: 0;
-		}
-	}
-
-	.workshop__eyebrow {
-		color: var(--color-jbc-black-50);
-	}
-
-	.workshop__title {
-		margin-top: 1.25rem;
-		max-width: 18ch;
-		font-size: var(--text-h2);
-		font-weight: 600;
-		line-height: 1.15;
-	}
-
-	@media (width >= 64rem) {
-		.workshop__title {
-			font-size: var(--text-h2-lg);
-		}
-	}
-
-	.workshop__text {
-		margin-top: 1.5rem;
-		max-width: 52ch;
-		color: var(--color-jbc-black-70);
-		font-size: var(--text-body-lg);
-		line-height: 1.75;
-	}
-
-	.workshop :global(.workshop__cta) {
-		margin-top: 2.25rem;
-		padding: 1rem 2.25rem;
-	}
-</style>

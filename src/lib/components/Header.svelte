@@ -59,23 +59,51 @@
 	}}
 />
 
-<a class="skip" href="#main">Skip to content</a>
+<!-- Off-screen until focused, rather than hidden, so it stays reachable. -->
+<a
+	class="skip fixed top-0 left-0 z-100 -translate-y-[110%] bg-jbc-red px-5 py-3 text-eyebrow
+	       font-semibold tracking-jbc-caps text-jbc-white uppercase no-underline
+	       transition-transform duration-200 ease-out-brand focus-visible:translate-y-0"
+	href="#main">Skip to content</a
+>
 
-<header class={['header', filled && 'header--filled', menuOpen && 'header--menu-open']}>
-	<div class="header__inner">
-		<a class="header__brand" href="/" aria-label="JBC — Jimibello & Co., home">
-			<!-- Clear space is baked into Logo; nothing here may crowd it. -->
-			<Logo variant="wide" theme={logoTheme} width={150} title="" class="header__logo-wide" />
-			<Logo variant="icon" theme={logoTheme} width={72} title="" class="header__logo-icon" />
+<header
+	class={[
+		'fixed inset-x-0 top-0 z-60 transition-[background-color,box-shadow] duration-400 ease-out-brand',
+		/* While the dark panel is open the bar must not paint white behind it. */
+		filled && !menuOpen && 'bg-jbc-white shadow-[0_1px_0_var(--color-jbc-black-15)]'
+	]}
+>
+	<div
+		class="mx-auto flex w-full max-w-[84rem] items-center justify-between gap-8 px-6 py-4 lg:px-12 lg:py-5"
+	>
+		<a
+			class="inline-flex items-center no-underline"
+			href="/"
+			aria-label="JBC — Jimibello & Co., home"
+		>
+			<!-- One lockup at a time: wide on desktop, icon-only where space is tight.
+			     Clear space is baked into Logo; nothing here may crowd it. -->
+			<Logo variant="wide" theme={logoTheme} width={150} title="" class="hidden md:inline-block" />
+			<Logo variant="icon" theme={logoTheme} width={72} title="" class="md:hidden" />
 		</a>
 
-		<nav class="header__nav" aria-label="Primary">
-			<ul>
+		<nav class="hidden lg:block" aria-label="Primary">
+			<ul class="flex items-center gap-10">
 				{#each nav as item (item.href)}
 					<li>
 						<a
 							href={item.href}
-							class={['header__link', isCurrent(item.href) && 'is-current']}
+							class={[
+								'relative inline-block py-1 text-eyebrow font-semibold tracking-jbc-caps uppercase',
+								'no-underline transition-colors duration-400 ease-out-brand hover:text-jbc-red',
+								/* Red underline, drawn from the left on hover, pinned open when current. */
+								'after:absolute after:inset-x-0 after:bottom-0 after:h-[1.5px] after:origin-left',
+								'after:scale-x-0 after:bg-jbc-red after:transition-transform after:duration-[350ms]',
+								'after:ease-out-brand hover:after:scale-x-100',
+								filled && !menuOpen ? 'text-jbc-black' : 'text-jbc-white',
+								isCurrent(item.href) && 'after:scale-x-100'
+							]}
 							aria-current={isCurrent(item.href) ? 'page' : undefined}
 						>
 							{item.label}
@@ -86,30 +114,64 @@
 		</nav>
 
 		<button
-			class="header__toggle"
+			class={[
+				'group inline-flex items-center gap-3 border-0 bg-none py-2 [font-family:inherit]',
+				'cursor-pointer text-eyebrow font-semibold tracking-jbc-caps uppercase',
+				'transition-colors duration-400 ease-out-brand lg:hidden',
+				filled && !menuOpen ? 'text-jbc-black' : 'text-jbc-white'
+			]}
 			type="button"
 			aria-expanded={menuOpen}
 			aria-controls="mobile-menu"
 			onclick={() => (menuOpen = !menuOpen)}
 		>
-			<span class="header__toggle-label">{menuOpen ? 'Close' : 'Menu'}</span>
-			<span class="header__toggle-bars" aria-hidden="true">
-				<span></span>
-				<span></span>
+			<span>{menuOpen ? 'Close' : 'Menu'}</span>
+			<!-- Two bars cross into an X — no third bar to fade out. -->
+			<span class="grid w-[22px] gap-[5px]" aria-hidden="true">
+				<span
+					class={[
+						'h-[1.5px] bg-current transition-transform duration-300 ease-out-brand',
+						menuOpen && 'translate-y-[3.25px] rotate-45'
+					]}
+				></span>
+				<span
+					class={[
+						'h-[1.5px] bg-current transition-transform duration-300 ease-out-brand',
+						menuOpen && '-translate-y-[3.25px] -rotate-45'
+					]}
+				></span>
 			</span>
 		</button>
 	</div>
 </header>
 
-<!-- Rendered always, hidden when closed, so the open/close transition can run. -->
-<div id="mobile-menu" class={['menu', 'dark-bg', menuOpen && 'menu--open']} inert={!menuOpen}>
-	<nav aria-label="Mobile">
-		<ul>
+<!-- Rendered always, hidden when closed, so the open/close transition can run.
+     `dark-bg` is the marker the on-dark: variant keys off; nothing styles it. -->
+<div
+	id="mobile-menu"
+	class={[
+		'dark-bg fixed inset-0 z-50 flex items-center bg-jbc-black px-6 pt-24 pb-12 lg:hidden',
+		'transition-[opacity,visibility] duration-400 ease-out-brand',
+		menuOpen ? 'visible opacity-100' : 'invisible opacity-0'
+	]}
+	inert={!menuOpen}
+>
+	<nav class="w-full" aria-label="Mobile">
+		<ul class="w-full">
 			{#each nav as item, i (item.href)}
-				<li style:--menu-delay="{i * 45}ms">
+				<li class="border-b border-jbc-white-15" style:--menu-delay="{i * 45}ms">
 					<a
 						href={item.href}
-						class={['menu__link', isCurrent(item.href) && 'is-current']}
+						class={[
+							'block py-5 text-[2rem] leading-[1.15] font-bold no-underline',
+							/* Items settle in sequence once the panel itself has appeared. */
+							'transition-[opacity,transform,color] duration-400 ease-out-brand',
+							'delay-[var(--menu-delay)] motion-reduce:transition-none',
+							menuOpen
+								? 'translate-y-0 opacity-100'
+								: 'translate-y-3 opacity-0 motion-reduce:translate-y-0 motion-reduce:opacity-100',
+							isCurrent(item.href) ? 'text-jbc-red' : 'text-jbc-white hover:text-jbc-red'
+						]}
 						aria-current={isCurrent(item.href) ? 'page' : undefined}
 					>
 						{item.label}
@@ -119,270 +181,3 @@
 		</ul>
 	</nav>
 </div>
-
-<style>
-	.skip {
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 100;
-		padding: 0.75rem 1.25rem;
-		background-color: var(--color-jbc-red);
-		color: var(--color-jbc-white);
-		font-size: var(--text-eyebrow);
-		font-weight: 600;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		text-decoration: none;
-		/* Off-screen until focused, rather than display:none, so it stays reachable. */
-		transform: translateY(-110%);
-		transition: transform 200ms var(--ease-out-brand);
-	}
-
-	.skip:focus-visible {
-		transform: translateY(0);
-	}
-
-	.header {
-		position: fixed;
-		inset: 0 0 auto;
-		z-index: 60;
-		transition:
-			background-color 400ms var(--ease-out-brand),
-			box-shadow 400ms var(--ease-out-brand);
-	}
-
-	.header--filled {
-		background-color: var(--color-jbc-white);
-		box-shadow: 0 1px 0 var(--color-jbc-black-15);
-	}
-
-	/* While the dark panel is open the bar must not paint white behind it. */
-	.header--menu-open,
-	.header--menu-open.header--filled {
-		background-color: transparent;
-		box-shadow: none;
-	}
-
-	.header__inner {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 2rem;
-		width: 100%;
-		max-width: 84rem;
-		margin-inline: auto;
-		padding: 1rem 1.5rem;
-	}
-
-	@media (width >= 64rem) {
-		.header__inner {
-			padding: 1.25rem 3rem;
-		}
-	}
-
-	.header__brand {
-		display: inline-flex;
-		align-items: center;
-		text-decoration: none;
-	}
-
-	/* One lockup at a time: wide on desktop, icon-only where space is tight. */
-	.header__brand :global(.header__logo-wide) {
-		display: none;
-	}
-
-	@media (width >= 48rem) {
-		.header__brand :global(.header__logo-wide) {
-			display: inline-block;
-		}
-
-		.header__brand :global(.header__logo-icon) {
-			display: none;
-		}
-	}
-
-	.header__nav {
-		display: none;
-	}
-
-	@media (width >= 64rem) {
-		.header__nav {
-			display: block;
-		}
-	}
-
-	.header__nav ul {
-		display: flex;
-		align-items: center;
-		gap: 2.5rem;
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	.header__link {
-		position: relative;
-		display: inline-block;
-		padding-block: 0.25rem;
-		color: var(--color-jbc-white);
-		font-size: var(--text-eyebrow);
-		font-weight: 600;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		text-decoration: none;
-		transition: color 400ms var(--ease-out-brand);
-	}
-
-	.header--filled .header__link {
-		color: var(--color-jbc-black);
-	}
-
-	/* Red underline, drawn from the left on hover and pinned open when current. */
-	.header__link::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		width: 100%;
-		height: 1.5px;
-		background-color: var(--color-jbc-red);
-		transform: scaleX(0);
-		transform-origin: left;
-		transition: transform 350ms var(--ease-out-brand);
-	}
-
-	.header__link:hover::after,
-	.header__link.is-current::after {
-		transform: scaleX(1);
-	}
-
-	.header__link:hover {
-		color: var(--color-jbc-red);
-	}
-
-	.header__toggle {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.75rem;
-		padding: 0.5rem 0;
-		background: none;
-		border: 0;
-		cursor: pointer;
-		color: var(--color-jbc-white);
-		font-family: inherit;
-		font-size: var(--text-eyebrow);
-		font-weight: 600;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		transition: color 400ms var(--ease-out-brand);
-	}
-
-	.header--filled .header__toggle {
-		color: var(--color-jbc-black);
-	}
-
-	.header--menu-open .header__toggle,
-	.header--menu-open.header--filled .header__toggle {
-		color: var(--color-jbc-white);
-	}
-
-	@media (width >= 64rem) {
-		.header__toggle {
-			display: none;
-		}
-	}
-
-	.header__toggle-bars {
-		display: grid;
-		gap: 5px;
-		width: 22px;
-	}
-
-	.header__toggle-bars span {
-		height: 1.5px;
-		background-color: currentColor;
-		transition: transform 300ms var(--ease-out-brand);
-	}
-
-	/* Two bars cross into an X — no third bar to fade out. */
-	.header--menu-open .header__toggle-bars span:first-child {
-		transform: translateY(3.25px) rotate(45deg);
-	}
-
-	.header--menu-open .header__toggle-bars span:last-child {
-		transform: translateY(-3.25px) rotate(-45deg);
-	}
-
-	.menu {
-		position: fixed;
-		inset: 0;
-		z-index: 50;
-		display: flex;
-		align-items: center;
-		padding: 6rem 1.5rem 3rem;
-		background-color: var(--color-jbc-black);
-		opacity: 0;
-		visibility: hidden;
-		transition:
-			opacity 400ms var(--ease-out-brand),
-			visibility 400ms;
-	}
-
-	.menu--open {
-		opacity: 1;
-		visibility: visible;
-	}
-
-	@media (width >= 64rem) {
-		.menu {
-			display: none;
-		}
-	}
-
-	.menu ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		width: 100%;
-	}
-
-	.menu li {
-		border-bottom: 1px solid var(--color-jbc-white-15);
-	}
-
-	.menu__link {
-		display: block;
-		padding: 1.25rem 0;
-		color: var(--color-jbc-white);
-		font-size: 2rem;
-		font-weight: 700;
-		line-height: 1.15;
-		text-decoration: none;
-		/* Items settle in sequence once the panel itself has appeared. */
-		opacity: 0;
-		transform: translateY(12px);
-		transition:
-			opacity 400ms var(--ease-out-brand) var(--menu-delay),
-			transform 400ms var(--ease-out-brand) var(--menu-delay),
-			color 300ms var(--ease-out-brand);
-	}
-
-	.menu--open .menu__link {
-		opacity: 1;
-		transform: none;
-	}
-
-	.menu__link.is-current,
-	.menu__link:hover {
-		color: var(--color-jbc-red);
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.menu__link {
-			opacity: 1;
-			transform: none;
-			transition: none;
-		}
-	}
-</style>

@@ -71,38 +71,21 @@
 <svelte:element
 	this={as}
 	{@attach reveal}
-	class={['fade-up', visible && 'is-visible', className]}
+	class={[
+		'transition-[opacity,transform] ease-out-brand',
+		'delay-[var(--fade-delay)] duration-[var(--fade-duration)]',
+		visible
+			? 'translate-y-0 opacity-100 will-change-auto'
+			: // Hint the compositor only while the element is still animating in.
+				'translate-y-[var(--fade-distance)] opacity-0 will-change-[opacity,transform]',
+		/* Belt and braces: if JS is slow or unavailable, content must never be
+		   stranded at opacity 0 for a reader who has asked for reduced motion. */
+		'motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none',
+		className
+	]}
 	style:--fade-delay="{delay}ms"
 	style:--fade-duration="{duration}ms"
 	style:--fade-distance="{distance}px"
 >
 	{@render children()}
 </svelte:element>
-
-<style>
-	.fade-up {
-		opacity: 0;
-		transform: translateY(var(--fade-distance));
-		transition:
-			opacity var(--fade-duration) var(--ease-out-brand) var(--fade-delay),
-			transform var(--fade-duration) var(--ease-out-brand) var(--fade-delay);
-		/* Hint the compositor only while the element is still animating in. */
-		will-change: opacity, transform;
-	}
-
-	.fade-up.is-visible {
-		opacity: 1;
-		transform: none;
-		will-change: auto;
-	}
-
-	/* Belt and braces: if JS is slow or unavailable, content must never be
-	   stranded at opacity 0 for a reader who has asked for reduced motion. */
-	@media (prefers-reduced-motion: reduce) {
-		.fade-up {
-			opacity: 1;
-			transform: none;
-			transition: none;
-		}
-	}
-</style>

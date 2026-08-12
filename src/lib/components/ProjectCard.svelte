@@ -9,9 +9,15 @@
 	 * `shape` drives the asymmetric grid: 'tall' spans two rows, 'wide' spans two
 	 * columns, 'square' occupies one cell. The aspect ratio follows the shape so
 	 * the images themselves are the thing breaking the grid's rhythm.
+	 *
+	 * `metaClass` exists for the one caller that needs it: the home page runs a
+	 * card's image to the full viewport width but returns its caption to the
+	 * content column. That used to be a `:global(.card__meta)` selector reaching
+	 * in from the outside, which broke silently if this file renamed the class.
 	 */
 	import { srcset, img } from '$lib/images';
 	import type { Project } from '$lib/data/site';
+	import type { ClassValue } from 'svelte/elements';
 
 	interface Props {
 		project: Project;
@@ -19,19 +25,32 @@
 		sizes?: string;
 		/** Above-the-fold cards load eagerly; the rest stay lazy. */
 		priority?: boolean;
+		class?: ClassValue;
+		/** Applied to the caption block, for callers that re-inset it. */
+		metaClass?: ClassValue;
 	}
 
-	let { project, sizes = '(min-width: 1024px) 50vw, 100vw', priority = false }: Props = $props();
+	let {
+		project,
+		sizes = '(min-width: 1024px) 50vw, 100vw',
+		priority = false,
+		class: className = '',
+		metaClass = ''
+	}: Props = $props();
 
 	/** Tall tiles are portrait, wide tiles are letterbox, squares sit between. */
 	const RATIOS = { tall: 3 / 4, wide: 16 / 9, square: 4 / 3 } as const;
 	let ratio = $derived(RATIOS[project.shape]);
 </script>
 
-<a class="card" href="/portfolio/{project.slug}">
-	<div class="card__frame" style:aspect-ratio={ratio}>
+<a class={['group block text-inherit no-underline', className]} href="/portfolio/{project.slug}">
+	<!-- Fixed frame: the image scales inside it, the layout never moves. -->
+	<div class="overflow-hidden bg-jbc-black-15" style:aspect-ratio={ratio}>
 		<img
-			class="card__image"
+			class="h-full w-full object-cover transition-transform duration-500 ease-out-brand
+			       group-hover:scale-[1.04] group-focus-visible:scale-[1.04]
+			       motion-reduce:transition-none motion-reduce:group-hover:scale-100
+			       motion-reduce:group-focus-visible:scale-100"
 			src={img(project.hero, 1024, { ratio })}
 			srcset={srcset(project.hero, { ratio })}
 			{sizes}
@@ -44,77 +63,15 @@
 		/>
 	</div>
 
-	<div class="card__meta">
-		<span class="card__category eyebrow">{project.category}</span>
-		<h3 class="card__title">{project.title}</h3>
-		<p class="card__excerpt">{project.excerpt}</p>
+	<div class={['pt-5', metaClass]}>
+		<!-- The red arrives on hover — the tag is the only element that changes hue. -->
+		<span
+			class="block eyebrow text-jbc-black-50 transition-colors duration-400 ease-out-brand
+			       group-hover:text-jbc-red group-focus-visible:text-jbc-red"
+		>
+			{project.category}
+		</span>
+		<h3 class="mt-2 text-h2 leading-[1.2] font-semibold">{project.title}</h3>
+		<p class="mt-2 max-w-[46ch] text-body leading-[1.65] text-jbc-black-70">{project.excerpt}</p>
 	</div>
 </a>
-
-<style>
-	.card {
-		display: block;
-		color: inherit;
-		text-decoration: none;
-	}
-
-	.card__frame {
-		/* Fixed frame: the image scales inside it, the layout never moves. */
-		overflow: hidden;
-		background-color: var(--color-jbc-black-15);
-	}
-
-	.card__image {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		transition: transform 500ms var(--ease-out-brand);
-	}
-
-	.card:hover .card__image,
-	.card:focus-visible .card__image {
-		transform: scale(1.04);
-	}
-
-	.card__meta {
-		padding-top: 1.25rem;
-	}
-
-	.card__category {
-		display: block;
-		color: var(--color-jbc-black-50);
-		transition: color 400ms var(--ease-out-brand);
-	}
-
-	/* The red arrives on hover — the tag is the only element that changes hue. */
-	.card:hover .card__category,
-	.card:focus-visible .card__category {
-		color: var(--color-jbc-red);
-	}
-
-	.card__title {
-		margin-top: 0.5rem;
-		font-size: var(--text-h2);
-		font-weight: 600;
-		line-height: 1.2;
-	}
-
-	.card__excerpt {
-		margin-top: 0.5rem;
-		max-width: 46ch;
-		color: var(--color-jbc-black-70);
-		font-size: var(--text-body);
-		line-height: 1.65;
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.card__image {
-			transition: none;
-		}
-
-		.card:hover .card__image,
-		.card:focus-visible .card__image {
-			transform: none;
-		}
-	}
-</style>

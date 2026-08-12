@@ -29,16 +29,10 @@
 
 <Header solid={solidHeader} />
 
-<!-- Target of the skip link in Header. -->
-<main id="main" tabindex="-1">
+<!-- Target of the skip link in Header. Focus lands here from that link and
+     the focus ring is enough, so the default outline is dropped. -->
+<main id="main" class="outline-none" tabindex="-1">
 	{@render children()}
 </main>
 
 <Footer />
-
-<style>
-	main {
-		/* Focus lands here from the skip link; the focus ring is enough. */
-		outline: none;
-	}
-</style>

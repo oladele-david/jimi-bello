@@ -14,6 +14,10 @@
 	--color-jbc-red: #d61b0c;
 	--color-jbc-white: #ffffff;
 
+	/* Primary-CTA hover shade. Mixed from the two brand colours rather than
+	   picked by eye — no fourth hex enters the system. */
+	--color-jbc-red-deep: color-mix(in srgb, #d61b0c 86%, #262626);
+
 	/* Opacity tints only — no new hues enter the system here. */
 	--color-jbc-black-70: rgba(38, 38, 38, 0.7);
 	--color-jbc-black-50: rgba(38, 38, 38, 0.5);
@@ -24,8 +28,16 @@
 
 	--font-sans: 'Raleway', ui-sans-serif, system-ui, sans-serif;
 
+	/* Display tracking. Named because these three values are the only negative
+	   tracking on the site and they recur across every page head. */
+	--tracking-jbc-tight: -0.02em;
+	--tracking-jbc-snug: -0.015em;
+	--tracking-jbc-caps: 0.18em;
+
 	/* Type scale — brand manual: H1 Bold 36px+, H2 SemiBold 24px,
-	   body large Regular 18px, body Regular 16px. Desktop values scale up. */
+	   body large Regular 18px, body Regular 16px. Desktop values scale up.
+	   Line heights are the value each role actually uses on the page, so
+	   `text-h1` needs no `leading-*` companion in the common case. */
 	--text-eyebrow: 0.75rem;
 	--text-eyebrow--line-height: 1.2;
 	--text-body: 1rem;
@@ -33,11 +45,15 @@
 	--text-body-lg: 1.125rem;
 	--text-body-lg--line-height: 1.7;
 	--text-h2: 1.5rem;
-	--text-h2--line-height: 1.25;
+	--text-h2--line-height: 1.15;
 	--text-h2-lg: 2.5rem;
 	--text-h2-lg--line-height: 1.15;
 	--text-h1: 2.25rem;
-	--text-h1--line-height: 1.1;
+	--text-h1--line-height: 1.05;
+	/* Desktop page-head title. Shared by /services, /contact and /portfolio;
+	   heroes that sit over photography run larger and set their own. */
+	--text-h1-lg: 4.25rem;
+	--text-h1-lg--line-height: 1.05;
 	--text-hero: clamp(2.75rem, 8vw, 6rem);
 	--text-hero--line-height: 0.98;
 
@@ -50,6 +66,80 @@
 
 	/* Scroll-reveal and hover easing. Restrained, no overshoot. */
 	--ease-out-brand: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* A control or a piece of type sitting on a Dark Liver / Maximum Red ground.
+   Replaces the `:global(.dark-bg) .thing` selectors that used to reach into
+   child components from the outside: a component now declares its own dark
+   behaviour inline and the parent only has to set `.dark-bg` on the section.
+
+   `:is()` rather than `:where()` — it keeps its arguments' specificity, so an
+   `on-dark:` utility beats the plain one regardless of source order. */
+@custom-variant on-dark (&:is(.dark-bg, .dark-bg *));
+
+/* Scrims. Every one is a wash of Dark Liver over a photograph, weighted to the
+   edge the type sits on. They live here rather than in five page `<style>`
+   blocks because "how dark a photo has to go before white type is legible" is
+   a brand rule, not a page detail — and because a multi-stop gradient written
+   as a Tailwind arbitrary value is unreadable.
+
+   Each is `absolute inset-0`; the caller only adds `aria-hidden`. */
+@utility scrim-hero {
+	position: absolute;
+	inset: 0;
+	/* Weighted to the bottom, where the type sits, so the image stays open above. */
+	background-image: linear-gradient(
+		to top,
+		rgba(38, 38, 38, 0.82) 0%,
+		rgba(38, 38, 38, 0.55) 38%,
+		rgba(38, 38, 38, 0.28) 70%,
+		rgba(38, 38, 38, 0.45) 100%
+	);
+}
+
+@utility scrim-page {
+	position: absolute;
+	inset: 0;
+	background-image: linear-gradient(
+		to top,
+		rgba(38, 38, 38, 0.85) 0%,
+		rgba(38, 38, 38, 0.5) 45%,
+		rgba(38, 38, 38, 0.42) 100%
+	);
+}
+
+@utility scrim-project {
+	position: absolute;
+	inset: 0;
+	background-image: linear-gradient(
+		to top,
+		rgba(38, 38, 38, 0.85) 0%,
+		rgba(38, 38, 38, 0.45) 45%,
+		rgba(38, 38, 38, 0.4) 100%
+	);
+}
+
+/* Heavy enough that body copy — not just a headline — holds its contrast. */
+@utility scrim-feature {
+	position: absolute;
+	inset: 0;
+	background-image: linear-gradient(
+		to right,
+		rgba(38, 38, 38, 0.94) 0%,
+		rgba(38, 38, 38, 0.86) 45%,
+		rgba(38, 38, 38, 0.68) 100%
+	);
+}
+
+@utility scrim-next {
+	position: absolute;
+	inset: 0;
+	background-image: linear-gradient(
+		to top,
+		rgba(38, 38, 38, 0.9) 0%,
+		rgba(38, 38, 38, 0.72) 60%,
+		rgba(38, 38, 38, 0.66) 100%
+	);
 }
 
 @layer base {

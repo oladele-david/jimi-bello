@@ -47,6 +47,22 @@
 	function hrefFor(category: Category) {
 		return category === 'All' ? '/portfolio' : `/portfolio?category=${category}`;
 	}
+
+	/**
+	 * Understated text tabs — no pills, no borders. The red rule under the active
+	 * tab and the one drawn on hover are the same `after:` element in two states,
+	 * so an active tab does not visibly change when the pointer crosses it.
+	 */
+	const TAB =
+		'relative inline-block py-5 text-eyebrow font-semibold tracking-jbc-caps uppercase ' +
+		'whitespace-nowrap no-underline text-jbc-black-50 transition-colors duration-[350ms] ' +
+		'ease-out-brand hover:text-jbc-black ' +
+		"after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:content-[''] " +
+		'after:origin-left after:scale-x-0 after:bg-jbc-red after:transition-transform ' +
+		'after:duration-[350ms] after:ease-out-brand hover:after:scale-x-100';
+
+	/** Same caps treatment as a tab, but it is a count, not a control. */
+	const COUNT = 'shrink-0 text-eyebrow font-semibold tracking-jbc-caps uppercase text-jbc-black-50';
 </script>
 
 <svelte:head>
@@ -57,26 +73,31 @@
 	/>
 </svelte:head>
 
-<section class="head">
+<!-- Top padding clears the fixed header, which is already filled on this route. -->
+<section class="pt-32 pb-12 lg:pt-44 lg:pb-16">
 	<div class="shell">
-		<p class="head__eyebrow eyebrow">Portfolio</p>
-		<h1 class="head__title">The work, and what it had to solve.</h1>
-		<p class="head__lede">
+		<p class="eyebrow text-jbc-black-50">Portfolio</p>
+		<h1 class="mt-5 max-w-[16ch] text-h1 font-bold tracking-jbc-tight lg:text-h1-lg">
+			The work, and what it had to solve.
+		</h1>
+		<p class="mt-6 max-w-[48ch] text-body-lg text-jbc-black-70">
 			Every project here started with something that was not working — a dark room, a floor plate
 			with no daylight, a renovation that had stopped twice.
 		</p>
 	</div>
 </section>
 
-<div class="filters">
-	<div class="shell">
-		<nav class="filters__nav" aria-label="Filter projects by category">
-			<ul>
+<!-- Sticky: sits directly beneath the fixed header once that header fills. -->
+<div class="sticky top-18 z-20 border-b border-jbc-black-15 bg-jbc-white lg:top-20">
+	<div class="shell flex items-center justify-between gap-6">
+		<nav aria-label="Filter projects by category">
+			<!-- Four tabs fit most phones; anything narrower scrolls rather than wraps. -->
+			<ul class="flex [scrollbar-width:none] items-center gap-7 overflow-x-auto lg:gap-10">
 				{#each categories as category (category)}
 					<li>
 						<a
 							href={hrefFor(category)}
-							class={['filters__tab', category === active && 'is-active']}
+							class={[TAB, category === active && 'text-jbc-black after:scale-x-100']}
 							aria-current={category === active ? 'true' : undefined}
 							data-sveltekit-noscroll
 						>
@@ -86,29 +107,29 @@
 				{/each}
 			</ul>
 		</nav>
-		<p class="filters__count" aria-live="polite">
+		<p class={COUNT} aria-live="polite">
 			{filtered.length}
 			{filtered.length === 1 ? 'project' : 'projects'}
 		</p>
 	</div>
 </div>
 
-<section class="work">
+<section class="py-section lg:py-section-lg">
 	<div class="shell">
 		{#if tiles.length === 0}
-			<p class="work__empty">No projects in this category yet.</p>
+			<p class="text-body-lg text-jbc-black-70">No projects in this category yet.</p>
 		{:else}
 			<!-- Keyed on category too, so switching filters replays the reveal
 			     instead of leaving newly-inserted tiles at opacity 0. -->
 			{#key active}
-				<div class="work__grid">
+				<div class="grid gap-14 lg:grid-cols-2 lg:items-start lg:gap-x-16 lg:gap-y-24">
 					{#each tiles as tile, i (tile.project.slug)}
 						<FadeUp
 							index={i}
 							class={[
-								'work__tile',
-								tile.span && 'work__tile--span',
-								tile.offset && 'work__tile--offset'
+								tile.span && 'lg:col-span-2',
+								/* Right-hand tiles drop, so no row lines up flush across. */
+								tile.offset && 'lg:mt-20'
 							]}
 						>
 							<ProjectCard
@@ -125,175 +146,3 @@
 		{/if}
 	</div>
 </section>
-
-<style>
-	.head {
-		/* Clears the fixed header, which is already filled white on this route. */
-		padding-block: 8rem 3rem;
-	}
-
-	@media (width >= 64rem) {
-		.head {
-			padding-block: 11rem 4rem;
-		}
-	}
-
-	.head__eyebrow {
-		color: var(--color-jbc-black-50);
-	}
-
-	.head__title {
-		margin-top: 1.25rem;
-		max-width: 16ch;
-		font-size: var(--text-h1);
-		font-weight: 700;
-		line-height: 1.05;
-		letter-spacing: -0.02em;
-	}
-
-	@media (width >= 64rem) {
-		.head__title {
-			font-size: 4.25rem;
-		}
-	}
-
-	.head__lede {
-		margin-top: 1.5rem;
-		max-width: 48ch;
-		color: var(--color-jbc-black-70);
-		font-size: var(--text-body-lg);
-		line-height: 1.7;
-	}
-
-	/* ── Filters ──────────────────────────────────────────────────────────── */
-
-	.filters {
-		position: sticky;
-		/* Sits directly beneath the fixed header once it fills. */
-		top: 4.5rem;
-		z-index: 20;
-		background-color: var(--color-jbc-white);
-		border-bottom: 1px solid var(--color-jbc-black-15);
-	}
-
-	@media (width >= 64rem) {
-		.filters {
-			top: 5rem;
-		}
-	}
-
-	.filters .shell {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1.5rem;
-	}
-
-	.filters__nav ul {
-		display: flex;
-		align-items: center;
-		gap: 1.75rem;
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		/* Four tabs fit most phones; anything narrower scrolls rather than wraps. */
-		overflow-x: auto;
-		scrollbar-width: none;
-	}
-
-	@media (width >= 64rem) {
-		.filters__nav ul {
-			gap: 2.5rem;
-		}
-	}
-
-	/* Understated text tabs — no pills, no borders. */
-	.filters__tab {
-		position: relative;
-		display: inline-block;
-		padding-block: 1.25rem;
-		color: var(--color-jbc-black-50);
-		font-size: var(--text-eyebrow);
-		font-weight: 600;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		text-decoration: none;
-		white-space: nowrap;
-		transition: color 350ms var(--ease-out-brand);
-	}
-
-	.filters__tab::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		width: 100%;
-		height: 2px;
-		background-color: var(--color-jbc-red);
-		transform: scaleX(0);
-		transform-origin: left;
-		transition: transform 350ms var(--ease-out-brand);
-	}
-
-	.filters__tab:hover {
-		color: var(--color-jbc-black);
-	}
-
-	.filters__tab.is-active {
-		color: var(--color-jbc-black);
-	}
-
-	.filters__tab.is-active::after,
-	.filters__tab:hover::after {
-		transform: scaleX(1);
-	}
-
-	.filters__count {
-		flex-shrink: 0;
-		color: var(--color-jbc-black-50);
-		font-size: var(--text-eyebrow);
-		font-weight: 600;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-	}
-
-	/* ── Grid ─────────────────────────────────────────────────────────────── */
-
-	.work {
-		padding-block: var(--spacing-section);
-	}
-
-	@media (width >= 64rem) {
-		.work {
-			padding-block: var(--spacing-section-lg);
-		}
-	}
-
-	.work__grid {
-		display: grid;
-		gap: 3.5rem;
-	}
-
-	@media (width >= 64rem) {
-		.work__grid {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			column-gap: 4rem;
-			row-gap: 6rem;
-			align-items: start;
-		}
-
-		.work__grid :global(.work__tile--span) {
-			grid-column: 1 / -1;
-		}
-
-		/* Right-hand tiles drop, so no row ever lines up flush across. */
-		.work__grid :global(.work__tile--offset) {
-			margin-top: 5rem;
-		}
-	}
-
-	.work__empty {
-		color: var(--color-jbc-black-70);
-		font-size: var(--text-body-lg);
-	}
-</style>
