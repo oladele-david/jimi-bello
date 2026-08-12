@@ -131,6 +131,40 @@
 	);
 }
 
+/* Home loader ground. The only "plush" surface on the site, and still only the
+   three brand colours: Maximum Red bloomed from below the fold of the screen
+   reads as deep oxblood over Dark Liver, and a faint white lift sits behind the
+   lockup so the mark is not floating on a flat field. No fourth hex.
+
+   Sits with the scrims rather than in the component because it is the same kind
+   of object — a wash whose stops were tuned against white type — and because a
+   three-layer gradient written as a Tailwind arbitrary value is unreadable. */
+@utility loader-ground {
+	position: absolute;
+	inset: 0;
+	background-color: #1a1615;
+	background-image:
+		radial-gradient(
+			130% 90% at 50% 120%,
+			rgba(214, 27, 12, 0.38) 0%,
+			rgba(214, 27, 12, 0.16) 38%,
+			rgba(214, 27, 12, 0.03) 68%,
+			transparent 88%
+		),
+		radial-gradient(
+			70% 50% at 50% 40%,
+			rgba(255, 255, 255, 0.09) 0%,
+			rgba(255, 255, 255, 0.02) 52%,
+			transparent 80%
+		),
+		linear-gradient(
+			180deg,
+			rgba(24, 19, 18, 0.98) 0%,
+			rgba(38, 38, 38, 1) 50%,
+			rgba(18, 14, 13, 1) 100%
+		);
+}
+
 @utility scrim-next {
 	position: absolute;
 	inset: 0;

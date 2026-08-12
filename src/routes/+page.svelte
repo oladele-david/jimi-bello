@@ -11,6 +11,7 @@
 	import { projects, services } from '$lib/data/site';
 	import CTAButton from '$lib/components/CTAButton.svelte';
 	import FadeUp from '$lib/components/FadeUp.svelte';
+	import Preloader from '$lib/components/Preloader.svelte';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
 
 	const HERO = 'pages/home-hero';
@@ -34,6 +35,8 @@
 		content="JBC designs interiors for homes and offices and builds the furniture that goes in them — from first sketch to the day you move back in. Lagos, Nigeria."
 	/>
 </svelte:head>
+
+<Preloader />
 
 <!-- `dark-bg` earns the hero its white CTA outline via the on-dark: variant —
      the photograph reads as a dark ground even though no colour is set here. -->
