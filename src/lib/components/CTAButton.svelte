@@ -6,10 +6,11 @@
 	 *
 	 * Three appearances:
 	 *   primary — solid Maximum Red fill, white label. Used once per section at most.
-	 *   outline — 1.5px border on transparent ground. Inside a `.dark-bg` section
-	 *             the border and label flip to white so the control stays legible;
-	 *             hovering fills it red either way. That flip is the `on-dark:`
-	 *             variant from layout.css, so no parent has to reach in for it.
+	 *   outline — 1.5px red border on transparent ground. Inside a `.dark-bg`
+	 *             section the border and label flip to white so the control stays
+	 *             legible; hovering fills it red either way. That flip is the
+	 *             `on-dark:` variant from layout.css, so no parent has to reach
+	 *             in for it.
 	 *   invert  — for the three Maximum Red bands, where a red hover fill would be
 	 *             invisible. White at rest, solid white with red type on hover.
 	 *
@@ -46,9 +47,13 @@
 		...rest
 	}: Props = $props();
 
+	/* Border *width* only — the colour belongs to the variant. A
+	   `border-transparent` here would win over `border-jbc-red` on equal
+	   specificity (Tailwind emits it later in the sheet), which is exactly how
+	   the outline border went missing on white sections. */
 	const BASE =
 		'inline-flex items-center justify-center gap-[0.75em] appearance-none rounded-none ' +
-		'border-[1.5px] border-transparent cursor-pointer font-sans text-eyebrow font-semibold ' +
+		'border-[1.5px] cursor-pointer font-sans text-eyebrow font-semibold ' +
 		'tracking-jbc-caps uppercase whitespace-nowrap no-underline ' +
 		'transition-[background-color,border-color,color] duration-400 ease-out-brand ' +
 		'disabled:opacity-60 disabled:cursor-progress';

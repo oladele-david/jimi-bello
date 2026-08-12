@@ -16,6 +16,7 @@
 	import { projects, categories, type Category } from '$lib/data/site';
 	import FadeUp from '$lib/components/FadeUp.svelte';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
+	import Skyline from '$lib/components/Skyline.svelte';
 
 	function isCategory(value: string | null): value is Category {
 		return value !== null && (categories as readonly string[]).includes(value);
@@ -74,8 +75,11 @@
 </svelte:head>
 
 <!-- Top padding clears the fixed header, which is already filled on this route. -->
-<section class="pt-32 pb-12 lg:pt-44 lg:pb-16">
-	<div class="shell">
+<section class="relative overflow-hidden">
+	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[80%]" aria-hidden="true">
+		<Skyline theme="light" opacity={0.22} />
+	</div>
+	<div class="relative shell pt-28 pb-20 lg:pt-25 lg:pb-28">
 		<p class="eyebrow text-jbc-black-50">Portfolio</p>
 		<h1 class="mt-5 max-w-[16ch] text-h1 font-bold tracking-jbc-tight lg:text-h1-lg">
 			The work, and what it had to solve.
@@ -89,12 +93,16 @@
 
 <!-- Sticky: sits directly beneath the fixed header once that header fills. -->
 <div class="sticky top-18 z-20 border-b border-jbc-black-15 bg-jbc-white lg:top-20">
-	<div class="shell flex items-center justify-between gap-6">
-		<nav aria-label="Filter projects by category">
-			<!-- Four tabs fit most phones; anything narrower scrolls rather than wraps. -->
-			<ul class="flex [scrollbar-width:none] items-center gap-7 overflow-x-auto lg:gap-10">
+	<div class="shell flex min-w-0 items-center justify-between gap-4 lg:gap-6">
+		<nav class="min-w-0 flex-1" aria-label="Filter projects by category">
+			<!-- On phones the labels wrap into a compact second row; wider screens keep one line. -->
+			<ul
+				class="flex max-w-full flex-wrap items-center gap-x-5 sm:flex-nowrap sm:gap-x-7
+				       sm:overflow-x-auto sm:overscroll-x-contain sm:[scrollbar-width:none]
+				       lg:gap-x-10 [&::-webkit-scrollbar]:hidden"
+			>
 				{#each categories as category (category)}
-					<li>
+					<li class="shrink-0">
 						<a
 							href={hrefFor(category)}
 							class={[TAB, category === active && 'text-jbc-black after:scale-x-100']}
