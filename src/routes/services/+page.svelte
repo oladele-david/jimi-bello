@@ -36,7 +36,7 @@
 </svelte:head>
 
 <section class="dark-bg relative overflow-hidden bg-jbc-black text-jbc-white">
-	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[70%]" aria-hidden="true">
+	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[90%]" aria-hidden="true">
 		<Skyline theme="dark" opacity={0.22} />
 	</div>
 	<!-- Top padding clears the fixed header. -->

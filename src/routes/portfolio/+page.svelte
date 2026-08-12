@@ -76,10 +76,10 @@
 
 <!-- Top padding clears the fixed header, which is already filled on this route. -->
 <section class="relative overflow-hidden">
-	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[80%]" aria-hidden="true">
+	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[90%]" aria-hidden="true">
 		<Skyline theme="light" opacity={0.22} />
 	</div>
-	<div class="relative shell pt-28 pb-20 lg:pt-25 lg:pb-28">
+	<div class="relative shell pt-28 pb-20 lg:pt-48 lg:pb-28">
 		<p class="eyebrow text-jbc-black-50">Portfolio</p>
 		<h1 class="mt-5 max-w-[16ch] text-h1 font-bold tracking-jbc-tight lg:text-h1-lg">
 			The work, and what it had to solve.

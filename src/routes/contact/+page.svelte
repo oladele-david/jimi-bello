@@ -15,6 +15,7 @@
 	import CTAButton from '$lib/components/CTAButton.svelte';
 	import FadeUp from '$lib/components/FadeUp.svelte';
 	import type { ActionData } from './$types';
+	import Skyline from '$lib/components/Skyline.svelte';
 
 	let { form }: { form: ActionData } = $props();
 
@@ -72,8 +73,11 @@
 </svelte:head>
 
 <!-- Top padding clears the fixed header, which is filled white on this route. -->
-<section class="pt-32 pb-12 lg:pt-44 lg:pb-16">
-	<div class="shell">
+<section class="relative overflow-hidden">
+	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[90%]" aria-hidden="true">
+		<Skyline theme="light" opacity={0.22} />
+	</div>
+	<div class="relative shell pt-36 pb-20 lg:pt-48 lg:pb-28">
 		<p class="eyebrow text-jbc-black-50">Contact</p>
 		<h1 class="mt-5 max-w-[16ch] text-h1 font-bold tracking-jbc-tight lg:text-h1-lg">
 			Tell us what the room is doing wrong.
