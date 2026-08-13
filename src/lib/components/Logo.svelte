@@ -88,7 +88,7 @@
 		   Clear space travels with the mark as padding, so nav items, images and
 		   page edges cannot crowd it regardless of where the logo is placed —
 		   box-content keeps that padding outside the declared width. */
-		'box-content inline-block w-[var(--jbc-logo-width)] min-w-[var(--jbc-logo-min-width)]',
+		'box-content w-[var(--jbc-logo-width)] min-w-[var(--jbc-logo-min-width)]',
 		'p-[var(--jbc-logo-clear-space)]',
 		/* Isolate the mark from inherited page typography. */
 		'[&_text]:[font-kerning:none]',

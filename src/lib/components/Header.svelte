@@ -84,7 +84,7 @@
 		>
 			<!-- One lockup at a time: wide on desktop, icon-only where space is tight.
 			     Clear space is baked into Logo; nothing here may crowd it. -->
-			<!-- <Logo variant="wide" theme={logoTheme} width={150} title="" class="hidden md:inline-block" /> -->
+			<Logo variant="wide" theme={logoTheme} width={150} title="" class="hidden md:inline-block" />
 			<Logo variant="icon" theme={logoTheme} width={72} title="" class="md:hidden" />
 		</a>
 
