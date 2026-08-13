@@ -8,7 +8,7 @@
 	 * one — per the brand manual.
 	 */
 	import { img, srcset } from '$lib/images';
-	import { projects, services } from '$lib/data/site';
+	import { brandTagline, projects, services } from '$lib/data/site';
 	import CTAButton from '$lib/components/CTAButton.svelte';
 	import FadeUp from '$lib/components/FadeUp.svelte';
 	import Preloader from '$lib/components/Preloader.svelte';
@@ -32,7 +32,7 @@
 	<title>JBC — Jimibello &amp; Co. | Interior design and handcrafted furniture, Lagos</title>
 	<meta
 		name="description"
-		content="JBC designs interiors for homes and offices and builds the furniture that goes in them — from first sketch to the day you move back in. Lagos, Nigeria."
+		content="{brandTagline} JBC designs interiors for homes and offices and builds the furniture that goes in them. Lagos, Nigeria."
 	/>
 </svelte:head>
 
@@ -56,7 +56,7 @@
 	<div class="scrim-hero" aria-hidden="true"></div>
 
 	<div class="relative shell pb-20 text-jbc-white lg:pb-28">
-		<p class="eyebrow text-jbc-white-70">Interior design &amp; furniture · Lagos</p>
+		<p class="eyebrow text-jbc-white-70">{brandTagline}</p>
 		<h1 class="mt-6 max-w-[16ch] text-hero font-bold tracking-jbc-tight">
 			Interiors we design.<br />Furniture we build.
 		</h1>

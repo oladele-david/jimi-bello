@@ -11,13 +11,15 @@ export const nav: NavItem[] = [
 	{ label: 'Contact', href: '/contact' }
 ];
 
+export const brandTagline = 'Better Living Through Design.';
+
 export const contact = {
 	email: 'hello@jimibelloandco.com',
-	phone: '+234 803 000 0000',
-	address: ['14 Adeola Odeku Street', 'Victoria Island, Lagos', 'Nigeria'],
+	phone: '08084539531',
+	address: ['9B Tinubu Road', 'Ilupeju, Lagos', 'Nigeria'],
 	hours: 'Mon – Fri, 9:00 – 18:00 WAT',
 	social: [
-		{ label: 'Instagram', href: 'https://instagram.com' },
+		{ label: '@jimibelloandco', href: 'https://instagram.com/jimibelloandco' },
 		{ label: 'Pinterest', href: 'https://pinterest.com' },
 		{ label: 'LinkedIn', href: 'https://linkedin.com' }
 	]

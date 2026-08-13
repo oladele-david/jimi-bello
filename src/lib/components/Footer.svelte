@@ -10,7 +10,7 @@
 	 */
 	import Logo from './Logo.svelte';
 	import Skyline from './Skyline.svelte';
-	import { nav, contact } from '$lib/data/site';
+	import { nav, contact, brandTagline } from '$lib/data/site';
 
 	const year = new Date().getFullYear();
 
@@ -40,8 +40,7 @@
 			<div>
 				<Logo variant="stacked" theme="dark" width={200} />
 				<p class="mt-7 max-w-[34ch] text-body text-jbc-white-70">
-					Handcrafted furniture and interior design for homes and offices — from first sketch to the
-					day you move back in.
+					{brandTagline}
 				</p>
 			</div>
 

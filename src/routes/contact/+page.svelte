@@ -68,7 +68,7 @@
 	<title>Contact — JBC | Jimibello &amp; Co.</title>
 	<meta
 		name="description"
-		content="Talk to JBC about an interior or a piece of furniture. Studio in Victoria Island, Lagos — {contact.email}."
+		content="Talk to JBC about an interior or a piece of furniture. Studio in Ilupeju, Lagos — {contact.email}."
 	/>
 </svelte:head>
 
@@ -247,8 +247,8 @@
 				<iframe
 					class="block h-full w-full border-0 contrast-[1.05] grayscale transition-[filter]
 					       duration-400 ease-out-brand group-hover:contrast-100 group-hover:grayscale-[0.15]"
-					title="Map showing the JBC studio in Victoria Island, Lagos"
-					src="https://www.openstreetmap.org/export/embed.html?bbox=3.41%2C6.42%2C3.45%2C6.44&layer=mapnik&marker=6.43%2C3.43&query={mapQuery}"
+					title="Map showing the JBC studio in Ilupeju, Lagos"
+					src="https://www.openstreetmap.org/export/embed.html?bbox=3.348%2C6.536%2C3.376%2C6.566&layer=mapnik&marker=6.551%2C3.362&query={mapQuery}"
 					loading="lazy"
 					referrerpolicy="no-referrer-when-downgrade"
 				></iframe>
