@@ -55,7 +55,7 @@
 	<!-- Scrim: the headline and the header lockup both need this to stay legible. -->
 	<div class="scrim-hero" aria-hidden="true"></div>
 
-	<div class="relative shell pb-20 text-jbc-white lg:pb-28">
+	<div class="relative shell pb-40 text-jbc-white lg:pb-28">
 		<p class="eyebrow text-jbc-white-70">{brandTagline}</p>
 		<h1 class="mt-6 max-w-[16ch] text-hero font-bold tracking-jbc-tight">
 			Interiors we design.<br />Furniture we build.

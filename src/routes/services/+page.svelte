@@ -11,10 +11,10 @@
 	import { services } from '$lib/data/site';
 	import CTAButton from '$lib/components/CTAButton.svelte';
 	import FadeUp from '$lib/components/FadeUp.svelte';
-	import Skyline from '$lib/components/Skyline.svelte';
 
 	const standard = services.filter((s) => !s.feature);
 	const feature = services.find((s) => s.feature);
+	const HERO = 'pages/about-hero';
 
 	/**
 	 * Red rule as the list marker — the accent at its smallest useful size.
@@ -35,20 +35,29 @@
 	/>
 </svelte:head>
 
-<section class="dark-bg relative overflow-hidden bg-jbc-black text-jbc-white">
-	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[90%]" aria-hidden="true">
-		<Skyline theme="dark" opacity={0.22} />
-	</div>
+<section class="relative flex min-h-[68svh] items-end overflow-hidden bg-jbc-black">
+	<img
+		class="absolute inset-0 h-full w-full object-cover"
+		src={img(HERO, 1920, { ratio: 16 / 9 })}
+		srcset={srcset(HERO, { ratio: 16 / 9 })}
+		sizes="100vw"
+		alt="The JBC studio floor, with drawings pinned along a timber storage wall"
+		width="1920"
+		height="1080"
+		fetchpriority="high"
+		decoding="async"
+	/>
+	<div class="scrim-page" aria-hidden="true"></div>
 	<!-- Top padding clears the fixed header. -->
-	<div class="relative shell pt-36 pb-20 lg:pt-48 lg:pb-28">
-		<p class="eyebrow text-jbc-red">Services</p>
-		<h1 class="mt-5 max-w-[16ch] text-h1 font-bold tracking-jbc-tight lg:text-h1-lg">
+	<div class="relative shell pb-16 text-jbc-white lg:pb-22">
+		<p class="eyebrow text-jbc-white-70">Services</p>
+		<h1 class="mt-5 max-w-[18ch] text-h1 font-bold tracking-jbc-tight text-jbc-white lg:text-[4.5rem]">
 			Five ways in. One team throughout.
 		</h1>
-		<p class="mt-7 max-w-[52ch] text-body-lg text-jbc-white-70">
+		<!-- <p class="mt-7 max-w-[52ch] text-body-lg text-jbc-white-70">
 			Take the whole project or take one piece of it. The consultation stands on its own, the space
 			planning stands on its own, and the workshop will build for a room we did not design.
-		</p>
+		</p> -->
 	</div>
 </section>
 

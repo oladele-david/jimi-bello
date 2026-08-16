@@ -13,10 +13,12 @@
 	 * column cursor and CSS cannot see that.
 	 */
 	import { page } from '$app/state';
+	import { img, srcset } from '$lib/images';
 	import { projects, categories, type Category } from '$lib/data/site';
 	import FadeUp from '$lib/components/FadeUp.svelte';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
-	import Skyline from '$lib/components/Skyline.svelte';
+
+	const HERO = 'pages/portfolio-hero';
 
 	function isCategory(value: string | null): value is Category {
 		return value !== null && (categories as readonly string[]).includes(value);
@@ -74,20 +76,29 @@
 	/>
 </svelte:head>
 
-<!-- Top padding clears the fixed header, which is already filled on this route. -->
-<section class="relative overflow-hidden">
-	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[90%]" aria-hidden="true">
-		<Skyline theme="light" opacity={0.22} />
-	</div>
-	<div class="relative shell pt-28 pb-20 lg:pt-48 lg:pb-28">
-		<p class="eyebrow text-jbc-black-50">Portfolio</p>
-		<h1 class="mt-5 max-w-[16ch] text-h1 font-bold tracking-jbc-tight lg:text-h1-lg">
+<!-- Top padding clears the fixed header. -->
+<section class="relative flex min-h-[68svh] items-end overflow-hidden bg-jbc-black">
+	<img
+		class="absolute inset-0 h-full w-full object-cover"
+		src={img(HERO, 1920, { ratio: 16 / 9 })}
+		srcset={srcset(HERO, { ratio: 16 / 9 })}
+		sizes="100vw"
+		alt="A contemporary architectural living space with expansive windows and bespoke timber joinery"
+		width="1920"
+		height="1080"
+		fetchpriority="high"
+		decoding="async"
+	/>
+	<div class="scrim-page" aria-hidden="true"></div>
+	<div class="relative shell pb-16 text-jbc-white lg:pb-22">
+		<p class="eyebrow text-jbc-white-70">Portfolio</p>
+		<h1 class="mt-5 max-w-[18ch] text-h1 font-bold tracking-jbc-tight lg:text-[4.5rem]">
 			The work, and what it had to solve.
 		</h1>
-		<p class="mt-6 max-w-[48ch] text-body-lg text-jbc-black-70">
+		<!-- <p class="mt-7 max-w-[48ch] text-body-lg text-jbc-white-70">
 			Every project here started with something that was not working — a dark room, a floor plate
 			with no daylight, a renovation that had stopped twice.
-		</p>
+		</p> -->
 	</div>
 </section>
 

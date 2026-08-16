@@ -41,6 +41,8 @@ const IMAGES = {
 	'pages/home-hero': 'photo-1618221195710-dd6b41faaea6',
 	'pages/about-hero': 'photo-1524758631624-e2822e304c36',
 	'pages/about-workshop': 'photo-1594026112284-02bb6f3352fe',
+	'pages/portfolio-hero': 'photo-1600607687939-ce8a6c25118c',
+	'pages/contact-hero': 'photo-1600585152220-90363fe7e115',
 
 	// Services
 	'services/residential': 'photo-1586023492125-27b2c045efd7',

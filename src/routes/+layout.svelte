@@ -12,11 +12,8 @@
 	 * filled there — the white lockup would otherwise sit invisibly on white.
 	 * Everything else opens on a photograph or a Dark Liver band, so the bar
 	 * stays transparent until the reader scrolls past the fold.
-	 *
-	 * Matched exactly: /portfolio/[slug] opens on a full-bleed hero and is
-	 * deliberately not in this list.
 	 */
-	const LIGHT_AT_TOP = ['/portfolio', '/contact'];
+	const LIGHT_AT_TOP: string[] = [];
 	let solidHeader = $derived(LIGHT_AT_TOP.includes(page.url.pathname));
 </script>
 
