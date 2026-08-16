@@ -7,8 +7,13 @@
 	let isLoginPage = $derived(page.url.pathname === '/console/login');
 
 	const NAV = [
-		{ label: 'Projects', href: '/console' },
+		{ label: 'Portfolio', href: '/console' },
 		{ label: 'Media Library', href: '/console/media' }
+		/* Future Roadmap Modules:
+		{ label: 'Site Content', href: '/console?tab=content' },
+		{ label: 'Contact Info', href: '/console?tab=contact' },
+		{ label: 'Security', href: '/console?tab=security' }
+		*/
 	];
 </script>
 
@@ -31,13 +36,17 @@
 					</a>
 
 					<!-- Navigation Links -->
-					<nav class="hidden md:flex items-center gap-1 ml-4" aria-label="Console Navigation">
+					<nav class="hidden lg:flex items-center gap-1 ml-4" aria-label="Console Navigation">
 						{#each NAV as item}
-							{@const active = item.href === '/console' ? page.url.pathname === '/console' || page.url.pathname.startsWith('/console/projects') : page.url.pathname.startsWith(item.href)}
+							{@const isExact = item.href === '/console' && (page.url.pathname === '/console' && !page.url.searchParams.get('tab'))}
+							{@const isMedia = item.href === '/console/media' && page.url.pathname.startsWith('/console/media')}
+							{@const isTab = item.href.includes('tab=') && page.url.search.includes(item.href.split('?')[1])}
+							{@const isProjectSubpage = item.href === '/console' && page.url.pathname.startsWith('/console/projects')}
+							{@const active = isExact || isMedia || isTab || isProjectSubpage}
 							<a
 								href={item.href}
-								class="px-3.5 py-1.5 rounded-sm text-xs font-medium uppercase tracking-wider transition-all duration-200 {active
-									? 'bg-white/10 text-white shadow-sm'
+								class="px-3 py-1.5 rounded-sm text-xs font-medium uppercase tracking-wider transition-all duration-200 {active
+									? 'bg-white/10 text-white shadow-sm font-semibold'
 									: 'text-white/60 hover:text-white hover:bg-white/5'}"
 							>
 								{item.label}
@@ -77,12 +86,16 @@
 		</header>
 
 		<!-- Sub-header Breadcrumb / Actions Bar for Mobile Nav -->
-		<div class="md:hidden border-b border-white/10 bg-[#171717] px-4 py-2 flex items-center justify-between gap-2 overflow-x-auto">
+		<div class="lg:hidden border-b border-white/10 bg-[#171717] px-4 py-2 flex items-center gap-2 overflow-x-auto">
 			{#each NAV as item}
-				{@const active = item.href === '/console' ? page.url.pathname === '/console' || page.url.pathname.startsWith('/console/projects') : page.url.pathname.startsWith(item.href)}
+				{@const isExact = item.href === '/console' && (page.url.pathname === '/console' && !page.url.searchParams.get('tab'))}
+				{@const isMedia = item.href === '/console/media' && page.url.pathname.startsWith('/console/media')}
+				{@const isTab = item.href.includes('tab=') && page.url.search.includes(item.href.split('?')[1])}
+				{@const isProjectSubpage = item.href === '/console' && page.url.pathname.startsWith('/console/projects')}
+				{@const active = isExact || isMedia || isTab || isProjectSubpage}
 				<a
 					href={item.href}
-					class="px-3 py-1 text-xs font-medium uppercase tracking-wider rounded {active ? 'bg-white/15 text-white' : 'text-white/50'}"
+					class="px-3 py-1 text-xs font-medium uppercase tracking-wider rounded shrink-0 {active ? 'bg-white/15 text-white' : 'text-white/50'}"
 				>
 					{item.label}
 				</a>
