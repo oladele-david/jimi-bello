@@ -49,7 +49,7 @@ const IMAGES = {
 	'services/commercial': 'photo-1497366754035-f200968a6e72',
 	'services/space-planning': 'photo-1503602642458-232111445657',
 	'services/furniture-design': 'photo-1611486212355-d276af4581c0',
-	'services/renovation-consultation': 'photo-1581094794329-c8112a89af12',
+	'services/renovation-consultation': 'photo-1731168273756-e02cae42265b',
 
 	// Ikoyi Residence
 	'projects/ikoyi-residence/hero': 'photo-1586023492125-27b2c045efd7',
