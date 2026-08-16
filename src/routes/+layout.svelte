@@ -15,6 +15,7 @@
 	 */
 	const LIGHT_AT_TOP: string[] = [];
 	let solidHeader = $derived(LIGHT_AT_TOP.includes(page.url.pathname));
+	let isConsoleRoute = $derived(page.url.pathname.startsWith('/console'));
 </script>
 
 <svelte:head>
@@ -24,12 +25,18 @@
 	<meta property="og:type" content="website" />
 </svelte:head>
 
-<Header solid={solidHeader} />
+{#if !isConsoleRoute}
+	<Header solid={solidHeader} />
 
-<!-- Target of the skip link in Header. Focus lands here from that link and
-     the focus ring is enough, so the default outline is dropped. -->
-<main id="main" class="outline-none" tabindex="-1">
-	{@render children()}
-</main>
+	<!-- Target of the skip link in Header. Focus lands here from that link and
+	     the focus ring is enough, so the default outline is dropped. -->
+	<main id="main" class="outline-none" tabindex="-1">
+		{@render children()}
+	</main>
 
-<Footer />
+	<Footer />
+{:else}
+	<main id="main" class="min-h-screen bg-[#191919] text-jbc-white antialiased">
+		{@render children()}
+	</main>
+{/if}

@@ -36,7 +36,22 @@ function nearestWidth(width: number) {
 	);
 }
 
+function isDirectUrl(name: string): boolean {
+	return (
+		name.startsWith('http://') ||
+		name.startsWith('https://') ||
+		name.startsWith('/api/images/') ||
+		name.startsWith('/uploads/') ||
+		name.startsWith('data:') ||
+		name.startsWith('/images/')
+	);
+}
+
 export function img(name: string, width: number, _options: ImageOptions = {}) {
+	if (!name) return '';
+	if (isDirectUrl(name)) {
+		return name;
+	}
 	return `${BASE}${name}-${nearestWidth(width)}.webp`;
 }
 
@@ -45,5 +60,9 @@ export function srcset(
 	_options: ImageOptions = {},
 	widths: readonly number[] = DEFAULT_WIDTHS
 ) {
+	if (!name) return '';
+	if (isDirectUrl(name)) {
+		return `${name} 1024w`;
+	}
 	return widths.map((w) => `${BASE}${name}-${w}.webp ${w}w`).join(', ');
 }

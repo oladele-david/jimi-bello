@@ -14,11 +14,15 @@
 	 */
 	import { page } from '$app/state';
 	import { img, srcset } from '$lib/images';
-	import { projects, categories, type Category } from '$lib/data/site';
+	import { categories, type Category, projects as defaultProjects } from '$lib/data/site';
 	import FadeUp from '$lib/components/FadeUp.svelte';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
 
+	let { data } = $props();
+
 	const HERO = 'pages/portfolio-hero';
+
+	let allProjects = $derived(data?.projects && data.projects.length > 0 ? data.projects : defaultProjects);
 
 	function isCategory(value: string | null): value is Category {
 		return value !== null && (categories as readonly string[]).includes(value);
@@ -30,7 +34,7 @@
 	});
 
 	let filtered = $derived(
-		active === 'All' ? projects : projects.filter((project) => project.category === active)
+		active === 'All' ? allProjects : allProjects.filter((project) => project.category === active)
 	);
 
 	let tiles = $derived.by(() => {

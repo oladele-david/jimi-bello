@@ -1,0 +1,4 @@
+# Cloudflare Wrangler local environment variables & secrets
+# Used automatically by `wrangler dev` and `pnpm run preview`
+ADMIN_PASSWORD=jimi-admin-2026!
+ADMIN_SECRET=jbc-interior-architecture-secret-key-2026

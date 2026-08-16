@@ -77,7 +77,7 @@
 				<p class="max-w-[34ch] text-h2 leading-[1.3] font-semibold lg:text-[1.875rem]">
 					{project.excerpt}
 				</p>
-				{#each project.body as paragraph (paragraph)}
+				{#each project.body as paragraph, i (i)}
 					<p class={PROSE}>{paragraph}</p>
 				{/each}
 			</FadeUp>

@@ -8,21 +8,32 @@
 	 * one — per the brand manual.
 	 */
 	import { img, srcset } from '$lib/images';
-	import { brandTagline, projects, services } from '$lib/data/site';
+	import { brandTagline, services, projects as defaultProjects } from '$lib/data/site';
 	import CTAButton from '$lib/components/CTAButton.svelte';
 	import FadeUp from '$lib/components/FadeUp.svelte';
 	import Preloader from '$lib/components/Preloader.svelte';
 	import ProjectCard from '$lib/components/ProjectCard.svelte';
 
+	let { data } = $props();
+
 	const HERO = 'pages/home-hero';
+
+	let allProjects = $derived(data?.projects && data.projects.length > 0 ? data.projects : defaultProjects);
 
 	/**
 	 * Curated rather than sliced, because the shapes carry the layout: a tall
 	 * tile beside a square for the offset pair, then the one 'wide' project on
 	 * its own so it can break out to the full viewport width.
 	 */
-	const pair = projects.filter((p) => ['ikoyi-residence', 'four-poster-series'].includes(p.slug));
-	const [breakout] = projects.filter((p) => p.slug === 'victoria-island-studio');
+	let pair = $derived.by(() => {
+		const found = allProjects.filter((p) => ['ikoyi-residence', 'four-poster-series'].includes(p.slug));
+		return found.length >= 2 ? found.slice(0, 2) : allProjects.slice(0, 2);
+	});
+
+	let breakout = $derived.by(() => {
+		const found = allProjects.find((p) => p.slug === 'victoria-island-studio') || allProjects.find((p) => p.shape === 'wide');
+		return found || allProjects[2] || allProjects[0];
+	});
 
 	/** Section heading, used by both the work and services teasers. */
 	const SECTION_TITLE = 'mt-4 text-h2 font-semibold lg:text-h2-lg';
