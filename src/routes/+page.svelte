@@ -41,7 +41,7 @@
 <Preloader />
 
 <!-- Hero Section -->
-<section class="dark-bg relative flex min-h-svh items-end overflow-hidden bg-jbc-obsidian">
+<section class="dark-bg relative flex min-h-svh flex-col justify-end overflow-hidden bg-jbc-obsidian pt-28 pb-16 lg:pt-36 lg:pb-24">
 	<img
 		class="absolute inset-0 h-full w-full object-cover"
 		src={img(HERO, 1920, { ratio: 16 / 10 })}
@@ -55,12 +55,12 @@
 	/>
 	<div class="scrim-hero" aria-hidden="true"></div>
 
-	<div class="relative shell pb-24 text-jbc-white lg:pb-28">
-		<p class="eyebrow text-jbc-ember font-semibold tracking-jbc-caps uppercase">{brandTagline}</p>
-		<h1 class="mt-4 max-w-[16ch] text-hero font-display font-bold tracking-jbc-tight">
+	<div class="relative shell text-jbc-white">
+		<p class="eyebrow text-jbc-white/80 font-semibold tracking-jbc-caps uppercase">{brandTagline}</p>
+		<h1 class="mt-4 max-w-[18ch] text-hero font-display font-bold tracking-jbc-tight">
 			Interiors we design.<br />Furniture we build.
 		</h1>
-		<p class="mt-6 max-w-[52ch] text-body-lg leading-[1.65] text-jbc-white/80">
+		<p class="mt-5 max-w-[50ch] text-body lg:text-body-lg leading-[1.65] text-jbc-white/80">
 			Every space we touch is shaped by intention, craft, and the way people actually live. We design interiors and handcraft the furniture within them — all from our studio and workshop in Lagos.
 		</p>
 		<div class="mt-8 flex flex-wrap gap-4">

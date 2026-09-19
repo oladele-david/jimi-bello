@@ -32,7 +32,7 @@
 </svelte:head>
 
 <!-- Hero Section -->
-<section class="dark-bg relative flex min-h-[68svh] items-end overflow-hidden bg-jbc-obsidian">
+<section class="dark-bg relative flex min-h-[68svh] flex-col justify-end overflow-hidden bg-jbc-obsidian pt-28 pb-16 lg:pt-36 lg:pb-22">
 	<img
 		class="absolute inset-0 h-full w-full object-cover"
 		src={img(HERO, 1920, { ratio: 16 / 9 })}

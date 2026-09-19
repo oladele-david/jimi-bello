@@ -37,7 +37,7 @@
 
 <article class="bg-jbc-ivory">
 	<!-- Project Hero -->
-	<header class="dark-bg relative flex min-h-[78svh] items-end overflow-hidden bg-jbc-obsidian">
+	<header class="dark-bg relative flex min-h-[78svh] flex-col justify-end overflow-hidden bg-jbc-obsidian pt-28 pb-16 lg:pt-36 lg:pb-24">
 		<img
 			class="absolute inset-0 h-full w-full object-cover"
 			src={img(project.hero, 1920, { ratio: 16 / 9 })}

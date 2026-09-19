@@ -88,8 +88,8 @@
 	   heroes that sit over photography run larger and set their own. */
 	--text-h1-lg: 4.25rem;
 	--text-h1-lg--line-height: 1.05;
-	--text-hero: clamp(2.75rem, 8vw, 6rem);
-	--text-hero--line-height: 0.98;
+	--text-hero: clamp(2.25rem, 4.5vw, 3.85rem);
+	--text-hero--line-height: 1.05;
 
 	/* Section rhythm — reduced to decrease excessive white space */
 	--spacing-section: 3.5rem;
