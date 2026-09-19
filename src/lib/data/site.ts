@@ -111,27 +111,30 @@ export const services: Service[] = [
 	{
 		slug: 'residential',
 		title: 'Residential Interiors',
-		summary: 'Homes built around how you actually live — not how a catalogue says you should.',
+		summary:
+			'Interiors that feel distinctly yours. We create refined residential spaces shaped around your lifestyle, preferences, and the way you truly live.',
 		detail:
-			'We start with your routines, your light, your storage headaches. Then we design every room around them — layout, finishes, lighting, and the furniture we build for it. One team from first sketch to the day you move back in.',
+			'We start with your routines, your light, and your spatial priorities. Then we design every room around them — layout, finishes, lighting, and custom pieces crafted for your home. One team from first sketch to handover.',
 		points: ['Full-home concepts', 'Room-by-room refits', 'Lighting & finish schedules'],
 		image: 'services/residential'
 	},
 	{
 		slug: 'commercial',
 		title: 'Commercial Interiors',
-		summary: 'Offices, showrooms and hospitality spaces that work as hard as your team does.',
+		summary:
+			'Spaces that make an impression. We design offices, showrooms, and hospitality environments that express your brand, enhance experience, and perform with purpose.',
 		detail:
-			'Commercial work lives or dies on flow and durability. We plan for the traffic a space really gets, specify materials that survive it, and keep the brand legible in every sightline — without the space reading like a lobby.',
+			'Commercial spaces demand flow, brand identity, and enduring materiality. We plan for real operational traffic, specify materials that last, and ensure an inspiring experience for your team and clients.',
 		points: ['Workplace & studio fit-outs', 'Showroom and retail', 'Brand-led material palettes'],
 		image: 'services/commercial'
 	},
 	{
 		slug: 'space-planning',
 		title: 'Space Planning',
-		summary: 'The unglamorous work that decides whether a room ever feels right.',
+		summary:
+			'Where thoughtful design begins. We shape layouts, proportions, and movement to ensure every element works together seamlessly before the details take form.',
 		detail:
-			'Before a single finish is chosen we resolve circulation, sightlines, daylight and storage. Most rooms that feel wrong are planned wrong, and no amount of styling fixes that. This service is available on its own if you already have a builder.',
+			'Before choosing a single finish, we resolve circulation, sightlines, daylight, and storage. Most rooms that feel uncomfortable suffer from flawed planning — we solve the fundamentals first.',
 		points: [
 			'Circulation & zoning studies',
 			'Furniture layouts to scale',
@@ -143,13 +146,13 @@ export const services: Service[] = [
 		slug: 'furniture-design',
 		title: 'Furniture Design',
 		summary:
-			'Our workshop. Wooden beds, four-poster beds, chests of drawers, dining tables and chairs, bookcases, coffee tables.',
+			'Bespoke pieces. Considered craftsmanship. We design and create furniture made specifically for your space, from statement pieces to timeless everyday essentials.',
 		detail:
-			'This is the part of JBC most studios have to outsource. We draw a piece, prototype it, and build it in solid timber to the millimetre your room needs — which means the awkward alcove becomes a bookcase instead of a problem. Every piece is signed, numbered and warranted for ten years.',
+			'Our in-house workshop crafts made-to-measure furniture in solid timber. Every piece is drafted, prototyped, and built to the exact millimeter your room requires, backed by our ten-year structural warranty.',
 		points: [
 			'Made-to-measure case goods and seating',
 			'Solid timber, joinery-first construction',
-			'Prototype review before the full build',
+			'Prototype review before full build',
 			'Ten-year structural warranty'
 		],
 		image: 'services/furniture-design',
@@ -158,10 +161,11 @@ export const services: Service[] = [
 	{
 		slug: 'renovation-consultation',
 		title: 'Renovation Consultation',
-		summary: 'A second opinion before you spend the money — or halfway through, when it stalls.',
+		summary:
+			'A considered approach to transformation. We provide expert guidance to help you navigate your renovation, make confident decisions, and achieve a cohesive, well-resolved result.',
 		detail:
-			'Half-day and full-day sessions where we walk the property, pressure-test the plan, flag what will cost more than you have been told, and leave you with a written scope you can hand to any contractor. No obligation to hire us for the build.',
-		points: ['On-site walkthrough', 'Written scope & budget bands', 'Contractor-ready drawings'],
+			'Structured advisory walkthroughs and evaluations where we pressure-test drawings, clarify contractor scopes, and protect your investment before construction commences.',
+		points: ['On-site walkthrough', 'Written scope & budget bands', 'Contractor-ready guidance'],
 		image: 'services/renovation-consultation'
 	}
 ];
