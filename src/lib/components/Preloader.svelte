@@ -48,7 +48,7 @@
 		aria-live="polite"
 	>
 		<div class="flex flex-col items-center">
-			<Logo {variant} theme="dark" tagline="brand" {width} />
+			<Logo variant="primary" color="white" {width} />
 		</div>
 	</div>
 {/if}

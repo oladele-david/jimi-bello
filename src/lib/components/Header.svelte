@@ -82,9 +82,8 @@
 			href="/"
 			aria-label="JimiBello Co., home"
 		>
-			<!-- Desktop: full primary mark (JB + JIMIBELLOCO). Mobile (< lg): JB monogram -->
-			<Logo variant="primary" theme={logoTheme} class="hidden lg:inline-block h-12 w-auto" />
-			<Logo variant="monogram" theme={logoTheme} class="lg:hidden h-10 w-auto" />
+			<!-- Responsive Ember Logo: switches between primary logo (≥1024px) and monogram (<1024px) seamlessly -->
+			<Logo variant="responsive" color="ember" class="h-10 lg:h-12 w-auto" />
 		</a>
 
 		<nav class="hidden lg:block" aria-label="Primary">

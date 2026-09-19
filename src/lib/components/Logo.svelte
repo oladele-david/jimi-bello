@@ -2,8 +2,10 @@
 	/**
 	 * JimiBello Co. Logo System.
 	 * Supports:
+	 *   - responsive: Automatically swaps between primary logo on desktop (≥1024px)
+	 *                 and monogram mark on mobile (<1024px) via <picture>
 	 *   - primary: Stacked mark (JB monogram + JIMIBELLOCO wordmark)
-	 *   - monogram: JB monogram mark only (compact/mobile)
+	 *   - monogram: JB monogram mark only (compact)
 	 *   - wordmark: JIMIBELLOCO wordmark only (horizontal)
 	 *
 	 * Backward compatibility:
@@ -11,7 +13,7 @@
 	 *   - 'stacked' maps to 'primary'
 	 *   - 'icon' maps to 'monogram'
 	 */
-	type Variant = 'primary' | 'monogram' | 'wordmark' | 'wide' | 'stacked' | 'icon';
+	type Variant = 'responsive' | 'primary' | 'monogram' | 'wordmark' | 'wide' | 'stacked' | 'icon';
 	type Theme = 'light' | 'dark';
 	type Color = 'white' | 'black' | 'ember';
 
@@ -28,7 +30,7 @@
 
 	let {
 		variant = 'primary',
-		theme = 'light',
+		theme,
 		color,
 		width,
 		height,
@@ -37,9 +39,12 @@
 		class: className = ''
 	}: Props = $props();
 
-	let resolvedColor = $derived<Color>(
-		color ?? (theme === 'dark' ? 'white' : 'black')
-	);
+	let resolvedColor = $derived<Color>(() => {
+		if (color) return color;
+		if (theme === 'dark') return 'white';
+		if (theme === 'light') return 'black';
+		return 'ember';
+	});
 
 	let baseName = $derived<string>(() => {
 		switch (variant) {
@@ -56,16 +61,31 @@
 		}
 	});
 
-	let src = $derived(`/logos/${baseName()}-${resolvedColor}.svg`);
+	let src = $derived(`/logos/${baseName()}-${resolvedColor()}.svg`);
 	let accessibleTitle = $derived(alt ?? title);
 </script>
 
-<img
-	{src}
-	alt={accessibleTitle}
-	class={['inline-block object-contain', className]}
-	style:width={width ? `${width}px` : undefined}
-	style:height={height ? `${height}px` : undefined}
-	loading="eager"
-	decoding="async"
-/>
+{#if variant === 'responsive'}
+	<picture class="inline-flex items-center">
+		<source media="(min-width: 1024px)" srcset="/logos/primary-logo-{resolvedColor()}.svg" />
+		<img
+			src="/logos/monogram-{resolvedColor()}.svg"
+			alt={accessibleTitle}
+			class={['block object-contain', className]}
+			style:width={width ? `${width}px` : undefined}
+			style:height={height ? `${height}px` : undefined}
+			loading="eager"
+			decoding="async"
+		/>
+	</picture>
+{:else}
+	<img
+		{src}
+		alt={accessibleTitle}
+		class={['object-contain', className || 'inline-block']}
+		style:width={width ? `${width}px` : undefined}
+		style:height={height ? `${height}px` : undefined}
+		loading="eager"
+		decoding="async"
+	/>
+{/if}
