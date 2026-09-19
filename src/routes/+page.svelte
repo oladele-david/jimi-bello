@@ -109,14 +109,13 @@
 
 				<FadeUp index={1} class="mt-6">
 					<p class="text-body-lg text-jbc-obsidian/80 leading-[1.7]">
-						JimiBello &amp; Co. is a multi-disciplinary design studio and furniture workshop based in Lagos. We believe that exceptional interiors are born from a seamless dialogue between architecture, furniture, and human routine.
+						At Jimi Bello Co., we combine full-service interior design with our own custom furniture workshop. It’s a distinction that changes everything. Instead of searching for pre-made pieces that almost fit your space, we design and build furniture that fits it perfectly.
 					</p>
 					<p class="mt-4 text-body-lg text-jbc-obsidian/80 leading-[1.7]">
-						By designing spaces and building the bespoke pieces that inhabit them, we eliminate compromise — creating environments of lasting warmth, balance, and purpose.
+						From residential homes to sprawling corporate offices across Lagos, we manage projects of every scale. Whether revitalizing a stalled renovation or executing a full floor-plate design, our team handles the entire process from concept to completion.
 					</p>
-					<div class="mt-8 flex flex-wrap gap-4">
-						<CTAButton href="/about" variant="outline">More About Our Studio</CTAButton>
-						<CTAButton href="/services" variant="secondary">Our Services</CTAButton>
+					<div class="mt-8">
+						<CTAButton href="/about" variant="outline">More About JBC</CTAButton>
 					</div>
 				</FadeUp>
 			</div>
