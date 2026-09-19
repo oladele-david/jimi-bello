@@ -217,15 +217,12 @@
 			>
 				Every exceptional space begins with a considered idea.
 			</h2>
-			<p class="mt-6 max-w-[52ch] text-body-lg text-jbc-white/90 leading-[1.7]">
-				Whether you are planning a complete home interior, an inspiring commercial environment, or commissioning a bespoke furniture piece from our workshop, we are ready to bring it to life.
+			<p class="mt-6 max-w-[56ch] text-body-lg text-jbc-white/90 leading-[1.7]">
+				Tell us about your space, your vision, and your investment range. We’ll take the time to understand your needs, assess your project and transform your ideas into a thoughtfully designed space, shaped around how you live, work, and experience it.
 			</p>
-			<div class="mt-9 flex flex-wrap gap-4">
+			<div class="mt-9">
 				<CTAButton href="/contact" variant="primary" size="lg" class="bg-jbc-obsidian text-jbc-white hover:bg-jbc-obsidian/90">
-					Book a Consultation &rarr;
-				</CTAButton>
-				<CTAButton href="/products" variant="invert" size="lg">
-					Explore Products
+					Book a Consultation.
 				</CTAButton>
 			</div>
 		</FadeUp>
