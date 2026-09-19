@@ -221,7 +221,7 @@
 				Tell us about your space, your vision, and your investment range. We’ll take the time to understand your needs, assess your project and transform your ideas into a thoughtfully designed space, shaped around how you live, work, and experience it.
 			</p>
 			<div class="mt-9">
-				<CTAButton href="/contact" variant="primary" size="lg" class="bg-jbc-obsidian text-jbc-white hover:bg-jbc-obsidian/90">
+				<CTAButton href="/contact" variant="invert" size="lg">
 					Book a Consultation.
 				</CTAButton>
 			</div>
