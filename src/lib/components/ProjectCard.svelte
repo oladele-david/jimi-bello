@@ -45,7 +45,7 @@
 
 <a class={['group block text-inherit no-underline', className]} href="/portfolio/{project.slug}">
 	<!-- Fixed frame: the image scales inside it, the layout never moves. -->
-	<div class="overflow-hidden bg-jbc-black-15" style:aspect-ratio={ratio}>
+	<div class="overflow-hidden bg-jbc-obsidian-15" style:aspect-ratio={ratio}>
 		<img
 			class="h-full w-full object-cover transition-transform duration-500 ease-out-brand
 			       group-hover:scale-[1.04] group-focus-visible:scale-[1.04]
@@ -64,14 +64,14 @@
 	</div>
 
 	<div class={['pt-5', metaClass]}>
-		<!-- The red arrives on hover — the tag is the only element that changes hue. -->
+		<!-- The ember arrives on hover — the tag is the only element that changes hue. -->
 		<span
-			class="block eyebrow text-jbc-black-50 transition-colors duration-400 ease-out-brand
-			       group-hover:text-jbc-red group-focus-visible:text-jbc-red"
+			class="block eyebrow text-jbc-obsidian-50 transition-colors duration-400 ease-out-brand
+			       group-hover:text-jbc-ember group-focus-visible:text-jbc-ember"
 		>
 			{project.category}
 		</span>
-		<h3 class="mt-2 text-h2 leading-[1.2] font-semibold">{project.title}</h3>
-		<p class="mt-2 max-w-[46ch] text-body leading-[1.65] text-jbc-black-70">{project.excerpt}</p>
+		<h3 class="mt-2 text-h2 font-display leading-[1.2] font-semibold text-jbc-obsidian">{project.title}</h3>
+		<p class="mt-2 max-w-[46ch] text-body leading-[1.65] text-jbc-obsidian-70">{project.excerpt}</p>
 	</div>
 </a>

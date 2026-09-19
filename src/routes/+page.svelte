@@ -1,11 +1,8 @@
 <script lang="ts">
 	/**
-	 * Home. Five movements: full-bleed hero, intro with a Bold pull-quote,
-	 * asymmetric featured grid, services teaser, dark CTA band.
-	 *
-	 * The hero photograph is the one place a busy image sits behind the lockup,
-	 * so the header renders its solid white lockup there — never the full-colour
-	 * one — per the brand manual.
+	 * Home page for JimiBello & Co.
+	 * Incorporates brand identity: Ivory grounds, Ember accents, Obsidian darks,
+	 * JB Monogram watermark, and high image density.
 	 */
 	import { img, srcset } from '$lib/images';
 	import { brandTagline, services, projects as defaultProjects } from '$lib/data/site';
@@ -20,11 +17,6 @@
 
 	let allProjects = $derived(data?.projects && data.projects.length > 0 ? data.projects : defaultProjects);
 
-	/**
-	 * Curated rather than sliced, because the shapes carry the layout: a tall
-	 * tile beside a square for the offset pair, then the one 'wide' project on
-	 * its own so it can break out to the full viewport width.
-	 */
 	let pair = $derived.by(() => {
 		const found = allProjects.filter((p) => ['ikoyi-residence', 'four-poster-series'].includes(p.slug));
 		return found.length >= 2 ? found.slice(0, 2) : allProjects.slice(0, 2);
@@ -35,23 +27,21 @@
 		return found || allProjects[2] || allProjects[0];
 	});
 
-	/** Section heading, used by both the work and services teasers. */
-	const SECTION_TITLE = 'mt-4 text-h2 font-semibold lg:text-h2-lg';
+	const SECTION_TITLE = 'mt-4 text-h2 font-display font-semibold lg:text-h2-lg text-jbc-obsidian';
 </script>
 
 <svelte:head>
-	<title>JBC — Jimibello &amp; Co. | Interior design and handcrafted furniture, Lagos</title>
+	<title>JimiBello &amp; Co. | Living Through Design — Interior Architecture &amp; Handcrafted Furniture</title>
 	<meta
 		name="description"
-		content="{brandTagline} JBC designs interiors for homes and offices and builds the furniture that goes in them. Lagos, Nigeria."
+		content="{brandTagline} JimiBello & Co. designs interiors for homes and offices and builds bespoke furniture in our Lagos workshop."
 	/>
 </svelte:head>
 
 <Preloader />
 
-<!-- `dark-bg` earns the hero its white CTA outline via the on-dark: variant —
-     the photograph reads as a dark ground even though no colour is set here. -->
-<section class="dark-bg relative flex min-h-svh items-end overflow-hidden bg-jbc-black">
+<!-- Hero Section -->
+<section class="dark-bg relative flex min-h-svh items-end overflow-hidden bg-jbc-obsidian">
 	<img
 		class="absolute inset-0 h-full w-full object-cover"
 		src={img(HERO, 1920, { ratio: 16 / 10 })}
@@ -63,119 +53,152 @@
 		fetchpriority="high"
 		decoding="async"
 	/>
-	<!-- Scrim: the headline and the header lockup both need this to stay legible. -->
 	<div class="scrim-hero" aria-hidden="true"></div>
 
-	<div class="relative shell pb-30 text-jbc-white lg:pb-28">
-		<p class="eyebrow text-jbc-white-70">{brandTagline}</p>
-		<h1 class="mt-6 max-w-[16ch] text-hero font-bold tracking-jbc-tight">
+	<div class="relative shell pb-24 text-jbc-white lg:pb-28">
+		<p class="eyebrow text-jbc-ember font-semibold tracking-jbc-caps uppercase">{brandTagline}</p>
+		<h1 class="mt-4 max-w-[16ch] text-hero font-display font-bold tracking-jbc-tight">
 			Interiors we design.<br />Furniture we build.
 		</h1>
-		<p class="mt-7 max-w-[46ch] text-body-lg leading-[1.65] text-jbc-white-70">
-			Most studios draw a room and then go shopping. We draw the room, then make the pieces that fit
-			it — in our own workshop, to the millimetre.
+		<p class="mt-6 max-w-[52ch] text-body-lg leading-[1.65] text-jbc-white/80">
+			Every space we touch is shaped by intention, craft, and the way people actually live. We design interiors and handcraft the furniture within them — all from our studio and workshop in Lagos.
 		</p>
-		<div class="mt-10">
-			<CTAButton href="/portfolio" variant="outline" size="lg">See the work</CTAButton>
+		<div class="mt-8 flex flex-wrap gap-4">
+			<CTAButton href="/portfolio" variant="primary" size="lg">Explore Our Work</CTAButton>
+			<CTAButton href="/products" variant="outline" size="lg">View Products</CTAButton>
 		</div>
 	</div>
 </section>
 
-<section class="py-section lg:py-section-lg">
-	<!-- Two columns from lg: the eyebrow and quote stack in column one, the body
-	     fills column two — pulled level with the quote, not the eyebrow. Placed
-	     by explicit row/column rather than named areas, which Tailwind cannot
-	     express without dropping to arbitrary properties. -->
-	<div class="shell lg:grid lg:grid-cols-[1.1fr_1fr] lg:items-start lg:gap-x-20">
-		<FadeUp class="lg:col-start-1 lg:row-start-1">
-			<p class="eyebrow text-jbc-black-50">Who we are</p>
-		</FadeUp>
-		<FadeUp index={1} class="lg:col-start-1 lg:row-start-2">
-			<blockquote
-				class="mt-7 max-w-[20ch] text-h1 leading-[1.08] font-bold tracking-jbc-snug
-				       lg:mt-4 lg:text-[3.25rem]"
-			>
-				A room is finished when nothing in it is a compromise.
-			</blockquote>
-		</FadeUp>
-		<FadeUp index={2} class="lg:col-start-2 lg:row-span-2 lg:row-start-1">
-			<p class="mt-6 max-w-[52ch] text-body-lg text-jbc-black-70">
-				JBC is an interior design studio with a furniture workshop attached. That second half is the
-				part that changes things: when the alcove is an awkward width, we do not hunt for a bookcase
-				that nearly fits — we build one that does.
-			</p>
-			<p class="mt-6 max-w-[52ch] text-body-lg text-jbc-black-70">
-				We work on homes and offices across Lagos, on projects that run from a single stalled
-				renovation to a full floor plate. One team carries it from the first sketch to the day you
-				move back in.
-			</p>
-			<CTAButton href="/about" variant="outline" class="mt-9">More about JBC</CTAButton>
-		</FadeUp>
+<!-- Who We Are (Ivory Ground with Image Density + Watermark) -->
+<section class="relative overflow-hidden bg-jbc-ivory py-[var(--spacing-section)] lg:py-[var(--spacing-section-lg)]">
+	<!-- JB Monogram Watermark (Page 40 Brand Book style) -->
+	<img
+		src="/logos/monogram-ember.svg"
+		aria-hidden="true"
+		class="pointer-events-none absolute -right-[10%] top-1/2 -translate-y-1/2 w-[42vw] max-w-[550px] opacity-[0.06] select-none"
+		alt=""
+	/>
+
+	<div class="relative shell">
+		<div class="grid gap-12 lg:grid-cols-12 lg:items-center lg:gap-16">
+			<!-- Image Column: increases visual density -->
+			<FadeUp class="lg:col-span-5">
+				<div class="relative aspect-[4/5] overflow-hidden bg-jbc-obsidian/10 shadow-md">
+					<img
+						src={img('projects/ikoyi-residence/01', { w: 900, q: 85 })}
+						alt="Curated interior living space by JimiBello & Co."
+						class="h-full w-full object-cover"
+						loading="lazy"
+					/>
+					<div class="absolute bottom-4 left-4 bg-jbc-obsidian/85 px-3 py-1 text-eyebrow text-jbc-white backdrop-blur-sm">
+						Ikoyi Residence
+					</div>
+				</div>
+			</FadeUp>
+
+			<!-- Content Column -->
+			<div class="lg:col-span-7">
+				<FadeUp>
+					<p class="eyebrow text-jbc-ember font-semibold">Who we are</p>
+					<blockquote
+						class="mt-4 max-w-[22ch] text-h1 font-display leading-[1.12] font-bold tracking-jbc-snug text-jbc-obsidian lg:text-[2.75rem]"
+					>
+						We don't design for the space alone. We design for the life within it.
+					</blockquote>
+				</FadeUp>
+
+				<FadeUp index={1} class="mt-6">
+					<p class="text-body-lg text-jbc-obsidian/80 leading-[1.7]">
+						JimiBello &amp; Co. is a multi-disciplinary design studio and furniture workshop based in Lagos. We believe that exceptional interiors are born from a seamless dialogue between architecture, furniture, and human routine.
+					</p>
+					<p class="mt-4 text-body-lg text-jbc-obsidian/80 leading-[1.7]">
+						By designing spaces and building the bespoke pieces that inhabit them, we eliminate compromise — creating environments of lasting warmth, balance, and purpose.
+					</p>
+					<div class="mt-8 flex flex-wrap gap-4">
+						<CTAButton href="/about" variant="outline">More About Our Studio</CTAButton>
+						<CTAButton href="/services" variant="secondary">Our Services</CTAButton>
+					</div>
+				</FadeUp>
+			</div>
+		</div>
 	</div>
 </section>
 
-<section class="pb-section lg:pb-section-lg">
-	<div class="shell">
-		<FadeUp class="max-w-[30ch]">
-			<p class="eyebrow text-jbc-black-50">Selected work</p>
-			<h2 class={SECTION_TITLE}>Three rooms that had a problem first.</h2>
+<!-- Selected Work (Ivory Ground with Left Mirrored Watermark) -->
+<section class="relative overflow-hidden bg-jbc-ivory border-t border-jbc-obsidian/10 pb-[var(--spacing-section)] lg:pb-[var(--spacing-section-lg)] pt-12 lg:pt-16">
+	<!-- Left Watermark -->
+	<img
+		src="/logos/monogram-ember.svg"
+		aria-hidden="true"
+		class="pointer-events-none absolute -left-[10%] top-1/3 -translate-y-1/2 w-[40vw] max-w-[500px] opacity-[0.05] select-none -scale-x-100"
+		alt=""
+	/>
+
+	<div class="relative shell">
+		<FadeUp class="max-w-[34ch]">
+			<p class="eyebrow text-jbc-ember font-semibold">Selected work</p>
+			<h2 class={SECTION_TITLE}>Three spaces, brought to life through design.</h2>
+			<p class="mt-3 text-body text-jbc-slate">
+				A curated selection of residential spaces, commercial environments, and bespoke workshop pieces.
+			</p>
 		</FadeUp>
 	</div>
 
-	<!-- Pair: one tall, one square, offset. The offset is the whole point —
-	     a uniform 3-up would read as a template. -->
-	<div class="shell mt-12 grid gap-14 lg:mt-18 lg:grid-cols-[1.15fr_1fr] lg:items-start lg:gap-16">
+	<!-- Pair: one tall, one square, offset -->
+	<div class="relative shell mt-12 grid gap-14 lg:mt-16 lg:grid-cols-[1.15fr_1fr] lg:items-start lg:gap-16">
 		{#each pair as project, i (project.slug)}
-			<FadeUp index={i} class={[i === 1 && 'lg:mt-28']}>
+			<FadeUp index={i} class={[i === 1 && 'lg:mt-24']}>
 				<ProjectCard {project} sizes="(min-width: 64rem) 42vw, 100vw" />
 			</FadeUp>
 		{/each}
 	</div>
 
-	<!-- Breakout: the image runs full-viewport, out of the content column
-	     entirely, but its caption returns to the column via `metaClass` so the
-	     text still lines up with everything above it. -->
-	<FadeUp class="mt-16 lg:mt-28">
+	<!-- Breakout -->
+	<FadeUp class="relative mt-16 lg:mt-24">
 		<ProjectCard project={breakout} sizes="100vw" metaClass="shell" />
 	</FadeUp>
 
-	<div class="shell mt-14">
+	<div class="relative shell mt-12 text-center lg:text-left">
 		<FadeUp>
-			<CTAButton href="/portfolio" variant="outline">View all work</CTAButton>
+			<CTAButton href="/portfolio" variant="outline">View All Projects &rarr;</CTAButton>
 		</FadeUp>
 	</div>
 </section>
 
-<section class="border-t border-jbc-black-15 py-section lg:py-section-lg">
-	<div class="shell">
+<!-- What We Do / Services Teaser (Ivory Ground) -->
+<section class="relative overflow-hidden bg-jbc-ivory border-t border-jbc-obsidian/10 py-[var(--spacing-section)] lg:py-[var(--spacing-section-lg)]">
+	<div class="relative shell">
 		<FadeUp class="max-w-[32ch]">
-			<p class="eyebrow text-jbc-black-50">What we do</p>
-			<h2 class={SECTION_TITLE}>Five services, one team.</h2>
+			<p class="eyebrow text-jbc-ember font-semibold">What we do</p>
+			<h2 class={SECTION_TITLE}>Five services, one team throughout.</h2>
 		</FadeUp>
 
 		<ul class="mt-12">
 			{#each services as service, i (service.slug)}
-				<FadeUp as="li" index={i} class="border-t border-jbc-black-15 last:border-b">
+				<FadeUp as="li" index={i} class="border-t border-jbc-obsidian/15 last:border-b">
 					<a
 						class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-5 py-7 text-inherit
-						       no-underline lg:gap-12 lg:py-9"
+						       no-underline lg:gap-12 lg:py-8 transition-colors duration-300 hover:bg-jbc-obsidian/[0.02]"
 						href="/services#{service.slug}"
 					>
 						<span
-							class="eyebrow text-jbc-black-50 transition-colors duration-400 ease-out-brand
-							       group-hover:text-jbc-red"
+							class="eyebrow text-jbc-obsidian/50 transition-colors duration-400 ease-out-brand
+							       group-hover:text-jbc-ember font-mono"
 						>
 							{String(i + 1).padStart(2, '0')}
 						</span>
 						<span class="grid gap-2 lg:grid-cols-[18rem_1fr] lg:items-baseline lg:gap-8">
-							<span class="text-[1.375rem] leading-[1.2] font-semibold">{service.title}</span>
-							<span class="max-w-[54ch] text-body leading-[1.6] text-jbc-black-70"
+							<span class="text-[1.375rem] font-display leading-[1.2] font-semibold text-jbc-obsidian group-hover:text-jbc-ember transition-colors duration-300">
+								{service.title}
+							</span>
+							<span class="max-w-[54ch] text-body leading-[1.6] text-jbc-obsidian/75"
 								>{service.summary}</span
 							>
 						</span>
 						<span
-							class="self-center text-jbc-black-50 transition-[color,transform] duration-400
-							       ease-out-brand group-hover:translate-x-1.5 group-hover:text-jbc-red
+							class="self-center text-jbc-obsidian/40 transition-[color,transform] duration-400
+							       ease-out-brand group-hover:translate-x-1.5 group-hover:text-jbc-ember
 							       motion-reduce:group-hover:translate-x-0"
 							aria-hidden="true">→</span
 						>
@@ -186,24 +209,27 @@
 	</div>
 </section>
 
-<!-- Solid Maximum Red: the footer already owns the dark ground + skyline
-     treatment, so the CTA takes the one saturated surface on the site. -->
-<section class="relative overflow-hidden bg-jbc-red text-jbc-white">
-	<div class="relative shell py-section lg:py-section-lg">
+<!-- Call to Action Band (Ember Ground) -->
+<section class="relative overflow-hidden bg-jbc-ember text-jbc-white">
+	<div class="relative shell py-[var(--spacing-section)] lg:py-[var(--spacing-section-lg)]">
 		<FadeUp>
-			<!-- On red, the white opacity tints go muddy rather than quiet, so the
-			     secondary type holds full white and steps down in weight instead. -->
-			<p class="eyebrow text-jbc-white">Start a project</p>
+			<p class="eyebrow text-jbc-white font-semibold uppercase tracking-jbc-caps">Begin Your Project</p>
 			<h2
-				class="mt-5 max-w-[18ch] text-h1 leading-[1.08] font-bold tracking-jbc-snug lg:text-[3.5rem]"
+				class="mt-4 max-w-[20ch] text-h1 font-display leading-[1.08] font-bold tracking-jbc-snug lg:text-[3.25rem]"
 			>
-				Tell us what the room is doing wrong.
+				Every exceptional space begins with a considered idea.
 			</h2>
-			<p class="mt-6 max-w-[50ch] text-body-lg text-jbc-white">
-				Send us the space, the budget band you are working to, and what is not working. We will tell
-				you honestly whether we are the right studio for it.
+			<p class="mt-6 max-w-[52ch] text-body-lg text-jbc-white/90 leading-[1.7]">
+				Whether you are planning a complete home interior, an inspiring commercial environment, or commissioning a bespoke furniture piece from our workshop, we are ready to bring it to life.
 			</p>
-			<CTAButton href="/contact" variant="invert" size="lg" class="mt-10">Talk to JBC</CTAButton>
+			<div class="mt-9 flex flex-wrap gap-4">
+				<CTAButton href="/contact" variant="primary" size="lg" class="bg-jbc-obsidian text-jbc-white hover:bg-jbc-obsidian/90">
+					Book a Consultation &rarr;
+				</CTAButton>
+				<CTAButton href="/products" variant="invert" size="lg">
+					Explore Products
+				</CTAButton>
+			</div>
 		</FadeUp>
 	</div>
 </section>

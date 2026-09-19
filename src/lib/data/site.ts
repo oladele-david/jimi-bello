@@ -7,23 +7,94 @@ export const nav: NavItem[] = [
 	{ label: 'Home', href: '/' },
 	{ label: 'About', href: '/about' },
 	{ label: 'Services', href: '/services' },
+	{ label: 'Products', href: '/products' },
 	{ label: 'Portfolio', href: '/portfolio' },
 	{ label: 'Contact', href: '/contact' }
 ];
 
-export const brandTagline = 'Better Living Through Design.';
+export const brandTagline = 'Living Through Design.';
 
 export const contact = {
-	email: 'hello@jimibelloandco.com',
+	email: 'info@jimibello.com',
 	phone: '08084539531',
+	phone2: '0913 001 4376',
+	phones: ['08084539531', '0913 001 4376'],
 	address: ['9B Tinubu Road', 'Ilupeju, Lagos', 'Nigeria'],
 	hours: 'Mon – Fri, 9:00 – 18:00 WAT',
 	social: [
-		{ label: '@jimibelloandco', href: 'https://instagram.com/jimibelloandco' },
+		{ label: '@jimibelloco', href: 'https://instagram.com/jimibelloco' },
 		{ label: 'Pinterest', href: 'https://pinterest.com' },
 		{ label: 'LinkedIn', href: 'https://linkedin.com' }
 	]
 };
+
+export interface Product {
+	slug: string;
+	title: string;
+	category: string;
+	description: string;
+	image: string;
+	material?: string;
+	dimensions?: string;
+	featured?: boolean;
+}
+
+export const products: Product[] = [
+	{
+		slug: 'bello-sofa-series',
+		title: 'Bello Sofa Series',
+		category: 'Living',
+		description: 'Generously proportioned seating with clean architectural lines and deep, tailored cushioning.',
+		image: 'projects/ikoyi-residence/hero',
+		material: 'Solid timber frame, bespoke upholstery',
+		featured: true
+	},
+	{
+		slug: 'four-poster-bed',
+		title: 'Four-Poster Bed Frame',
+		category: 'Bedroom',
+		description: 'Redrawn for standard room heights — strong vertical posts with joinery-first construction.',
+		image: 'projects/four-poster-series/hero',
+		material: 'Solid Iroko / Walnut',
+		featured: true
+	},
+	{
+		slug: 'iroko-dining-table',
+		title: 'Iroko Dining Table',
+		category: 'Dining',
+		description: 'Single-slab top on a knocked-down trestle base, built to the exact millimetre your room needs.',
+		image: 'projects/iroko-dining-collection/hero',
+		material: 'Solid Iroko Timber',
+		featured: true
+	},
+	{
+		slug: 'woodwolves-credenza',
+		title: 'Woodwolves Credenza',
+		category: 'Storage',
+		description: 'Handcrafted cabinetry with integrated flush pulls and soft-closing joinery.',
+		image: 'projects/ikoyi-residence/04',
+		material: 'Smoked Oak & Brass',
+		featured: false
+	},
+	{
+		slug: 'steam-bent-dining-chair',
+		title: 'Steam-Bent Dining Chair',
+		category: 'Dining',
+		description: 'Curved back support with seat height calibrated directly to our dining collection.',
+		image: 'projects/iroko-dining-collection/02',
+		material: 'Solid Timber, Linen Pad',
+		featured: false
+	},
+	{
+		slug: 'loft-coffee-table',
+		title: 'Loft Coffee Table',
+		category: 'Living',
+		description: 'Low-profile solid wood coffee table with organic edge treatment and recessed base.',
+		image: 'projects/four-poster-series/02',
+		material: 'Natural Walnut',
+		featured: false
+	}
+];
 
 export interface Service {
 	slug: string;

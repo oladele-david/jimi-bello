@@ -1,8 +1,8 @@
 <script lang="ts">
 	/**
-	 * About. The manual's own voice — direct, warm, no studio-speak. Vision and
-	 * Mission sit in an offset two-column block rather than matched cards, so
-	 * the page never reads as a corporate boilerplate section.
+	 * About — JimiBello & Co.
+	 * Updated with brand identity: Ivory grounds, Ember accents, Obsidian darks,
+	 * JB Monogram watermark, and high image density.
 	 */
 	import { img, srcset } from '$lib/images';
 	import CTAButton from '$lib/components/CTAButton.svelte';
@@ -13,39 +13,32 @@
 	const WORKSHOP = 'pages/about-workshop';
 
 	const numbers = [
-		{ value: '12', label: 'Years designing and building' },
-		{ value: '140+', label: 'Rooms completed in Lagos' },
-		{ value: '10 yr', label: 'Structural warranty on our furniture' }
+		{ value: '12', label: 'Years designing and crafting' },
+		{ value: '140+', label: 'Spaces completed across Lagos' },
+		{ value: '10 yr', label: 'Structural warranty on bespoke furniture' }
 	];
 
-	/**
-	 * The story's three paragraphs share one measure and colour. Spacing is left
-	 * to each `<p>`: the first one's top margin is responsive and a `mt-*` here
-	 * would need overriding, which puts two competing utilities in one class
-	 * list and leaves the outcome to Tailwind's sort order rather than to intent.
-	 */
-	const PROSE = 'max-w-[58ch] text-body-lg leading-[1.75] text-jbc-black-70';
-
-	/** Vision and Mission are typographically identical; only the copy differs. */
-	const VM_TITLE = 'mt-5 max-w-[20ch] text-h2 font-bold lg:text-[2.25rem]';
-	const VM_TEXT = 'mt-6 max-w-[48ch] text-body-lg leading-[1.75] text-jbc-white-70';
+	const PROSE = 'max-w-[58ch] text-body-lg leading-[1.75] text-jbc-obsidian/80';
+	const VM_TITLE = 'mt-5 max-w-[20ch] text-h2 font-display font-bold lg:text-[2.25rem]';
+	const VM_TEXT = 'mt-6 max-w-[48ch] text-body-lg leading-[1.75] text-jbc-white/80';
 </script>
 
 <svelte:head>
-	<title>About — JBC | Jimibello &amp; Co.</title>
+	<title>About — JimiBello &amp; Co. | Living Through Design</title>
 	<meta
 		name="description"
-		content="JBC is an interior design studio with a furniture workshop attached. Our story, vision and mission — and why building our own pieces changes what we can design."
+		content="JimiBello & Co. is an interior design studio with a dedicated furniture workshop in Lagos. Our story, vision and craft."
 	/>
 </svelte:head>
 
-<section class="relative flex min-h-[68svh] items-end overflow-hidden bg-jbc-black">
+<!-- Hero Section -->
+<section class="dark-bg relative flex min-h-[68svh] items-end overflow-hidden bg-jbc-obsidian">
 	<img
 		class="absolute inset-0 h-full w-full object-cover"
 		src={img(HERO, 1920, { ratio: 16 / 9 })}
 		srcset={srcset(HERO, { ratio: 16 / 9 })}
 		sizes="100vw"
-		alt="The JBC studio floor, with drawings pinned along a timber storage wall"
+		alt="The JimiBello & Co. studio floor, with drawings pinned along a timber storage wall"
 		width="1920"
 		height="1080"
 		fetchpriority="high"
@@ -53,70 +46,86 @@
 	/>
 	<div class="scrim-page" aria-hidden="true"></div>
 	<div class="relative shell pb-16 text-jbc-white lg:pb-22">
-		<p class="eyebrow text-jbc-white-70">About</p>
-		<!-- Over photography the title runs past the shared page-head token. -->
-		<h1 class="mt-5 max-w-[18ch] text-h1 font-bold tracking-jbc-tight lg:text-[4.5rem]">
-			A design studio with a workshop attached.
+		<p class="eyebrow text-jbc-ember font-semibold uppercase">About Our Studio</p>
+		<h1 class="mt-4 max-w-[18ch] text-h1 font-display font-bold tracking-jbc-tight lg:text-[4.25rem]">
+			A design studio with a workshop of its own.
 		</h1>
 	</div>
 </section>
 
-<section class="py-section lg:py-section-lg">
-	<div class="shell lg:grid lg:grid-cols-[1fr_1.15fr] lg:items-start lg:gap-x-20">
-		<FadeUp>
-			<p class="max-w-[22ch] text-h2-lg leading-[1.1] font-bold tracking-jbc-snug">
-				We started because too many good rooms were being finished with whatever happened to fit.
-			</p>
-		</FadeUp>
+<!-- Story Section (Ivory Ground + JB Watermark + Image Density) -->
+<section class="relative overflow-hidden bg-jbc-ivory py-[var(--spacing-section)] lg:py-[var(--spacing-section-lg)]">
+	<!-- JB Watermark on Right Edge -->
+	<img
+		src="/logos/monogram-ember.svg"
+		aria-hidden="true"
+		class="pointer-events-none absolute -right-[10%] top-1/2 -translate-y-1/2 w-[42vw] max-w-[550px] opacity-[0.06] select-none"
+		alt=""
+	/>
 
-		<FadeUp index={1}>
-			<!-- Below lg the body follows the pull-quote and needs the gap; level
-			     with it in two columns, it must not. -->
-			<p class="{PROSE} mt-8 lg:mt-0">
-				JBC began as a two-person interior practice in Lagos, and for the first few years we did
-				what every studio does: draw the space, then spend weeks hunting for pieces that were nearly
-				the right size. Nearly is expensive. Nearly is what makes a finished room feel slightly off
-				without anyone being able to say why.
-			</p>
-			<p class="{PROSE} mt-6">
-				So we opened a workshop. Now when a wall is 2,340mm wide, the bookcase is 2,340mm wide. When
-				a client wants a four-poster bed and has a normal ceiling, we redraw the bed rather than
-				talk them out of it. The design and the making sit in the same building, which means the
-				drawings are honest about what can actually be built — and the build never quietly departs
-				from the drawing.
-			</p>
-			<p class="{PROSE} mt-6">
-				We work on homes and offices, on budgets from modest to considerable. Need budget-friendly
-				interiors done properly? That is a conversation we are happy to have, and one we have often.
-			</p>
-			<CTAButton href="/services" variant="outline" class="mt-9">What we do</CTAButton>
-		</FadeUp>
+	<div class="relative shell">
+		<div class="grid gap-12 lg:grid-cols-12 lg:items-start lg:gap-16">
+			<!-- Quote Column -->
+			<FadeUp class="lg:col-span-5">
+				<p class="eyebrow text-jbc-ember font-semibold">Our Philosophy</p>
+				<blockquote class="mt-4 text-h2-lg font-display leading-[1.15] font-bold tracking-jbc-snug text-jbc-obsidian">
+					We believe good spaces are designed as a whole.
+				</blockquote>
+				<div class="mt-8 relative aspect-[4/3] overflow-hidden bg-jbc-obsidian/10 shadow-sm hidden lg:block">
+					<img
+						src={img('projects/four-poster-series/01', { w: 800, q: 85 })}
+						alt="Workshop joinery detail"
+						class="h-full w-full object-cover"
+						loading="lazy"
+					/>
+				</div>
+			</FadeUp>
+
+			<!-- Prose Column -->
+			<FadeUp index={1} class="lg:col-span-7">
+				<p class="{PROSE}">
+					JimiBello &amp; Co. began as a two-person interior practice in Lagos, born from a simple observation: too many exceptional rooms were being compromised by mass-produced furniture that never quite fit.
+				</p>
+				<p class="{PROSE} mt-6">
+					So we established our own dedicated workshop. Today, every project we undertake benefits from seamless integration between architectural design and master craftsmanship. When a room requires a bookcase of exact proportions, a dining table sculpted from continuous grain, or a bespoke bed suited to ceiling height, we draw it, prototype it, and build it.
+				</p>
+				<p class="{PROSE} mt-6">
+					We work across residential sanctuaries and commercial spaces throughout Lagos and beyond, upholding an uncompromising commitment to materials, integrity, and human comfort.
+				</p>
+				<div class="mt-8 flex flex-wrap gap-4">
+					<CTAButton href="/services" variant="outline">Our Services</CTAButton>
+					<CTAButton href="/products" variant="secondary">View Products</CTAButton>
+				</div>
+			</FadeUp>
+		</div>
 	</div>
 </section>
 
-<section class="pb-section lg:pb-section-lg">
-	<div class="shell">
-		<ul class="grid gap-10 border-t border-jbc-black-15 pt-10 md:grid-cols-3 md:gap-12">
+<!-- Stats Section (Ivory Ground) -->
+<section class="relative overflow-hidden bg-jbc-ivory border-t border-jbc-obsidian/10 py-12 lg:py-16">
+	<div class="relative shell">
+		<ul class="grid gap-10 md:grid-cols-3 md:gap-12">
 			{#each numbers as item, i (item.label)}
-				<FadeUp as="li" index={i} class="grid gap-3">
-					<span class="text-[3rem] leading-none font-bold tracking-jbc-tight">{item.value}</span>
-					<span class="max-w-[24ch] text-body leading-[1.6] text-jbc-black-70">{item.label}</span>
+				<FadeUp as="li" index={i} class="grid gap-2 border-l-2 border-jbc-ember pl-6">
+					<span class="text-[3rem] font-display leading-none font-bold tracking-jbc-tight text-jbc-obsidian">
+						{item.value}
+					</span>
+					<span class="max-w-[24ch] text-body leading-[1.5] text-jbc-slate">{item.label}</span>
 				</FadeUp>
 			{/each}
 		</ul>
 	</div>
 </section>
 
-<section class="dark-bg relative overflow-hidden bg-jbc-black text-jbc-white">
+<!-- Vision & Mission (Obsidian Dark Ground) -->
+<section class="dark-bg relative overflow-hidden bg-jbc-obsidian text-jbc-white">
 	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[65%]" aria-hidden="true">
-		<Skyline theme="dark" opacity={0.18} />
+		<Skyline theme="dark" opacity={0.16} />
 	</div>
 
-	<!-- Offset, not matched: the two blocks are the same width but the second
-	     sits lower, so they read as a conversation, not a table. -->
-	<div class="relative shell grid gap-14 py-section lg:grid-cols-2 lg:gap-x-20 lg:py-section-lg">
+	<div class="relative shell grid gap-14 py-[var(--spacing-section)] lg:grid-cols-2 lg:gap-x-20 lg:py-[var(--spacing-section-lg)]">
 		<FadeUp>
-			<p class="eyebrow text-jbc-red">Vision</p>
+			<p class="eyebrow text-jbc-ember font-semibold">Vision</p>
 			<h2 class={VM_TITLE}>Rooms in Lagos that were made for the people in them.</h2>
 			<p class={VM_TEXT}>
 				We want made-to-measure to stop being a luxury word. A house full of pieces built for its
@@ -126,7 +135,7 @@
 		</FadeUp>
 
 		<FadeUp index={1} class="lg:mt-24">
-			<p class="eyebrow text-jbc-red">Mission</p>
+			<p class="eyebrow text-jbc-ember font-semibold">Mission</p>
 			<h2 class={VM_TITLE}>Design it, build it, stand behind it.</h2>
 			<p class={VM_TEXT}>
 				Every project runs with one team from first sketch to handover: no design that cannot be
@@ -138,35 +147,48 @@
 	</div>
 </section>
 
-<section class="py-section lg:py-section-lg">
-	<div class="shell lg:grid lg:grid-cols-[0.95fr_1fr] lg:items-center lg:gap-x-20">
+<!-- Workshop Section (Ivory Ground + Left Mirrored Watermark + Photography) -->
+<section class="relative overflow-hidden bg-jbc-ivory py-[var(--spacing-section)] lg:py-[var(--spacing-section-lg)]">
+	<img
+		src="/logos/monogram-ember.svg"
+		aria-hidden="true"
+		class="pointer-events-none absolute -left-[10%] top-1/2 -translate-y-1/2 w-[40vw] max-w-[500px] opacity-[0.05] select-none -scale-x-100"
+		alt=""
+	/>
+
+	<div class="relative shell lg:grid lg:grid-cols-[0.95fr_1fr] lg:items-center lg:gap-x-20">
 		<FadeUp>
-			<img
-				class="block h-auto w-full bg-jbc-black-15"
-				src={img(WORKSHOP, 1024, { ratio: 4 / 5 })}
-				srcset={srcset(WORKSHOP, { ratio: 4 / 5 })}
-				sizes="(min-width: 64rem) 45vw, 100vw"
-				alt="A JBC maker checking a joint on a partly assembled timber frame"
-				width="1024"
-				height="1280"
-				loading="lazy"
-				decoding="async"
-			/>
+			<div class="relative aspect-[4/5] overflow-hidden bg-jbc-obsidian/10 shadow-md">
+				<img
+					class="h-full w-full object-cover"
+					src={img(WORKSHOP, 1024, { ratio: 4 / 5 })}
+					srcset={srcset(WORKSHOP, { ratio: 4 / 5 })}
+					sizes="(min-width: 64rem) 45vw, 100vw"
+					alt="A master maker refining joinery on a solid timber frame in our workshop"
+					width="1024"
+					height="1280"
+					loading="lazy"
+					decoding="async"
+				/>
+			</div>
 		</FadeUp>
 
 		<FadeUp index={1} class="mt-10 lg:mt-0">
-			<p class="eyebrow text-jbc-black-50">The workshop</p>
-			<h2 class="mt-5 max-w-[18ch] text-h2 font-semibold lg:text-h2-lg">
+			<p class="eyebrow text-jbc-ember font-semibold">The Workshop</p>
+			<h2 class="mt-4 max-w-[18ch] text-h2 font-display font-semibold lg:text-h2-lg text-jbc-obsidian">
 				The part most studios have to outsource.
 			</h2>
-			<p class="mt-6 max-w-[52ch] text-body-lg leading-[1.75] text-jbc-black-70">
-				Beds, four-poster beds, chests of drawers, dining tables and chairs, bookcases, coffee
-				tables — drawn here, prototyped here, built here in solid timber. Prototypes are reviewed
-				with you before the full run, and nothing ships until the joinery is right.
+			<p class="mt-5 max-w-[52ch] text-body-lg leading-[1.75] text-jbc-obsidian/80">
+				Our dedicated workshop is the heartbeat of JimiBello &amp; Co. Here, master craftsmen transform solid iroko, walnut, and oak into heirloom-grade furniture pieces. Every joint is finessed by hand, and every piece is built to endure.
 			</p>
-			<CTAButton href="/services#furniture-design" variant="outline" class="mt-9">
-				Furniture design
-			</CTAButton>
+			<div class="mt-8 flex flex-wrap gap-4">
+				<CTAButton href="/services#furniture-design" variant="outline">
+					Furniture Design Services
+				</CTAButton>
+				<CTAButton href="/products" variant="secondary">
+					View Workshop Pieces
+				</CTAButton>
+			</div>
 		</FadeUp>
 	</div>
 </section>

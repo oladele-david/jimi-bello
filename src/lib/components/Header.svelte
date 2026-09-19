@@ -61,7 +61,7 @@
 
 <!-- Off-screen until focused, rather than hidden, so it stays reachable. -->
 <a
-	class="skip fixed top-0 left-0 z-100 -translate-y-[110%] bg-jbc-red px-5 py-3 text-eyebrow
+	class="skip fixed top-0 left-0 z-100 -translate-y-[110%] bg-jbc-ember px-5 py-3 text-eyebrow
 	       font-semibold tracking-jbc-caps text-jbc-white uppercase no-underline
 	       transition-transform duration-200 ease-out-brand focus-visible:translate-y-0"
 	href="#main">Skip to content</a
@@ -69,23 +69,22 @@
 
 <header
 	class={[
-		'fixed inset-x-0 top-0 z-60 transition-[background-color,box-shadow] duration-400 ease-out-brand',
-		/* While the dark panel is open the bar must not paint white behind it. */
-		filled && !menuOpen && 'bg-jbc-white shadow-[0_1px_0_var(--color-jbc-black-15)]'
+		'fixed inset-x-0 top-0 z-60 transition-[background-color,box-shadow,backdrop-filter] duration-400 ease-out-brand',
+		/* While the dark panel is open the bar must not paint ivory behind it. */
+		filled && !menuOpen && 'bg-jbc-ivory/95 backdrop-blur-md shadow-[0_1px_0_var(--color-jbc-obsidian-15)]'
 	]}
 >
 	<div
-		class="mx-auto flex w-full max-w-[84rem] items-center justify-between gap-8 px-6 py-4 lg:px-12 lg:py-5"
+		class="mx-auto flex w-full max-w-[84rem] min-h-[64px] lg:min-h-[72px] items-center justify-between gap-4 lg:gap-8 px-6 py-3 lg:px-12 lg:py-4"
 	>
 		<a
 			class="inline-flex items-center no-underline"
 			href="/"
-			aria-label="JBC — Jimibello & Co., home"
+			aria-label="JimiBello Co., home"
 		>
-			<!-- One lockup at a time: wide on desktop, icon-only where space is tight.
-			     Clear space is baked into Logo; nothing here may crowd it. -->
-			<Logo variant="wide" theme={logoTheme} width={150} title="" class="hidden md:inline-block" />
-			<Logo variant="icon" theme={logoTheme} width={72} title="" class="md:hidden" />
+			<!-- Desktop: full primary mark (JB + JIMIBELLOCO). Mobile (< lg): JB monogram -->
+			<Logo variant="primary" theme={logoTheme} class="hidden lg:inline-block h-12 w-auto" />
+			<Logo variant="monogram" theme={logoTheme} class="lg:hidden h-10 w-auto" />
 		</a>
 
 		<nav class="hidden lg:block" aria-label="Primary">
@@ -96,12 +95,12 @@
 							href={item.href}
 							class={[
 								'relative inline-block py-1 text-eyebrow font-semibold tracking-jbc-caps uppercase',
-								'no-underline transition-colors duration-400 ease-out-brand hover:text-jbc-red',
-								/* Red underline, drawn from the left on hover, pinned open when current. */
+								'no-underline transition-colors duration-400 ease-out-brand hover:text-jbc-ember',
+								/* Ember underline, drawn from the left on hover, pinned open when current. */
 								'after:absolute after:inset-x-0 after:bottom-0 after:h-[1.5px] after:origin-left',
-								'after:scale-x-0 after:bg-jbc-red after:transition-transform after:duration-[350ms]',
+								'after:scale-x-0 after:bg-jbc-ember after:transition-transform after:duration-[350ms]',
 								'after:ease-out-brand hover:after:scale-x-100',
-								filled && !menuOpen ? 'text-jbc-black' : 'text-jbc-white',
+								filled && !menuOpen ? 'text-jbc-obsidian' : 'text-jbc-white',
 								isCurrent(item.href) && 'after:scale-x-100'
 							]}
 							aria-current={isCurrent(item.href) ? 'page' : undefined}
@@ -118,7 +117,7 @@
 				'group inline-flex items-center gap-3 border-0 bg-none py-2 [font-family:inherit]',
 				'cursor-pointer text-eyebrow font-semibold tracking-jbc-caps uppercase',
 				'transition-colors duration-400 ease-out-brand lg:hidden',
-				filled && !menuOpen ? 'text-jbc-black' : 'text-jbc-white'
+				filled && !menuOpen ? 'text-jbc-obsidian' : 'text-jbc-white'
 			]}
 			type="button"
 			aria-expanded={menuOpen}
@@ -150,7 +149,7 @@
 <div
 	id="mobile-menu"
 	class={[
-		'dark-bg fixed inset-0 z-50 flex items-center bg-jbc-black px-6 pt-24 pb-12 lg:hidden',
+		'dark-bg fixed inset-0 z-50 flex items-center bg-jbc-obsidian px-6 pt-24 pb-12 lg:hidden',
 		'transition-[opacity,visibility] duration-400 ease-out-brand',
 		menuOpen ? 'visible opacity-100' : 'invisible opacity-0'
 	]}
@@ -170,7 +169,7 @@
 							menuOpen
 								? 'translate-y-0 opacity-100'
 								: 'translate-y-3 opacity-0 motion-reduce:translate-y-0 motion-reduce:opacity-100',
-							isCurrent(item.href) ? 'text-jbc-red' : 'text-jbc-white hover:text-jbc-red'
+							isCurrent(item.href) ? 'text-jbc-ember' : 'text-jbc-white hover:text-jbc-ember'
 						]}
 						aria-current={isCurrent(item.href) ? 'page' : undefined}
 					>

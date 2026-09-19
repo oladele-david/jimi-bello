@@ -16,7 +16,7 @@
 
 	const LINK =
 		'text-body text-jbc-white no-underline transition-colors duration-300 ' +
-		'ease-out-brand hover:text-jbc-red';
+		'ease-out-brand hover:text-jbc-ember';
 
 	/** Column headings: caps eyebrow, dropped back to 50% white. */
 	const HEADING = 'eyebrow text-jbc-white-50';
@@ -27,7 +27,7 @@
 
 <!-- `dark-bg` is the marker the on-dark: variant keys off; it has no styles of
      its own, so the ground colour is set here explicitly. -->
-<footer class="dark-bg relative overflow-hidden bg-jbc-black text-jbc-white">
+<footer class="dark-bg relative overflow-hidden bg-jbc-obsidian text-jbc-white">
 	<!-- Decorative motif, anchored to the bottom edge behind the content. -->
 	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[60%]" aria-hidden="true">
 		<Skyline theme="dark" opacity={0.16} />
@@ -38,7 +38,7 @@
 		     width at lg so the logo's clear space holds. -->
 		<div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.2fr] lg:gap-16">
 			<div>
-				<Logo variant="stacked" theme="dark" width={200} />
+				<Logo variant="wordmark" color="white" class="h-8 w-auto" />
 				<p class="mt-7 max-w-[34ch] text-body text-jbc-white-70">
 					{brandTagline}
 				</p>

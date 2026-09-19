@@ -65,21 +65,15 @@
 
 	const VARIANTS = {
 		primary:
-			'bg-jbc-red border-jbc-red text-jbc-white hover:bg-jbc-red-deep hover:border-jbc-red-deep',
-		/* On Dark Liver grounds a red outline all but disappears, so the resting
-		   state goes white and the red arrives on hover instead. */
+			'bg-jbc-ember border-jbc-ember text-jbc-white hover:bg-jbc-ember-deep hover:border-jbc-ember-deep',
+		/* On Obsidian grounds an ember outline goes white at rest, ember on hover. */
 		outline:
-			'bg-transparent border-jbc-red text-jbc-red hover:bg-jbc-red hover:text-jbc-white ' +
+			'bg-transparent border-jbc-ember text-jbc-ember hover:bg-jbc-ember hover:text-jbc-white ' +
 			'on-dark:border-jbc-white on-dark:text-jbc-white ' +
-			'on-dark:hover:bg-jbc-red on-dark:hover:border-jbc-red on-dark:hover:text-jbc-white',
-		/* Maximum Red grounds. `outline` would resolve correctly at rest — red is a
-		   dark ground, so on-dark: turns it white — but its hover fills red, which
-		   is the ground itself. This inverts to a solid white chip instead. Stated
-		   unconditionally rather than as an on-dark: override, so no specificity
-		   contest decides which hover wins. */
+			'on-dark:hover:bg-jbc-ember on-dark:hover:border-jbc-ember on-dark:hover:text-jbc-white',
 		invert:
 			'bg-transparent border-jbc-white text-jbc-white ' +
-			'hover:bg-jbc-white hover:border-jbc-white hover:text-jbc-red'
+			'hover:bg-jbc-white hover:border-jbc-white hover:text-jbc-ember'
 	} as const;
 
 	let classes = $derived([BASE, SIZES[size], VARIANTS[variant], className]);

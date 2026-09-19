@@ -62,26 +62,26 @@
 	 */
 	const TAB =
 		'relative inline-block py-5 text-eyebrow font-semibold tracking-jbc-caps uppercase ' +
-		'whitespace-nowrap no-underline text-jbc-black-50 transition-colors duration-[350ms] ' +
-		'ease-out-brand hover:text-jbc-black ' +
+		'whitespace-nowrap no-underline text-jbc-obsidian/50 transition-colors duration-[350ms] ' +
+		'ease-out-brand hover:text-jbc-obsidian ' +
 		"after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:content-[''] " +
-		'after:origin-left after:scale-x-0 after:bg-jbc-red after:transition-transform ' +
+		'after:origin-left after:scale-x-0 after:bg-jbc-ember after:transition-transform ' +
 		'after:duration-[350ms] after:ease-out-brand hover:after:scale-x-100';
 
 	/** Same caps treatment as a tab, but it is a count, not a control. */
-	const COUNT = 'shrink-0 text-eyebrow font-semibold tracking-jbc-caps uppercase text-jbc-black-50';
+	const COUNT = 'shrink-0 text-eyebrow font-semibold tracking-jbc-caps uppercase text-jbc-obsidian/50';
 </script>
 
 <svelte:head>
-	<title>Portfolio — JBC | Jimibello &amp; Co.</title>
+	<title>Portfolio — JimiBello &amp; Co. | Living Through Design</title>
 	<meta
 		name="description"
-		content="Interiors and furniture by JBC — residential, commercial and workshop projects across Lagos."
+		content="Interiors and furniture by JimiBello & Co. — residential, commercial and workshop projects across Lagos."
 	/>
 </svelte:head>
 
 <!-- Top padding clears the fixed header. -->
-<section class="relative flex min-h-[68svh] items-end overflow-hidden bg-jbc-black">
+<section class="dark-bg relative flex min-h-[68svh] items-end overflow-hidden bg-jbc-obsidian">
 	<img
 		class="absolute inset-0 h-full w-full object-cover"
 		src={img(HERO, 1920, { ratio: 16 / 9 })}
@@ -95,19 +95,15 @@
 	/>
 	<div class="scrim-page" aria-hidden="true"></div>
 	<div class="relative shell pb-16 text-jbc-white lg:pb-22">
-		<p class="eyebrow text-jbc-white-70">Portfolio</p>
-		<h1 class="mt-5 max-w-[18ch] text-h1 font-bold tracking-jbc-tight lg:text-[4.5rem]">
+		<p class="eyebrow text-jbc-ember font-semibold uppercase">Portfolio</p>
+		<h1 class="mt-4 max-w-[18ch] text-h1 font-display font-bold tracking-jbc-tight lg:text-[4.25rem]">
 			The work, and what it had to solve.
 		</h1>
-		<!-- <p class="mt-7 max-w-[48ch] text-body-lg text-jbc-white-70">
-			Every project here started with something that was not working — a dark room, a floor plate
-			with no daylight, a renovation that had stopped twice.
-		</p> -->
 	</div>
 </section>
 
 <!-- Sticky: sits directly beneath the fixed header once that header fills. -->
-<div class="sticky top-18 z-20 border-b border-jbc-black-15 bg-jbc-white lg:top-20">
+<div class="sticky top-16 z-20 border-b border-jbc-obsidian/10 bg-jbc-ivory/95 backdrop-blur-md lg:top-18">
 	<div class="shell flex min-w-0 items-center justify-between gap-4 lg:gap-6">
 		<nav class="min-w-0 flex-1" aria-label="Filter projects by category">
 			<!-- On phones the labels wrap into a compact second row; wider screens keep one line. -->
@@ -120,7 +116,7 @@
 					<li class="shrink-0">
 						<a
 							href={hrefFor(category)}
-							class={[TAB, category === active && 'text-jbc-black after:scale-x-100']}
+							class={[TAB, category === active && 'text-jbc-obsidian after:scale-x-100']}
 							aria-current={category === active ? 'true' : undefined}
 							data-sveltekit-noscroll
 						>
@@ -137,7 +133,13 @@
 	</div>
 </div>
 
-<section class="py-section lg:py-section-lg">
+<section class="relative overflow-hidden bg-jbc-ivory py-[var(--spacing-section)] lg:py-[var(--spacing-section-lg)]">
+	<img
+		src="/logos/monogram-ember.svg"
+		aria-hidden="true"
+		class="pointer-events-none absolute -right-[10%] top-1/3 -translate-y-1/2 w-[42vw] max-w-[550px] opacity-[0.05] select-none"
+		alt=""
+	/>
 	<div class="shell">
 		{#if tiles.length === 0}
 			<p class="text-body-lg text-jbc-black-70">No projects in this category yet.</p>
