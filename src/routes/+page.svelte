@@ -58,13 +58,13 @@
 	<div class="relative shell text-jbc-white">
 		<p class="eyebrow text-jbc-white/80 font-semibold tracking-jbc-caps uppercase">{brandTagline}</p>
 		<h1 class="mt-4 max-w-[18ch] text-hero font-display font-bold tracking-jbc-tight">
-			Interiors we design.<br />Furniture we build.
+			Interiors We Design.<br />Furniture We Build.
 		</h1>
-		<p class="mt-5 max-w-[50ch] text-body lg:text-body-lg leading-[1.65] text-jbc-white/80">
-			Every space we touch is shaped by intention, craft, and the way people actually live. We design interiors and handcraft the furniture within them — all from our studio and workshop in Lagos.
+		<p class="mt-5 max-w-[54ch] text-body lg:text-body-lg leading-[1.65] text-jbc-white/80">
+			Our approach brings interior design and furniture making together from the start. We create spaces around how they need to function, then craft bespoke pieces that fit the vision, the proportions, and the people who will live with them.
 		</p>
 		<div class="mt-8 flex flex-wrap gap-4">
-			<CTAButton href="/portfolio" variant="primary" size="lg">Explore Our Work</CTAButton>
+			<CTAButton href="/portfolio" variant="primary" size="lg">Our Portfolio &rarr;</CTAButton>
 			<CTAButton href="/products" variant="outline" size="lg">View Products</CTAButton>
 		</div>
 	</div>
