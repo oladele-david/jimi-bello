@@ -1,6 +1,5 @@
 <script lang="ts">
 	import './layout.css';
-	import favicon from '$lib/assets/logo-white.png';
 	import { page } from '$app/state';
 	import Header from '$lib/components/Header.svelte';
 	import Footer from '$lib/components/Footer.svelte';
@@ -19,8 +18,11 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
-	<meta name="theme-color" content="#262626" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+	<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+	<meta name="theme-color" content="#0A0A0A" />
 	<meta property="og:site_name" content="JBC — Jimibello &amp; Co." />
 	<meta property="og:type" content="website" />
 </svelte:head>
