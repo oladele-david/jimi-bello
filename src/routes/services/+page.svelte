@@ -41,7 +41,7 @@
 	/>
 	<div class="scrim-page" aria-hidden="true"></div>
 	<div class="relative shell pb-16 text-jbc-white lg:pb-22">
-		<p class="eyebrow text-jbc-ember font-semibold uppercase">Our Expertise</p>
+		<p class="eyebrow text-jbc-ember font-semibold uppercase">Services</p>
 		<h1 class="mt-4 max-w-[18ch] text-h1 font-display font-bold tracking-jbc-tight text-jbc-white lg:text-[4.25rem]">
 			Five ways in. A dedicated team throughout.
 		</h1>
