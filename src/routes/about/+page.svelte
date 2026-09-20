@@ -84,17 +84,22 @@
 			<!-- Prose Column -->
 			<FadeUp index={1} class="lg:col-span-7">
 				<p class="{PROSE}">
-					JimiBello &amp; Co. began as a two-person interior practice in Lagos, born from a simple observation: too many exceptional rooms were being compromised by mass-produced furniture that never quite fit.
+					Jimi Bello Co. began as a two-person interior design practice in Lagos. In those early years, we would design a space, then spend weeks searching for furniture that was close to what the room needed, almost the right size, almost the right proportion, almost the right finish. We realised that almost was not good enough. So we opened our own workshop.
 				</p>
 				<p class="{PROSE} mt-6">
-					So we established our own dedicated workshop. Today, every project we undertake benefits from seamless integration between architectural design and master craftsmanship. When a room requires a bookcase of exact proportions, a dining table sculpted from continuous grain, or a bespoke bed suited to ceiling height, we draw it, prototype it, and build it.
+					It changed the way we design. We no longer had to design around what was available. We could design the piece first, refine it to the space, and make it with the same attention we gave the room itself.
 				</p>
 				<p class="{PROSE} mt-6">
-					We work across residential sanctuaries and commercial spaces throughout Lagos and beyond, upholding an uncompromising commitment to materials, integrity, and human comfort.
+					Today, design and craftsmanship come together as one process. We design with the freedom to create what the space truly needs, and we make with a clear understanding of the vision behind every piece. This allows us to be more precise, more intentional, and more considered in the way a space comes together.
 				</p>
-				<div class="mt-8 flex flex-wrap gap-4">
+				<p class="{PROSE} mt-6">
+					That relationship between design and making remains central to our work. What we draw informs what we build, and what we build strengthens the design—creating interiors where the furniture, materials, proportions and details feel naturally connected.
+				</p>
+				<p class="{PROSE} mt-6">
+					We work across residential and commercial spaces, creating considered interiors at different scales and investment levels. Whether the brief is ambitious or more restrained, our approach remains the same: thoughtful design, purposeful detail, and work made to last.
+				</p>
+				<div class="mt-8">
 					<CTAButton href="/services" variant="outline">Our Services</CTAButton>
-					<CTAButton href="/products" variant="secondary">View Products</CTAButton>
 				</div>
 			</FadeUp>
 		</div>
