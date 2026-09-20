@@ -18,12 +18,12 @@
 	let allProjects = $derived(data?.projects && data.projects.length > 0 ? data.projects : defaultProjects);
 
 	let pair = $derived.by(() => {
-		const found = allProjects.filter((p) => ['ikoyi-residence', 'four-poster-series'].includes(p.slug));
+		const found = allProjects.filter((p) => ['bello-sofa-series', 'pats-loft'].includes(p.slug));
 		return found.length >= 2 ? found.slice(0, 2) : allProjects.slice(0, 2);
 	});
 
 	let breakout = $derived.by(() => {
-		const found = allProjects.find((p) => p.slug === 'victoria-island-studio') || allProjects.find((p) => p.shape === 'wide');
+		const found = allProjects.find((p) => p.slug === 'nest') || allProjects.find((p) => p.shape === 'wide');
 		return found || allProjects[2] || allProjects[0];
 	});
 
