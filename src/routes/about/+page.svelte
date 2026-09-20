@@ -184,14 +184,11 @@
 				The part most studios have to outsource.
 			</h2>
 			<p class="mt-5 max-w-[52ch] text-body-lg leading-[1.75] text-jbc-obsidian/80">
-				Our dedicated workshop is the heartbeat of JimiBello &amp; Co. Here, master craftsmen transform solid iroko, walnut, and oak into heirloom-grade furniture pieces. Every joint is finessed by hand, and every piece is built to endure.
+				Our workshop is where ideas become tangible. We design and craft bespoke furniture and interior pieces from sofas, beds and dining furniture to doors, bookcases, coffee tables and wall clocks; each made with the space, the brief and the details in mind.
 			</p>
-			<div class="mt-8 flex flex-wrap gap-4">
-				<CTAButton href="/services#furniture-design" variant="outline">
-					Furniture Design Services
-				</CTAButton>
-				<CTAButton href="/products" variant="secondary">
-					View Workshop Pieces
+			<div class="mt-8">
+				<CTAButton href="/portfolio" variant="outline">
+					Our Portfolio
 				</CTAButton>
 			</div>
 		</FadeUp>
