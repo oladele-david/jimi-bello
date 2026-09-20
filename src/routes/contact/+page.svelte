@@ -67,7 +67,7 @@
 	/>
 	<div class="scrim-page" aria-hidden="true"></div>
 	<div class="relative shell pb-16 text-jbc-white lg:pb-22">
-		<p class="eyebrow text-jbc-ember font-semibold uppercase">Contact Our Studio</p>
+		<p class="eyebrow text-jbc-ember font-semibold uppercase">Contact</p>
 		<h1 class="mt-4 max-w-[18ch] text-h1 font-display font-bold tracking-jbc-tight lg:text-h1-lg">
 			Tell us what the room is doing wrong.
 		</h1>

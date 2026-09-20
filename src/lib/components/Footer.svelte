@@ -72,6 +72,11 @@
 					<li>
 						<a class={LINK} href="tel:{contact.phone.replace(/\s/g, '')}">{contact.phone}</a>
 					</li>
+					{#if contact.phone2}
+						<li>
+							<a class={LINK} href="tel:{contact.phone2.replace(/\s/g, '')}">{contact.phone2}</a>
+						</li>
+					{/if}
 				</ul>
 				<!-- Same list, wider gap above it — spelled out rather than layering a
 				     second `mt-*` over LIST, which would depend on utility order. -->
