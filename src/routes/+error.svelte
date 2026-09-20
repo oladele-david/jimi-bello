@@ -11,14 +11,14 @@
 </svelte:head>
 
 <section
-	class="dark-bg relative flex min-h-[80svh] items-center overflow-hidden bg-jbc-black text-jbc-white"
+	class="dark-bg relative flex min-h-[80svh] items-center overflow-hidden bg-jbc-obsidian text-jbc-white"
 >
-	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[65%]" aria-hidden="true">
+	<div class="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
 		<Skyline theme="dark" opacity={0.2} />
 	</div>
 
 	<div class="relative shell pt-32 pb-20">
-		<p class="eyebrow text-jbc-red">Error {page.status}</p>
+		<p class="eyebrow text-jbc-ember">Error {page.status}</p>
 		<!-- Runs a shade smaller than the page-head token: this screen is a dead
 		     end, not a section opener. -->
 		<h1 class="mt-5 max-w-[16ch] text-h1 font-bold tracking-jbc-tight lg:text-[4rem]">

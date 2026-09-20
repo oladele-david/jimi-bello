@@ -124,7 +124,7 @@
 
 <!-- Vision & Mission (Obsidian Dark Ground) -->
 <section class="dark-bg relative overflow-hidden bg-jbc-obsidian text-jbc-white">
-	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[65%]" aria-hidden="true">
+	<div class="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
 		<Skyline theme="dark" opacity={0.16} />
 	</div>
 

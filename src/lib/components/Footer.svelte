@@ -28,8 +28,8 @@
 <!-- `dark-bg` is the marker the on-dark: variant keys off; it has no styles of
      its own, so the ground colour is set here explicitly. -->
 <footer class="dark-bg relative overflow-hidden bg-jbc-obsidian text-jbc-white">
-	<!-- Decorative motif, anchored to the bottom edge behind the content. -->
-	<div class="pointer-events-none absolute inset-x-0 bottom-0 h-[60%]" aria-hidden="true">
+	<!-- Decorative motif, stretching the full height behind the content. -->
+	<div class="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
 		<Skyline theme="dark" opacity={0.16} />
 	</div>
 
