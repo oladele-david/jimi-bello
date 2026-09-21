@@ -34,9 +34,14 @@ export interface Product {
 	category: string;
 	description: string;
 	image: string;
+	price: string;
+	priceNote?: string;
 	material?: string;
 	dimensions?: string;
+	leadTime?: string;
+	gallery?: string[];
 	featured?: boolean;
+	details?: { label: string; value: string }[];
 }
 
 export const products: Product[] = [
@@ -44,57 +49,130 @@ export const products: Product[] = [
 		slug: 'bello-sofa-series',
 		title: 'Bello Sofa Series',
 		category: 'Living',
-		description: 'Generously proportioned seating with clean architectural lines and deep, tailored cushioning.',
+		price: '₦2,400,000',
+		priceNote: 'Made to order · Custom sizing & upholstery available',
+		description:
+			'A considered collection of bespoke sofas, shaped with refined proportions and crafted to bring comfort, character, and quiet presence to the spaces they inhabit. Designed and crafted entirely in our Lagos workshop.',
 		image: 'projects/ikoyi-residence/hero',
-		material: 'Solid timber frame, bespoke upholstery',
-		featured: true
+		material: 'Solid hardwood frame, bespoke linen-blend upholstery',
+		dimensions: 'W: 2400mm · D: 980mm · H: 780mm',
+		leadTime: '4–6 weeks',
+		gallery: ['projects/four-poster-series/01', 'projects/iroko-dining-collection/01', 'projects/four-poster-series/02'],
+		featured: true,
+		details: [
+			{ label: 'Origin', value: 'Handcrafted in JBC Workshop, Lagos' },
+			{ label: 'Frame', value: 'Seasoned kiln-dried hardwood joinery' },
+			{ label: 'Cushioning', value: 'High-resilience layered foam with fiber wrap' },
+			{ label: 'Customization', value: 'Bespoke fabric choices, modular sizing upon request' }
+		]
 	},
 	{
 		slug: 'four-poster-bed',
 		title: 'Four-Poster Bed Frame',
 		category: 'Bedroom',
-		description: 'Redrawn for standard room heights — strong vertical posts with joinery-first construction.',
+		price: '₦1,950,000',
+		priceNote: 'Available in Queen & King · Built to room ceiling height',
+		description:
+			'Redrawn for standard room heights — strong vertical posts with joinery-first construction. The frame carries the visual height without requiring high ceilings or canopies.',
 		image: 'projects/four-poster-series/hero',
-		material: 'Solid Iroko / Walnut',
-		featured: true
+		material: 'Solid Iroko / Seasoned West African Walnut',
+		dimensions: 'L: 2150mm · W: 1950mm · H: 2100mm',
+		leadTime: '4–5 weeks',
+		gallery: ['projects/four-poster-series/01', 'projects/four-poster-series/02', 'projects/four-poster-series/03'],
+		featured: true,
+		details: [
+			{ label: 'Timber', value: 'Solid Iroko or Walnut, sustainably sourced' },
+			{ label: 'Assembly', value: 'Knocks down into 5 modular components for easy delivery' },
+			{ label: 'Finish', value: 'Matte architectural timber oil' },
+			{ label: 'Sizing', value: 'Tailored to mattress specifications' }
+		]
 	},
 	{
 		slug: 'iroko-dining-table',
 		title: 'Iroko Dining Table',
 		category: 'Dining',
-		description: 'Single-slab top on a knocked-down trestle base, built to the exact millimetre your room needs.',
+		price: '₦2,800,000',
+		priceNote: 'Single-slab timber run · Custom lengths from 8 to 14 seats',
+		description:
+			'Single-slab top on a knocked-down trestle base, built to the exact millimetre your room needs. Cut from single log runs so grain and tone remain continuous across the expanse.',
 		image: 'projects/iroko-dining-collection/hero',
-		material: 'Solid Iroko Timber',
-		featured: true
+		material: 'Solid Iroko Timber, matte architectural oil',
+		dimensions: 'L: 3000mm · W: 1100mm · H: 750mm',
+		leadTime: '5–7 weeks',
+		gallery: ['projects/iroko-dining-collection/01', 'projects/iroko-dining-collection/02'],
+		featured: true,
+		details: [
+			{ label: 'Wood Selection', value: 'Single log run solid Iroko slab' },
+			{ label: 'Base', value: 'Hand-shaped timber trestle with mortise & tenon joints' },
+			{ label: 'Maintenance', value: 'Water and stain-resistant satin seal' },
+			{ label: 'Capacity', value: 'Comfortably seats 10–12 persons' }
+		]
 	},
 	{
 		slug: 'woodwolves-credenza',
 		title: 'Woodwolves Credenza',
 		category: 'Storage',
-		description: 'Handcrafted cabinetry with integrated flush pulls and soft-closing joinery.',
+		price: '₦1,650,000',
+		priceNote: 'Integrated soft-closing hardware',
+		description:
+			'Handcrafted cabinetry with integrated flush pulls and soft-closing joinery. Generous interior storage configured for home audio, glassware, or curated essentials.',
 		image: 'projects/ikoyi-residence/04',
-		material: 'Smoked Oak & Brass',
-		featured: false
+		material: 'Smoked Oak, hand-turned brass hardware',
+		dimensions: 'W: 2000mm · D: 500mm · H: 800mm',
+		leadTime: '4–6 weeks',
+		gallery: ['projects/ikoyi-residence/01', 'projects/ikoyi-residence/03'],
+		featured: false,
+		details: [
+			{ label: 'Hardware', value: 'Concealed Blum soft-close hinges, brass pulls' },
+			{ label: 'Interior', value: 'Adjustable timber shelves with cable access management' },
+			{ label: 'Finish', value: 'Natural smoked oak with UV lacquer' }
+		]
 	},
 	{
 		slug: 'steam-bent-dining-chair',
 		title: 'Steam-Bent Dining Chair',
 		category: 'Dining',
-		description: 'Curved back support with seat height calibrated directly to our dining collection.',
+		price: '₦380,000',
+		priceNote: 'Sold individually or in tailored sets',
+		description:
+			'Curved back support with seat height calibrated directly to our dining collection. Engineered using traditional steam-bending techniques for ergonomic comfort and structural resilience.',
 		image: 'projects/iroko-dining-collection/02',
-		material: 'Solid Timber, Linen Pad',
-		featured: false
+		material: 'Steam-bent solid hardwood, natural linen seat pad',
+		dimensions: 'W: 520mm · D: 540mm · H: 820mm (Seat H: 460mm)',
+		leadTime: '3–4 weeks',
+		gallery: ['projects/iroko-dining-collection/01'],
+		featured: false,
+		details: [
+			{ label: 'Craft Technique', value: 'Steam-bent solid timber curve' },
+			{ label: 'Upholstery', value: 'Removable natural Belgian linen pad' },
+			{ label: 'Stackability', value: 'Designed for graceful pairing with JBC tables' }
+		]
 	},
 	{
 		slug: 'loft-coffee-table',
 		title: 'Loft Coffee Table',
 		category: 'Living',
-		description: 'Low-profile solid wood coffee table with organic edge treatment and recessed base.',
+		price: '₦850,000',
+		priceNote: 'Each slab features unique natural edge grain',
+		description:
+			'Low-profile solid wood coffee table with organic edge treatment and recessed architectural base. Designed to ground open living rooms with warmth and tactile presence.',
 		image: 'projects/four-poster-series/02',
-		material: 'Natural Walnut',
-		featured: false
+		material: 'Natural Walnut, satin protective seal',
+		dimensions: 'L: 1400mm · W: 750mm · H: 380mm',
+		leadTime: '3–4 weeks',
+		gallery: ['projects/four-poster-series/03'],
+		featured: false,
+		details: [
+			{ label: 'Profile', value: 'Chamfered edge with recessed shadowline base' },
+			{ label: 'Wood', value: 'Selected American Walnut with warm amber undertones' },
+			{ label: 'Finish', value: 'Durable matte polyurethane sealer' }
+		]
 	}
 ];
+
+export function productBySlug(slug: string): Product | undefined {
+	return products.find((p) => p.slug === slug);
+}
 
 export interface Service {
 	slug: string;

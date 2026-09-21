@@ -13,7 +13,7 @@
 	 * stays transparent until the reader scrolls past the fold.
 	 */
 	const LIGHT_AT_TOP: string[] = [];
-	let solidHeader = $derived(LIGHT_AT_TOP.includes(page.url.pathname));
+	let solidHeader = $derived(LIGHT_AT_TOP.includes(page.url.pathname) || page.url.pathname.startsWith('/products'));
 	let isConsoleRoute = $derived(page.url.pathname.startsWith('/console'));
 </script>
 
