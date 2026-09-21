@@ -8,6 +8,7 @@
 
 	const NAV = [
 		{ label: 'Portfolio', href: '/console' },
+		{ label: 'Products', href: '/console/products' },
 		{ label: 'Media Library', href: '/console/media' }
 		/* Future Roadmap Modules:
 		{ label: 'Site Content', href: '/console?tab=content' },
@@ -31,7 +32,7 @@
 					<a href="/console" class="flex items-center gap-3 text-inherit no-underline group">
 						<Logo class="w-16 h-auto" />
 						<div class="border-l border-white/15 pl-3">
-							<span class="block text-xs font-semibold uppercase tracking-jbc-caps text-jbc-red">Studio Console</span>
+							<span class="block text-xs font-semibold uppercase tracking-jbc-caps text-jbc-ember">Studio Console</span>
 						</div>
 					</a>
 
@@ -39,10 +40,11 @@
 					<nav class="hidden lg:flex items-center gap-1 ml-4" aria-label="Console Navigation">
 						{#each NAV as item}
 							{@const isExact = item.href === '/console' && (page.url.pathname === '/console' && !page.url.searchParams.get('tab'))}
+							{@const isProducts = item.href === '/console/products' && page.url.pathname.startsWith('/console/products')}
 							{@const isMedia = item.href === '/console/media' && page.url.pathname.startsWith('/console/media')}
 							{@const isTab = item.href.includes('tab=') && page.url.search.includes(item.href.split('?')[1])}
 							{@const isProjectSubpage = item.href === '/console' && page.url.pathname.startsWith('/console/projects')}
-							{@const active = isExact || isMedia || isTab || isProjectSubpage}
+							{@const active = isExact || isProducts || isMedia || isTab || isProjectSubpage}
 							<a
 								href={item.href}
 								class="px-3 py-1.5 rounded-sm text-xs font-medium uppercase tracking-wider transition-all duration-200 {active
@@ -89,10 +91,11 @@
 		<div class="lg:hidden border-b border-white/10 bg-[#171717] px-4 py-2 flex items-center gap-2 overflow-x-auto">
 			{#each NAV as item}
 				{@const isExact = item.href === '/console' && (page.url.pathname === '/console' && !page.url.searchParams.get('tab'))}
+				{@const isProducts = item.href === '/console/products' && page.url.pathname.startsWith('/console/products')}
 				{@const isMedia = item.href === '/console/media' && page.url.pathname.startsWith('/console/media')}
 				{@const isTab = item.href.includes('tab=') && page.url.search.includes(item.href.split('?')[1])}
 				{@const isProjectSubpage = item.href === '/console' && page.url.pathname.startsWith('/console/projects')}
-				{@const active = isExact || isMedia || isTab || isProjectSubpage}
+				{@const active = isExact || isProducts || isMedia || isTab || isProjectSubpage}
 				<a
 					href={item.href}
 					class="px-3 py-1 text-xs font-medium uppercase tracking-wider rounded shrink-0 {active ? 'bg-white/15 text-white' : 'text-white/50'}"

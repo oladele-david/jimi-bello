@@ -1,15 +1,19 @@
 <script lang="ts">
-	import { products } from '$lib/data/site';
+	import { products as fallbackProducts } from '$lib/data/site';
 	import ProductCard from '$lib/components/ProductCard.svelte';
 	import FadeUp from '$lib/components/FadeUp.svelte';
+
+	let { data } = $props();
+
+	let allProducts = $derived(data?.products && data.products.length > 0 ? data.products : fallbackProducts);
 
 	let activeCategory = $state('All');
 	const categories = ['All', 'Living', 'Dining', 'Bedroom', 'Storage'];
 
 	let filteredProducts = $derived(
 		activeCategory === 'All'
-			? products
-			: products.filter((p) => p.category.toLowerCase() === activeCategory.toLowerCase())
+			? allProducts
+			: allProducts.filter((p) => p.category.toLowerCase() === activeCategory.toLowerCase())
 	);
 </script>
 

@@ -100,7 +100,7 @@
 				body: formData
 			});
 
-			const json = await res.json();
+			const json = (await res.json()) as any;
 			if (!res.ok || !json.success) {
 				throw new Error(json.error || 'Failed to upload hero image');
 			}
@@ -114,7 +114,7 @@
 		}
 	}
 
-	// Gallery images upload handler to Cloudflare R2
+	// Gallery images upload handler
 	async function handleGalleryUpload(e: Event) {
 		const target = e.target as HTMLInputElement;
 		const files = target.files;
@@ -136,7 +136,7 @@
 					body: formData
 				});
 
-				const json = await res.json();
+				const json = (await res.json()) as any;
 				if (res.ok && json.success) {
 					gallery = [
 						...gallery,
@@ -193,7 +193,7 @@
 				type="button"
 				onclick={() => (activeTab = 'edit')}
 				class="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-sm transition-colors cursor-pointer {activeTab === 'edit'
-					? 'bg-jbc-red text-white'
+					? 'bg-jbc-ember text-white'
 					: 'text-white/60 hover:text-white hover:bg-white/5'}"
 			>
 				Project Editor
@@ -202,7 +202,7 @@
 				type="button"
 				onclick={() => (activeTab = 'preview')}
 				class="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-sm transition-colors cursor-pointer {activeTab === 'preview'
-					? 'bg-jbc-red text-white'
+					? 'bg-jbc-ember text-white'
 					: 'text-white/60 hover:text-white hover:bg-white/5'}"
 			>
 				Live Visual Preview
@@ -221,7 +221,7 @@
 	</div>
 
 	{#if props.form?.error || uploadError}
-		<div class="p-4 bg-jbc-red/15 border border-jbc-red/40 rounded-sm text-jbc-red text-xs flex items-center gap-2">
+		<div class="p-4 bg-jbc-ember/15 border border-jbc-ember/40 rounded-sm text-jbc-ember text-xs flex items-center gap-2">
 			<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 			</svg>
@@ -233,7 +233,7 @@
 		<!-- Live Preview Surface -->
 		<div class="bg-[#1c1c1c] border border-white/10 p-6 sm:p-10 rounded-sm space-y-10">
 			<div>
-				<span class="text-eyebrow font-semibold uppercase tracking-jbc-caps text-jbc-red">Portfolio Grid Preview</span>
+				<span class="text-eyebrow font-semibold uppercase tracking-jbc-caps text-jbc-ember">Portfolio Grid Preview</span>
 				<p class="text-xs text-white/50 mt-1">This is how the card appears on the public portfolio and home grids.</p>
 				<div class="mt-6 max-w-xl bg-[#262626] p-6 rounded-sm text-white">
 					<ProjectCard project={previewProject} />
@@ -241,7 +241,7 @@
 			</div>
 
 			<div class="pt-8 border-t border-white/10">
-				<span class="text-eyebrow font-semibold uppercase tracking-jbc-caps text-jbc-red">Gallery Photography ({gallery.length} photos)</span>
+				<span class="text-eyebrow font-semibold uppercase tracking-jbc-caps text-jbc-ember">Gallery Photography ({gallery.length} photos)</span>
 				<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 					{#each gallery as item}
 						<div class="bg-[#141414] border border-white/10 rounded overflow-hidden">
@@ -295,7 +295,7 @@
 							bind:value={title}
 							oninput={handleTitleChange}
 							placeholder="e.g. Ikoyi Residence"
-							class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-red focus:ring-1 focus:ring-jbc-red"
+							class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-ember focus:ring-1 focus:ring-jbc-ember"
 						/>
 					</div>
 
@@ -324,7 +324,7 @@
 								required
 								bind:value={slug}
 								placeholder="ikoyi-residence"
-								class="w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white font-mono text-xs rounded-r-sm focus:outline-none focus:border-jbc-red focus:ring-1 focus:ring-jbc-red"
+								class="w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white font-mono text-xs rounded-r-sm focus:outline-none focus:border-jbc-ember focus:ring-1 focus:ring-jbc-ember"
 							/>
 						</div>
 					</div>
@@ -338,7 +338,7 @@
 							id="category"
 							name="category"
 							bind:value={category}
-							class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-red focus:ring-1 focus:ring-jbc-red"
+							class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-ember focus:ring-1 focus:ring-jbc-ember"
 						>
 							{#each categories as cat}
 								<option value={cat}>{cat}</option>
@@ -358,7 +358,7 @@
 							required
 							bind:value={year}
 							placeholder="2025"
-							class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-red focus:ring-1 focus:ring-jbc-red"
+							class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-ember focus:ring-1 focus:ring-jbc-ember"
 						/>
 					</div>
 
@@ -374,7 +374,7 @@
 							required
 							bind:value={location}
 							placeholder="e.g. Ikoyi, Lagos"
-							class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-red focus:ring-1 focus:ring-jbc-red"
+							class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-ember focus:ring-1 focus:ring-jbc-ember"
 						/>
 					</div>
 
@@ -390,7 +390,7 @@
 							required
 							bind:value={scope}
 							placeholder="e.g. Full interior design · Bespoke furniture · Lighting"
-							class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-red focus:ring-1 focus:ring-jbc-red"
+							class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-ember focus:ring-1 focus:ring-jbc-ember"
 						/>
 					</div>
 				</div>
@@ -407,14 +407,14 @@
 					<!-- Square Shape -->
 					<label
 						class="relative flex flex-col p-4 rounded-sm border cursor-pointer transition-all {shape === 'square'
-							? 'bg-jbc-red/10 border-jbc-red text-white'
+							? 'bg-jbc-ember/10 border-jbc-ember text-white'
 							: 'bg-[#141414] border-white/10 text-white/70 hover:border-white/25'}"
 					>
 						<input type="radio" name="shape" value="square" bind:group={shape} class="sr-only" />
 						<div class="flex items-center justify-between">
 							<span class="text-xs font-bold uppercase tracking-wider">Square (4:3)</span>
 							{#if shape === 'square'}
-								<span class="w-2 h-2 rounded-full bg-jbc-red"></span>
+								<span class="w-2 h-2 rounded-full bg-jbc-ember"></span>
 							{/if}
 						</div>
 						<div class="mt-3 aspect-4/3 bg-white/10 rounded flex items-center justify-center text-[10px] text-white/50">
@@ -426,14 +426,14 @@
 					<!-- Tall Shape -->
 					<label
 						class="relative flex flex-col p-4 rounded-sm border cursor-pointer transition-all {shape === 'tall'
-							? 'bg-jbc-red/10 border-jbc-red text-white'
+							? 'bg-jbc-ember/10 border-jbc-ember text-white'
 							: 'bg-[#141414] border-white/10 text-white/70 hover:border-white/25'}"
 					>
 						<input type="radio" name="shape" value="tall" bind:group={shape} class="sr-only" />
 						<div class="flex items-center justify-between">
 							<span class="text-xs font-bold uppercase tracking-wider">Tall (3:4)</span>
 							{#if shape === 'tall'}
-								<span class="w-2 h-2 rounded-full bg-jbc-red"></span>
+								<span class="w-2 h-2 rounded-full bg-jbc-ember"></span>
 							{/if}
 						</div>
 						<div class="mt-3 aspect-3/4 bg-white/10 rounded flex items-center justify-center text-[10px] text-white/50">
@@ -445,14 +445,14 @@
 					<!-- Wide Shape -->
 					<label
 						class="relative flex flex-col p-4 rounded-sm border cursor-pointer transition-all {shape === 'wide'
-							? 'bg-jbc-red/10 border-jbc-red text-white'
+							? 'bg-jbc-ember/10 border-jbc-ember text-white'
 							: 'bg-[#141414] border-white/10 text-white/70 hover:border-white/25'}"
 					>
 						<input type="radio" name="shape" value="wide" bind:group={shape} class="sr-only" />
 						<div class="flex items-center justify-between">
 							<span class="text-xs font-bold uppercase tracking-wider">Wide (16:9)</span>
 							{#if shape === 'wide'}
-								<span class="w-2 h-2 rounded-full bg-jbc-red"></span>
+								<span class="w-2 h-2 rounded-full bg-jbc-ember"></span>
 							{/if}
 						</div>
 						<div class="mt-3 aspect-16/9 bg-white/10 rounded flex items-center justify-center text-[10px] text-white/50">
@@ -482,7 +482,7 @@
 						required
 						bind:value={excerpt}
 						placeholder="A concise summary of the architectural brief..."
-						class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-red focus:ring-1 focus:ring-jbc-red"
+						class="mt-2 w-full px-4 py-2.5 bg-[#141414] border border-white/15 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-ember focus:ring-1 focus:ring-jbc-ember"
 					></textarea>
 				</div>
 
@@ -495,7 +495,7 @@
 						<button
 							type="button"
 							onclick={addParagraph}
-							class="text-xs text-jbc-red hover:underline font-semibold flex items-center gap-1 cursor-pointer"
+							class="text-xs text-jbc-ember hover:underline font-semibold flex items-center gap-1 cursor-pointer"
 						>
 							+ Add Paragraph
 						</button>
@@ -529,7 +529,7 @@
 									<button
 										type="button"
 										onclick={() => removeParagraph(index)}
-										class="text-jbc-red hover:text-jbc-red-deep ml-2"
+										class="text-jbc-ember hover:text-jbc-ember/85 ml-2"
 									>
 										Delete
 									</button>
@@ -539,7 +539,7 @@
 								rows="3"
 								bind:value={body[index]}
 								placeholder="Write story paragraph..."
-								class="w-full px-3 py-2 bg-[#191919] border border-white/10 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-red"
+								class="w-full px-3 py-2 bg-[#191919] border border-white/10 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-ember"
 							></textarea>
 						</div>
 					{/each}
@@ -561,7 +561,7 @@
 						<span class="block text-xs font-semibold uppercase tracking-wider text-white/70 mb-2">
 							Upload Hero Photo
 						</span>
-						<div class="border-2 border-dashed border-white/20 hover:border-jbc-red rounded-sm p-6 text-center transition-colors bg-[#141414]">
+						<div class="border-2 border-dashed border-white/20 hover:border-jbc-ember rounded-sm p-6 text-center transition-colors bg-[#141414]">
 							<input
 								type="file"
 								id="hero-file-input"
@@ -585,7 +585,7 @@
 						<!-- Direct Key / URL fallback -->
 						<div class="mt-4">
 							<label for="hero" class="block text-[11px] font-medium text-white/60">
-								Hero Image Key or URL *
+								Hero Image Path or URL *
 							</label>
 							<input
 								id="hero"
@@ -594,7 +594,7 @@
 								required
 								bind:value={hero}
 								placeholder="projects/ikoyi-residence/hero or /api/images/..."
-								class="mt-1 w-full px-3 py-2 bg-[#141414] border border-white/15 text-white text-xs font-mono rounded-sm focus:outline-none focus:border-jbc-red"
+								class="mt-1 w-full px-3 py-2 bg-[#141414] border border-white/15 text-white text-xs font-mono rounded-sm focus:outline-none focus:border-jbc-ember"
 							/>
 						</div>
 					</div>
@@ -684,7 +684,7 @@
 											<button
 												type="button"
 												onclick={() => removeGalleryItem(index)}
-												class="text-jbc-red hover:text-jbc-red-deep ml-2"
+												class="text-jbc-ember hover:text-jbc-ember/85 ml-2"
 											>
 												Remove
 											</button>
@@ -694,7 +694,7 @@
 										type="text"
 										bind:value={gallery[index].caption}
 										placeholder="Photo caption..."
-										class="w-full px-2.5 py-1.5 bg-[#1a1a1a] border border-white/10 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-red"
+										class="w-full px-2.5 py-1.5 bg-[#1a1a1a] border border-white/10 text-white text-xs rounded-sm focus:outline-none focus:border-jbc-ember"
 									/>
 								</div>
 							</div>
@@ -721,7 +721,7 @@
 					<button
 						type="submit"
 						disabled={isSubmitting || !title || !slug}
-						class="px-6 py-2.5 bg-jbc-red hover:bg-jbc-red-deep text-white text-xs font-semibold uppercase tracking-jbc-caps rounded-sm shadow-md transition-colors disabled:opacity-50 cursor-pointer flex items-center gap-2"
+						class="px-6 py-2.5 bg-jbc-ember hover:bg-jbc-ember/85 text-white text-xs font-semibold uppercase tracking-jbc-caps rounded-sm shadow-md transition-colors disabled:opacity-50 cursor-pointer flex items-center gap-2"
 					>
 						{#if isSubmitting}
 							<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">

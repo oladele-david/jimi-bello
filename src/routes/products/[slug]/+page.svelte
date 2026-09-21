@@ -10,6 +10,29 @@
 	let related = $derived(data.related);
 
 	let submitting = $state(false);
+
+	let otherImages = $derived.by(() => {
+		const imgs: string[] = [];
+		if (product.gallery) {
+			for (const g of product.gallery) {
+				if (g && !imgs.includes(g) && g !== product.image) {
+					imgs.push(g);
+				}
+			}
+		}
+		const fallbacks = [
+			'projects/four-poster-series/02',
+			'projects/iroko-dining-collection/01',
+			'projects/ikoyi-residence/01'
+		];
+		for (const fb of fallbacks) {
+			if (imgs.length >= 2) break;
+			if (!imgs.includes(fb) && fb !== product.image) {
+				imgs.push(fb);
+			}
+		}
+		return imgs.slice(0, 2);
+	});
 </script>
 
 <svelte:head>
@@ -65,17 +88,178 @@
 				</FadeUp>
 			</div>
 		</div>
+	</section>
 
-		<!-- Secondary Gallery Images (if available) -->
-		{#if product.gallery && product.gallery.length > 0}
-			<div class="mt-12 pt-12 border-t border-jbc-obsidian/10">
-				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-					{#each product.gallery as item, i}
-						<FadeUp index={i}>
-							<div class="relative aspect-[4/5] w-full overflow-hidden bg-jbc-obsidian/5">
+	<!-- Product Enquiry Section: Form on Left + 2 Images on Right + JB Offcut Watermark (matching Pasted image (2).png) -->
+	<section id="enquire" class="relative overflow-hidden border-t border-jbc-obsidian/10 bg-jbc-ivory py-20 lg:py-28">
+		<!-- Signature JB Monogram Offcut Watermark at the edge -->
+		<img
+			src="/logos/monogram-ember.svg"
+			aria-hidden="true"
+			class="pointer-events-none absolute -right-[12%] top-1/2 -translate-y-1/2 w-[42vw] max-w-[520px] opacity-[0.05] select-none"
+			alt=""
+		/>
+
+		<div class="relative shell">
+			<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+				<!-- Left Column: Minimal Form with Line-Inputs (approx 5.5 cols) -->
+				<div class="lg:col-span-6 max-w-xl">
+					<FadeUp>
+						<h2 class="text-xs sm:text-sm font-sans font-semibold tracking-[0.2em] uppercase text-jbc-obsidian">
+							Enquire About Our Products
+						</h2>
+					</FadeUp>
+
+					{#if form?.success}
+						<div class="mt-8 p-6 border border-jbc-ember/40 bg-jbc-ember/5">
+							<p class="text-base font-display text-jbc-obsidian font-medium">Thank you for your enquiry.</p>
+							<p class="mt-1 text-xs text-jbc-slate">
+								{form.message || 'Our studio will review your request and get back to you shortly.'}
+							</p>
+						</div>
+					{:else}
+						<form
+							method="POST"
+							use:enhance={() => {
+								submitting = true;
+								return async ({ update }) => {
+									submitting = false;
+									await update();
+								};
+							}}
+							class="mt-8 space-y-6"
+						>
+							<input type="hidden" name="subject" value="Product Enquiry: {product.title}" />
+
+							<!-- Row 1: First name & Last name -->
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+								<div>
+									<label for="firstName" class="sr-only">First name</label>
+									<input
+										type="text"
+										id="firstName"
+										name="name"
+										required
+										placeholder="First name"
+										value={form?.values?.name ?? ''}
+										class="w-full bg-transparent border-0 border-b border-jbc-obsidian/30 pb-2 text-sm text-jbc-obsidian placeholder-jbc-obsidian/50 focus:border-jbc-obsidian focus:outline-none transition-colors"
+									/>
+									{#if form?.errors?.name}
+										<p class="mt-1 text-xs text-jbc-ember">{form.errors.name}</p>
+									{/if}
+								</div>
+								<div>
+									<label for="lastName" class="sr-only">Last name</label>
+									<input
+										type="text"
+										id="lastName"
+										name="lastName"
+										placeholder="Last name"
+										class="w-full bg-transparent border-0 border-b border-jbc-obsidian/30 pb-2 text-sm text-jbc-obsidian placeholder-jbc-obsidian/50 focus:border-jbc-obsidian focus:outline-none transition-colors"
+									/>
+								</div>
+							</div>
+
+							<!-- Row 2: Email & Telephone -->
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+								<div>
+									<label for="email" class="sr-only">Your email address</label>
+									<input
+										type="email"
+										id="email"
+										name="email"
+										required
+										placeholder="Your email address"
+										value={form?.values?.email ?? ''}
+										class="w-full bg-transparent border-0 border-b border-jbc-obsidian/30 pb-2 text-sm text-jbc-obsidian placeholder-jbc-obsidian/50 focus:border-jbc-obsidian focus:outline-none transition-colors"
+									/>
+									{#if form?.errors?.email}
+										<p class="mt-1 text-xs text-jbc-ember">{form.errors.email}</p>
+									{/if}
+								</div>
+								<div>
+									<label for="phone" class="sr-only">Telephone</label>
+									<input
+										type="tel"
+										id="phone"
+										name="phone"
+										placeholder="Telephone"
+										value={form?.values?.phone ?? ''}
+										class="w-full bg-transparent border-0 border-b border-jbc-obsidian/30 pb-2 text-sm text-jbc-obsidian placeholder-jbc-obsidian/50 focus:border-jbc-obsidian focus:outline-none transition-colors"
+									/>
+								</div>
+							</div>
+
+							<!-- Row 3: Subject line -->
+							<div>
+								<label for="subjectSelect" class="sr-only">Subject</label>
+								<div class="relative">
+									<select
+										id="subjectSelect"
+										name="subjectDisplay"
+										class="w-full bg-transparent border-0 border-b border-jbc-obsidian/30 pb-2 text-sm text-jbc-obsidian focus:border-jbc-obsidian focus:outline-none transition-colors appearance-none pr-8 cursor-pointer"
+									>
+										<option value="Product enquiry: {product.title}" selected>Product enquiry: {product.title}</option>
+										<option value="Custom sizing: {product.title}">Custom sizing: {product.title}</option>
+										<option value="Press &amp; Catalogue">Press &amp; Catalogue</option>
+									</select>
+									<span class="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 text-xs text-jbc-obsidian/60" aria-hidden="true">
+										&#9662;
+									</span>
+								</div>
+							</div>
+
+							<!-- Row 4: Your message -->
+							<div>
+								<label for="message" class="sr-only">Your message</label>
+								<textarea
+									id="message"
+									name="message"
+									rows="3"
+									required
+									placeholder="Your message"
+									class="w-full bg-transparent border-0 border-b border-jbc-obsidian/30 pb-2 text-sm text-jbc-obsidian placeholder-jbc-obsidian/50 focus:border-jbc-obsidian focus:outline-none transition-colors resize-y"
+								>{form?.values?.message ?? ''}</textarea>
+								{#if form?.errors?.message}
+									<p class="mt-1 text-xs text-jbc-ember">{form.errors.message}</p>
+								{/if}
+							</div>
+
+							<!-- Row 5: Consent Checkbox -->
+							<div class="flex items-start gap-3 pt-1">
+								<input
+									type="checkbox"
+									id="consent"
+									name="consent"
+									class="mt-1 h-4 w-4 rounded-none border-jbc-obsidian/30 text-jbc-obsidian accent-jbc-obsidian focus:ring-0"
+								/>
+								<label for="consent" class="text-xs font-sans text-jbc-obsidian/75 leading-relaxed">
+									By joining the mailing list, I agree to the Privacy Policy
+								</label>
+							</div>
+
+							<!-- Submit Button -->
+							<div class="pt-3">
+								<button
+									type="submit"
+									disabled={submitting}
+									class="inline-flex items-center justify-center px-8 py-3.5 bg-jbc-obsidian text-jbc-white font-sans text-xs font-semibold tracking-[0.18em] uppercase hover:bg-jbc-ember transition-colors duration-300 disabled:opacity-50 cursor-pointer"
+								>
+									{submitting ? 'Sending Enquiry...' : 'Send Enquiry'}
+								</button>
+							</div>
+						</form>
+					{/if}
+				</div>
+
+				<!-- Right Column: The 2 Other Images (matching Pasted image (2).png) -->
+				<div class="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-6 items-start">
+					{#each otherImages as imgPath, idx}
+						<FadeUp index={idx}>
+							<div class="relative aspect-[3/4] w-full overflow-hidden bg-jbc-obsidian/5 shadow-sm">
 								<img
-									src={img(item, { w: 900, q: 85 })}
-									alt="{product.title} view"
+									src={img(imgPath, { w: 900, q: 88 })}
+									alt="{product.title} craft and interior view {idx + 1}"
 									class="h-full w-full object-cover"
 									loading="lazy"
 								/>
@@ -84,142 +268,6 @@
 					{/each}
 				</div>
 			</div>
-		{/if}
-	</section>
-
-	<!-- Product Enquiry Form Section -->
-	<section id="enquire" class="border-t border-jbc-obsidian/10 bg-jbc-ivory py-20 lg:py-28">
-		<div class="shell max-w-2xl">
-			<FadeUp class="text-center">
-				<h2 class="text-h2 font-display font-medium text-jbc-obsidian">
-					Enquire about our products
-				</h2>
-				<p class="mt-3 text-sm font-sans text-jbc-slate">
-					Please complete the form below regarding <span class="font-semibold text-jbc-obsidian">{product.title}</span> and our studio will be in touch.
-				</p>
-			</FadeUp>
-
-			{#if form?.success}
-				<div class="mt-10 p-8 border border-jbc-ember/40 bg-jbc-ember/5 text-center">
-					<p class="text-h2 font-display text-jbc-obsidian font-medium">Thank you for your enquiry.</p>
-					<p class="mt-2 text-sm text-jbc-slate">
-						{form.message || 'Our studio will review your request and get back to you shortly.'}
-					</p>
-				</div>
-			{:else}
-				<form
-					method="POST"
-					use:enhance={() => {
-						submitting = true;
-						return async ({ update }) => {
-							submitting = false;
-							await update();
-						};
-					}}
-					class="mt-10 space-y-6"
-				>
-					<!-- Pre-filled Product Subject -->
-					<input type="hidden" name="subject" value="Product Enquiry: {product.title}" />
-
-					<!-- Name (First & Last name) -->
-					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-						<div>
-							<label for="firstName" class="sr-only">First Name</label>
-							<input
-								type="text"
-								id="firstName"
-								name="name"
-								required
-								placeholder="First name *"
-								value={form?.values?.name ?? ''}
-								class="w-full bg-white border border-jbc-obsidian/15 px-4 py-3 text-sm text-jbc-obsidian placeholder-jbc-obsidian/40 focus:border-jbc-ember focus:outline-none transition-colors"
-							/>
-						</div>
-						<div>
-							<label for="lastName" class="sr-only">Last Name</label>
-							<input
-								type="text"
-								id="lastName"
-								name="lastName"
-								placeholder="Last name"
-								class="w-full bg-white border border-jbc-obsidian/15 px-4 py-3 text-sm text-jbc-obsidian placeholder-jbc-obsidian/40 focus:border-jbc-ember focus:outline-none transition-colors"
-							/>
-						</div>
-					</div>
-					{#if form?.errors?.name}
-						<p class="text-xs text-jbc-ember">{form.errors.name}</p>
-					{/if}
-
-					<!-- Email & Phone -->
-					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-						<div>
-							<label for="email" class="sr-only">Email</label>
-							<input
-								type="email"
-								id="email"
-								name="email"
-								required
-								placeholder="Your email address *"
-								value={form?.values?.email ?? ''}
-								class="w-full bg-white border border-jbc-obsidian/15 px-4 py-3 text-sm text-jbc-obsidian placeholder-jbc-obsidian/40 focus:border-jbc-ember focus:outline-none transition-colors"
-							/>
-							{#if form?.errors?.email}
-								<p class="mt-1 text-xs text-jbc-ember">{form.errors.email}</p>
-							{/if}
-						</div>
-						<div>
-							<label for="phone" class="sr-only">Telephone</label>
-							<input
-								type="tel"
-								id="phone"
-								name="phone"
-								placeholder="Telephone"
-								value={form?.values?.phone ?? ''}
-								class="w-full bg-white border border-jbc-obsidian/15 px-4 py-3 text-sm text-jbc-obsidian placeholder-jbc-obsidian/40 focus:border-jbc-ember focus:outline-none transition-colors"
-							/>
-						</div>
-					</div>
-
-					<!-- Subject display -->
-					<div>
-						<label for="subjectDisplay" class="sr-only">Subject</label>
-						<input
-							type="text"
-							id="subjectDisplay"
-							readonly
-							value="Product enquiry: {product.title}"
-							class="w-full bg-jbc-obsidian/5 border border-jbc-obsidian/15 px-4 py-3 text-sm text-jbc-obsidian/80 cursor-not-allowed"
-						/>
-					</div>
-
-					<!-- Message -->
-					<div>
-						<label for="message" class="sr-only">Your message</label>
-						<textarea
-							id="message"
-							name="message"
-							rows="5"
-							required
-							placeholder="Your message *"
-							class="w-full bg-white border border-jbc-obsidian/15 px-4 py-3 text-sm text-jbc-obsidian placeholder-jbc-obsidian/40 focus:border-jbc-ember focus:outline-none transition-colors"
-						>{form?.values?.message ?? ''}</textarea>
-						{#if form?.errors?.message}
-							<p class="mt-1 text-xs text-jbc-ember">{form.errors.message}</p>
-						{/if}
-					</div>
-
-					<!-- Submit button -->
-					<div class="pt-2">
-						<button
-							type="submit"
-							disabled={submitting}
-							class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 bg-jbc-obsidian text-jbc-white font-sans text-xs font-semibold tracking-[0.15em] uppercase hover:bg-jbc-ember transition-colors duration-300 disabled:opacity-50 cursor-pointer"
-						>
-							{submitting ? 'Sending Enquiry...' : 'Send Enquiry'}
-						</button>
-					</div>
-				</form>
-			{/if}
 		</div>
 	</section>
 

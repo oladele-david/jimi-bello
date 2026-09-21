@@ -1,17 +1,18 @@
-import { productBySlug, products } from '$lib/data/site';
+import { getProductBySlug, getProducts } from '$lib/server/db';
 import { error, fail } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export const load: PageServerLoad = async ({ params }) => {
-	const product = productBySlug(params.slug);
+export const load: PageServerLoad = async ({ params, platform }) => {
+	const product = await getProductBySlug(params.slug, platform);
 	if (!product) {
 		error(404, 'Product not found');
 	}
 
 	// Suggest up to 3 other pieces in the catalogue
-	const related = products.filter((p) => p.slug !== product.slug).slice(0, 3);
+	const allProducts = await getProducts(platform);
+	const related = allProducts.filter((p) => p.slug !== product.slug).slice(0, 3);
 
 	return {
 		product,

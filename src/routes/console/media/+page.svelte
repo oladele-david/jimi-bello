@@ -40,7 +40,7 @@
 					body: formData
 				});
 
-				const json = await res.json();
+				const json = (await res.json()) as any;
 				if (!res.ok || !json.success) {
 					throw new Error(json.error || `Failed to upload ${file.name}`);
 				}
@@ -168,7 +168,7 @@
 			</svg>
 			<h3 class="mt-4 text-sm font-semibold text-white">No media files found</h3>
 			<p class="mt-1 text-xs text-white/40">
-				Upload photographs and render assets directly to Cloudflare R2 bucket.
+				Upload photographs and architectural assets to your studio media library.
 			</p>
 		</div>
 	{:else}

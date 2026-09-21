@@ -29,3 +29,27 @@ CREATE TABLE IF NOT EXISTS media (
 );
 
 CREATE INDEX IF NOT EXISTS idx_media_created_at ON media(created_at);
+
+CREATE TABLE IF NOT EXISTS products (
+    slug TEXT PRIMARY KEY,
+    title TEXT NOT NULL,
+    category TEXT NOT NULL,
+    price TEXT NOT NULL,
+    price_note TEXT,
+    description TEXT NOT NULL,
+    image TEXT NOT NULL,
+    material TEXT,
+    dimensions TEXT,
+    lead_time TEXT,
+    gallery TEXT NOT NULL DEFAULT '[]', -- JSON array of image keys
+    featured INTEGER NOT NULL DEFAULT 0,
+    details TEXT NOT NULL DEFAULT '[]', -- JSON array of { label: string, value: string }
+    display_order INTEGER NOT NULL DEFAULT 0,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_products_category ON products(category);
+CREATE INDEX IF NOT EXISTS idx_products_featured ON products(featured);
+CREATE INDEX IF NOT EXISTS idx_products_display_order ON products(display_order);
+

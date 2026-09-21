@@ -2,7 +2,7 @@ import { redirect, type Handle } from '@sveltejs/kit';
 import { isAdminAuthenticated } from '$lib/server/auth';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const authenticated = await isAdminAuthenticated(event.cookies, event.platform);
+	const authenticated = await isAdminAuthenticated(event.cookies, event.platform as any);
 	event.locals.isAdmin = authenticated;
 
 	const { pathname } = event.url;

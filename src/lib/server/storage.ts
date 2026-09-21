@@ -7,7 +7,7 @@ export async function uploadToStorage(
 	data: Uint8Array | ArrayBuffer,
 	key: string,
 	contentType: string,
-	platform?: App.Platform
+	platform?: any
 ): Promise<{ key: string; url: string }> {
 	const bucket = platform?.env?.IMAGES_BUCKET;
 
@@ -48,7 +48,7 @@ export async function uploadToStorage(
 
 export async function getFromStorage(
 	key: string,
-	platform?: App.Platform
+	platform?: any
 ): Promise<{ data: BodyInit | Uint8Array | ReadableStream; contentType: string; size?: number } | null> {
 	const bucket = platform?.env?.IMAGES_BUCKET;
 	const normalizedKey = key.replace(/^\/+/, '');
@@ -89,7 +89,7 @@ export async function getFromStorage(
 	return null;
 }
 
-export async function deleteFromStorage(key: string, platform?: App.Platform): Promise<boolean> {
+export async function deleteFromStorage(key: string, platform?: any): Promise<boolean> {
 	const bucket = platform?.env?.IMAGES_BUCKET;
 	const normalizedKey = key.replace(/^\/+/, '');
 

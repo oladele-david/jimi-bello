@@ -72,7 +72,7 @@
 	{/if}
 
 	{#if form?.error}
-		<div class="p-4 bg-jbc-red/15 border border-jbc-red/40 rounded-sm text-jbc-red text-xs flex items-center gap-2">
+		<div class="p-4 bg-jbc-ember/15 border border-jbc-ember/40 rounded-sm text-jbc-ember text-xs flex items-center gap-2">
 			<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 			</svg>
@@ -93,6 +93,13 @@
 
 		{#if activeTab === 'projects'}
 			<div class="flex items-center gap-3 flex-wrap">
+				<a
+					href="/console/products"
+					class="px-3.5 py-2 rounded-sm text-xs font-medium text-white/80 hover:text-white border border-white/20 hover:border-white/40 transition-colors flex items-center gap-1.5"
+				>
+					<span>Manage Products &rarr;</span>
+				</a>
+
 				<button
 					type="button"
 					onclick={() => (showResetModal = true)}
@@ -103,7 +110,7 @@
 
 				<a
 					href="/console/projects/new"
-					class="inline-flex items-center gap-2 px-4 py-2 bg-jbc-red hover:bg-jbc-red-deep text-white text-xs font-semibold uppercase tracking-jbc-caps rounded-sm shadow-md transition-colors cursor-pointer no-underline"
+					class="inline-flex items-center gap-2 px-4 py-2 bg-jbc-ember hover:bg-jbc-ember/85 text-white text-xs font-semibold uppercase tracking-jbc-caps rounded-sm shadow-md transition-colors cursor-pointer no-underline"
 				>
 					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -120,11 +127,11 @@
 			type="button"
 			onclick={() => (activeTab = 'projects')}
 			class="p-4 rounded-sm border text-left transition-all cursor-pointer {activeTab === 'projects'
-				? 'bg-[#222] border-jbc-red shadow-md'
+				? 'bg-[#222] border-jbc-ember shadow-md'
 				: 'bg-[#181818] border-white/10 hover:border-white/20'}"
 		>
 			<div class="flex items-center justify-between">
-				<span class="text-xs font-bold uppercase tracking-wider {activeTab === 'projects' ? 'text-jbc-red' : 'text-white/80'}">
+				<span class="text-xs font-bold uppercase tracking-wider {activeTab === 'projects' ? 'text-jbc-ember' : 'text-white/80'}">
 					Portfolio Works
 				</span>
 				<span class="px-2 py-0.5 rounded text-[10px] bg-white/10 text-white/70">
@@ -138,11 +145,11 @@
 			type="button"
 			onclick={() => (activeTab = 'content')}
 			class="p-4 rounded-sm border text-left transition-all cursor-pointer {activeTab === 'content'
-				? 'bg-[#222] border-jbc-red shadow-md'
+				? 'bg-[#222] border-jbc-ember shadow-md'
 				: 'bg-[#181818] border-white/10 hover:border-white/20'}"
 		>
 			<div class="flex items-center justify-between">
-				<span class="text-xs font-bold uppercase tracking-wider {activeTab === 'content' ? 'text-jbc-red' : 'text-white/80'}">
+				<span class="text-xs font-bold uppercase tracking-wider {activeTab === 'content' ? 'text-jbc-ember' : 'text-white/80'}">
 					Site &amp; Brand
 				</span>
 				<span class="px-2 py-0.5 rounded text-[10px] uppercase font-semibold bg-white/10 text-white/60">
@@ -156,11 +163,11 @@
 			type="button"
 			onclick={() => (activeTab = 'contact')}
 			class="p-4 rounded-sm border text-left transition-all cursor-pointer {activeTab === 'contact'
-				? 'bg-[#222] border-jbc-red shadow-md'
+				? 'bg-[#222] border-jbc-ember shadow-md'
 				: 'bg-[#181818] border-white/10 hover:border-white/20'}"
 		>
 			<div class="flex items-center justify-between">
-				<span class="text-xs font-bold uppercase tracking-wider {activeTab === 'contact' ? 'text-jbc-red' : 'text-white/80'}">
+				<span class="text-xs font-bold uppercase tracking-wider {activeTab === 'contact' ? 'text-jbc-ember' : 'text-white/80'}">
 					Studio Details
 				</span>
 				<span class="px-2 py-0.5 rounded text-[10px] uppercase font-semibold bg-white/10 text-white/60">
@@ -174,11 +181,11 @@
 			type="button"
 			onclick={() => (activeTab = 'security')}
 			class="p-4 rounded-sm border text-left transition-all cursor-pointer {activeTab === 'security'
-				? 'bg-[#222] border-jbc-red shadow-md'
+				? 'bg-[#222] border-jbc-ember shadow-md'
 				: 'bg-[#181818] border-white/10 hover:border-white/20'}"
 		>
 			<div class="flex items-center justify-between">
-				<span class="text-xs font-bold uppercase tracking-wider {activeTab === 'security' ? 'text-jbc-red' : 'text-white/80'}">
+				<span class="text-xs font-bold uppercase tracking-wider {activeTab === 'security' ? 'text-jbc-ember' : 'text-white/80'}">
 					Security
 				</span>
 				<span class="px-2 py-0.5 rounded text-[10px] uppercase font-semibold bg-emerald-500/10 text-emerald-400">
@@ -221,7 +228,7 @@
 						type="button"
 						onclick={() => (selectedCategory = cat)}
 						class="px-3 py-1.5 rounded text-xs font-medium uppercase tracking-wider transition-colors cursor-pointer {selectedCategory === cat
-							? 'bg-jbc-red text-white'
+							? 'bg-jbc-ember text-white'
 							: 'text-white/60 hover:text-white hover:bg-white/5'}"
 					>
 						{cat}
@@ -240,7 +247,7 @@
 					type="text"
 					bind:value={searchQuery}
 					placeholder="Search projects..."
-					class="w-full pl-9 pr-4 py-2 bg-[#141414] border border-white/15 text-white placeholder-white/40 text-xs rounded-sm focus:outline-none focus:border-jbc-red focus:ring-1 focus:ring-jbc-red"
+					class="w-full pl-9 pr-4 py-2 bg-[#141414] border border-white/15 text-white placeholder-white/40 text-xs rounded-sm focus:outline-none focus:border-jbc-ember focus:ring-1 focus:ring-jbc-ember"
 				/>
 				{#if searchQuery}
 					<button
@@ -269,7 +276,7 @@
 				<div class="mt-6">
 					<a
 						href="/console/projects/new"
-						class="inline-flex items-center gap-1.5 px-4 py-2 bg-jbc-red hover:bg-jbc-red-deep text-white text-xs font-semibold uppercase tracking-jbc-caps rounded-sm no-underline"
+						class="inline-flex items-center gap-1.5 px-4 py-2 bg-jbc-ember hover:bg-jbc-ember/85 text-white text-xs font-semibold uppercase tracking-jbc-caps rounded-sm no-underline"
 					>
 						+ Create Project
 					</a>
@@ -294,7 +301,7 @@
 								<span class="px-2 py-0.5 bg-black/60 backdrop-blur-md border border-white/20 text-white text-[10px] font-semibold uppercase tracking-wider rounded-xs">
 									{project.category}
 								</span>
-								<span class="px-2 py-0.5 bg-jbc-red/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider rounded-xs">
+								<span class="px-2 py-0.5 bg-jbc-ember/80 backdrop-blur-md text-white text-[10px] font-semibold uppercase tracking-wider rounded-xs">
 									{project.shape || 'square'}
 								</span>
 							</div>
@@ -352,7 +359,7 @@
 									<button
 										type="button"
 										onclick={() => (deleteTarget = project)}
-										class="px-2.5 py-1 rounded text-xs text-jbc-red/70 hover:text-jbc-red hover:bg-jbc-red/10 transition-colors cursor-pointer"
+										class="px-2.5 py-1 rounded text-xs text-jbc-ember/70 hover:text-jbc-ember hover:bg-jbc-ember/10 transition-colors cursor-pointer"
 									>
 										Delete
 									</button>
@@ -445,7 +452,7 @@
 
 				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 					<div class="bg-[#141414] border border-white/10 p-5 rounded-sm space-y-3">
-						<span class="text-xs font-semibold uppercase tracking-wider text-jbc-red">Main Studio</span>
+						<span class="text-xs font-semibold uppercase tracking-wider text-jbc-ember">Main Studio</span>
 						<p class="text-sm font-bold text-white">{siteContact.address.join(', ')}</p>
 						<p class="text-xs text-white/50 leading-relaxed">
 							Hours: {siteContact.hours}
@@ -453,7 +460,7 @@
 					</div>
 
 					<div class="bg-[#141414] border border-white/10 p-5 rounded-sm space-y-3">
-						<span class="text-xs font-semibold uppercase tracking-wider text-jbc-red">Direct Inquiries</span>
+						<span class="text-xs font-semibold uppercase tracking-wider text-jbc-ember">Direct Inquiries</span>
 						<p class="text-sm font-bold text-white">{siteContact.email}</p>
 						<p class="text-xs text-white/50 leading-relaxed">
 							Phone: {siteContact.phone}
@@ -461,7 +468,7 @@
 					</div>
 
 					<div class="bg-[#141414] border border-white/10 p-5 rounded-sm space-y-3">
-						<span class="text-xs font-semibold uppercase tracking-wider text-jbc-red">Social Channels</span>
+						<span class="text-xs font-semibold uppercase tracking-wider text-jbc-ember">Social Channels</span>
 						<div class="space-y-2">
 							{#each siteContact.social as social}
 								<a
@@ -573,7 +580,7 @@
 				<button
 					type="submit"
 					disabled={isResetting}
-					class="px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-jbc-red hover:bg-jbc-red-deep text-white rounded-sm transition-colors disabled:opacity-50 cursor-pointer"
+					class="px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-jbc-ember hover:bg-jbc-ember/85 text-white rounded-sm transition-colors disabled:opacity-50 cursor-pointer"
 				>
 					{isResetting ? 'Resetting...' : 'Confirm Reset'}
 				</button>
@@ -619,7 +626,7 @@
 				<button
 					type="submit"
 					disabled={isDeleting}
-					class="px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-jbc-red hover:bg-jbc-red-deep text-white rounded-sm transition-colors disabled:opacity-50 cursor-pointer"
+					class="px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-jbc-ember hover:bg-jbc-ember/85 text-white rounded-sm transition-colors disabled:opacity-50 cursor-pointer"
 				>
 					{isDeleting ? 'Deleting...' : 'Delete Project'}
 				</button>

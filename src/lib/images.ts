@@ -47,11 +47,19 @@ function isDirectUrl(name: string): boolean {
 	);
 }
 
-export function img(name: string, width: number, _options: ImageOptions = {}) {
+export function img(
+	name: string,
+	widthOrOptions: number | { w?: number; width?: number; q?: number; quality?: number; ratio?: number; [key: string]: any } = 1024,
+	_options: ImageOptions = {}
+) {
 	if (!name) return '';
 	if (isDirectUrl(name)) {
 		return name;
 	}
+	const width =
+		typeof widthOrOptions === 'number'
+			? widthOrOptions
+			: (widthOrOptions?.w ?? widthOrOptions?.width ?? 1024);
 	return `${BASE}${name}-${nearestWidth(width)}.webp`;
 }
 

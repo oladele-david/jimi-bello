@@ -37,20 +37,20 @@ async function verifySignedString(signedStr: string, secret: string): Promise<st
 	return null;
 }
 
-export function getAdminPassword(platform?: App.Platform): string {
+export function getAdminPassword(platform?: any): string {
 	return platform?.env?.ADMIN_PASSWORD || process.env.ADMIN_PASSWORD || DEFAULT_PASSWORD;
 }
 
-export function getAdminSecret(platform?: App.Platform): string {
+export function getAdminSecret(platform?: any): string {
 	return platform?.env?.ADMIN_SECRET || process.env.ADMIN_SECRET || DEFAULT_SECRET;
 }
 
-export async function verifyPassword(password: string, platform?: App.Platform): Promise<boolean> {
+export async function verifyPassword(password: string, platform?: any): Promise<boolean> {
 	const expected = getAdminPassword(platform);
 	return password === expected;
 }
 
-export async function setAdminSession(cookies: Cookies, platform?: App.Platform): Promise<void> {
+export async function setAdminSession(cookies: Cookies, platform?: any): Promise<void> {
 	const secret = getAdminSecret(platform);
 	const token = await createToken(secret);
 
@@ -75,7 +75,7 @@ export async function clearAdminSession(cookies: Cookies): Promise<void> {
 	});
 }
 
-export async function isAdminAuthenticated(cookies: Cookies, platform?: App.Platform): Promise<boolean> {
+export async function isAdminAuthenticated(cookies: Cookies, platform?: any): Promise<boolean> {
 	const token = cookies.get(COOKIE_SESSION_NAME);
 	if (!token) return false;
 
@@ -94,7 +94,7 @@ export interface RateLimitStatus {
 /**
  * Check if the current client is locked out due to exceeding maximum password attempts.
  */
-export async function getLoginRateLimitStatus(cookies: Cookies, platform?: App.Platform): Promise<RateLimitStatus> {
+export async function getLoginRateLimitStatus(cookies: Cookies, platform?: any): Promise<RateLimitStatus> {
 	const raw = cookies.get(COOKIE_RATELIMIT_NAME);
 	if (!raw) {
 		return {
@@ -154,7 +154,7 @@ export async function getLoginRateLimitStatus(cookies: Cookies, platform?: App.P
 /**
  * Record a failed login attempt and lock if threshold is met.
  */
-export async function recordFailedLoginAttempt(cookies: Cookies, platform?: App.Platform): Promise<RateLimitStatus> {
+export async function recordFailedLoginAttempt(cookies: Cookies, platform?: any): Promise<RateLimitStatus> {
 	const current = await getLoginRateLimitStatus(cookies, platform);
 	const newAttempts = current.attempts + 1;
 	const secret = getAdminSecret(platform);

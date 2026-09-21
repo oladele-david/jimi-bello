@@ -39,14 +39,14 @@
 		class: className = ''
 	}: Props = $props();
 
-	let resolvedColor = $derived<Color>(() => {
+	let resolvedColor = $derived.by<Color>(() => {
 		if (color) return color;
 		if (theme === 'dark') return 'white';
 		if (theme === 'light') return 'black';
 		return 'ember';
 	});
 
-	let baseName = $derived<string>(() => {
+	let baseName = $derived.by<string>(() => {
 		switch (variant) {
 			case 'monogram':
 			case 'icon':
@@ -61,15 +61,15 @@
 		}
 	});
 
-	let src = $derived(`/logos/${baseName()}-${resolvedColor()}.svg`);
+	let src = $derived(`/logos/${baseName}-${resolvedColor}.svg`);
 	let accessibleTitle = $derived(alt ?? title);
 </script>
 
 {#if variant === 'responsive'}
 	<picture class="inline-flex items-center">
-		<source media="(min-width: 1024px)" srcset="/logos/primary-logo-{resolvedColor()}.svg" />
+		<source media="(min-width: 1024px)" srcset="/logos/primary-logo-{resolvedColor}.svg" />
 		<img
-			src="/logos/monogram-{resolvedColor()}.svg"
+			src="/logos/monogram-{resolvedColor}.svg"
 			alt={accessibleTitle}
 			class={['block object-contain', className]}
 			style:width={width ? `${width}px` : undefined}

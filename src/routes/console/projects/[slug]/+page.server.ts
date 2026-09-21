@@ -73,7 +73,7 @@ export const actions: Actions = {
 	},
 
 	deleteProject: async ({ params, platform }) => {
-		const result = await deleteProject(params.slug, platform);
+		const result = await deleteProject(params.slug as string, platform);
 		if (!result.success) {
 			return fail(500, { error: result.error || 'Failed to delete project' });
 		}
