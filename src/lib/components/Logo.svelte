@@ -69,7 +69,7 @@
 	<picture class="inline-flex items-center">
 		<source media="(min-width: 1024px)" srcset="/logos/primary-logo-{resolvedColor}.svg" />
 		<img
-			src="/logos/monogram-{resolvedColor}.svg"
+			src="/logos/primary-logo-{resolvedColor}.svg"
 			alt={accessibleTitle}
 			class={['block object-contain', className]}
 			style:width={width ? `${width}px` : undefined}

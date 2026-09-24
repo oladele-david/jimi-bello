@@ -125,11 +125,11 @@
 
 <!-- Selected Work (Ivory Ground with Left Mirrored Watermark) -->
 <section class="relative overflow-hidden bg-jbc-ivory border-t border-jbc-obsidian/10 pb-[var(--spacing-section)] lg:pb-[var(--spacing-section-lg)] pt-12 lg:pt-16">
-	<!-- Left Watermark -->
+	<!-- Watermark on right edge -->
 	<img
 		src="/logos/monogram-ember.svg"
 		aria-hidden="true"
-		class="pointer-events-none absolute -left-[10%] top-1/3 -translate-y-1/2 w-[40vw] max-w-[500px] opacity-[0.05] select-none -scale-x-100"
+		class="pointer-events-none absolute -right-[10%] top-1/3 -translate-y-1/2 w-[40vw] max-w-[500px] opacity-[0.05] select-none"
 		alt=""
 	/>
 

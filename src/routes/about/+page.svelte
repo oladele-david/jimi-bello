@@ -154,10 +154,11 @@
 
 <!-- Workshop Section (Ivory Ground + Left Mirrored Watermark + Photography) -->
 <section class="relative overflow-hidden bg-jbc-ivory py-[var(--spacing-section)] lg:py-[var(--spacing-section-lg)]">
+	<!-- Watermark on right edge -->
 	<img
 		src="/logos/monogram-ember.svg"
 		aria-hidden="true"
-		class="pointer-events-none absolute -left-[10%] top-1/2 -translate-y-1/2 w-[40vw] max-w-[500px] opacity-[0.05] select-none -scale-x-100"
+		class="pointer-events-none absolute -right-[10%] top-1/2 -translate-y-1/2 w-[40vw] max-w-[500px] opacity-[0.05] select-none"
 		alt=""
 	/>
 

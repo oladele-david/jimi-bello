@@ -1,9 +1,12 @@
 <script lang="ts">
+	import { img, srcset } from '$lib/images';
 	import { products as fallbackProducts } from '$lib/data/site';
 	import ProductCard from '$lib/components/ProductCard.svelte';
 	import FadeUp from '$lib/components/FadeUp.svelte';
 
 	let { data } = $props();
+
+	const HERO = 'services/furniture-design';
 
 	let allProducts = $derived(data?.products && data.products.length > 0 ? data.products : fallbackProducts);
 
@@ -26,17 +29,31 @@
 </svelte:head>
 
 <main id="main" class="bg-jbc-ivory text-jbc-obsidian min-h-screen">
-	<!-- Editorial Intro -->
-	<section class="shell pt-36 lg:pt-44 pb-10">
-		<FadeUp>
-			<span class="eyebrow text-jbc-ember block font-semibold">Furniture &amp; Objects</span>
-			<h1 class="mt-3 text-h1 lg:text-[3.5rem] font-display font-medium text-jbc-obsidian tracking-jbc-tight max-w-[20ch]">
-				Pieces built for the life within.
-			</h1>
-			<p class="mt-4 max-w-[48ch] text-body-lg text-jbc-slate">
-				Handcrafted in solid timber in our Lagos workshop. Made to order and sized to your space.
-			</p>
-		</FadeUp>
+	<!-- Hero Section with Background Photography -->
+	<section class="dark-bg relative flex min-h-[68svh] flex-col justify-end overflow-hidden bg-jbc-obsidian pt-28 pb-16 lg:pt-36 lg:pb-22">
+		<img
+			class="absolute inset-0 h-full w-full object-cover"
+			src={img(HERO, 1920, { ratio: 16 / 9 })}
+			srcset={srcset(HERO, { ratio: 16 / 9 })}
+			sizes="100vw"
+			alt="Handcrafted furniture and bespoke architectural objects from the JimiBello &amp; Co. workshop"
+			width="1920"
+			height="1080"
+			fetchpriority="high"
+			decoding="async"
+		/>
+		<div class="scrim-page" aria-hidden="true"></div>
+		<div class="relative shell pb-16 text-jbc-white lg:pb-22">
+			<FadeUp>
+				<p class="eyebrow text-jbc-ember font-semibold uppercase">Furniture &amp; Objects</p>
+				<h1 class="mt-4 max-w-[18ch] text-h1 font-display font-bold tracking-jbc-tight lg:text-[4.25rem]">
+					Pieces built for the life within.
+				</h1>
+				<p class="mt-4 max-w-[48ch] text-body-lg text-jbc-white/80">
+					Handcrafted in solid timber in our Lagos workshop. Made to order and sized to your space.
+				</p>
+			</FadeUp>
+		</div>
 	</section>
 
 	<!-- Catalogue Section -->
@@ -49,7 +66,7 @@
 			alt=""
 		/>
 
-		<div class="relative shell">
+		<div class="relative shell pt-12">
 			<!-- Category filter bar -->
 			<div class="flex flex-wrap items-center justify-between gap-6 border-b border-jbc-obsidian/10 pb-6">
 				<div class="flex flex-wrap gap-2 sm:gap-4">

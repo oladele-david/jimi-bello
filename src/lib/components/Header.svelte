@@ -82,8 +82,8 @@
 			href="/"
 			aria-label="JimiBello Co., home"
 		>
-			<!-- Responsive Ember Logo: switches between primary logo (≥1024px) and monogram (<1024px) seamlessly -->
-			<Logo variant="responsive" color="ember" class="h-10 lg:h-12 w-auto" />
+			<!-- Full Primary Ember Logo: JB monogram with JimiBello Co underneath it across all screen sizes -->
+			<Logo variant="primary" color="ember" class="h-10 lg:h-12 w-auto" />
 		</a>
 
 		<nav class="hidden lg:block" aria-label="Primary">

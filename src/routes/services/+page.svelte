@@ -54,22 +54,13 @@
 		class="relative overflow-hidden scroll-mt-20 border-b border-jbc-obsidian/10 bg-jbc-ivory py-[var(--spacing-section)] lg:py-[var(--spacing-section-lg)]"
 		id={service.slug}
 	>
-		<!-- Watermark on alternating sides -->
-		{#if i % 2 === 0}
-			<img
-				src="/logos/monogram-ember.svg"
-				aria-hidden="true"
-				class="pointer-events-none absolute -right-[8%] top-1/2 -translate-y-1/2 w-[36vw] max-w-[480px] opacity-[0.05] select-none"
-				alt=""
-			/>
-		{:else}
-			<img
-				src="/logos/monogram-ember.svg"
-				aria-hidden="true"
-				class="pointer-events-none absolute -left-[8%] top-1/2 -translate-y-1/2 w-[36vw] max-w-[480px] opacity-[0.05] select-none -scale-x-100"
-				alt=""
-			/>
-		{/if}
+		<!-- Watermark on right edge -->
+		<img
+			src="/logos/monogram-ember.svg"
+			aria-hidden="true"
+			class="pointer-events-none absolute -right-[8%] top-1/2 -translate-y-1/2 w-[36vw] max-w-[480px] opacity-[0.05] select-none"
+			alt=""
+		/>
 
 		<div class="relative shell lg:grid lg:grid-cols-2 lg:items-center lg:gap-x-20">
 			<!-- Image Column -->
