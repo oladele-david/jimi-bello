@@ -1,10 +1,14 @@
 import { getProductBySlug, getProducts } from '$lib/server/db';
-import { error, fail } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoad, Actions } from './$types';
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const load: PageServerLoad = async ({ params, platform }) => {
+	if (params.slug === 'bello-sofa-series') {
+		redirect(301, '/products/bello-accent-chair-series');
+	}
+
 	const product = await getProductBySlug(params.slug, platform);
 	if (!product) {
 		error(404, 'Product not found');

@@ -73,10 +73,15 @@
 				</blockquote>
 				<div class="mt-8 relative aspect-[4/3] overflow-hidden bg-jbc-obsidian/10 shadow-sm hidden lg:block">
 					<img
-						src={img('projects/four-poster-series/01', { w: 800, q: 85 })}
-						alt="Workshop joinery detail"
+						src={img('pages/about-philosophy', 1024, { ratio: 4 / 3 })}
+						srcset={srcset('pages/about-philosophy', { ratio: 4 / 3 })}
+						sizes="(min-width: 64rem) 40vw, 100vw"
+						alt="Warm modern bedroom interior with bespoke wood furnishings by JimiBello & Co."
 						class="h-full w-full object-cover"
+						width="1024"
+						height="768"
 						loading="lazy"
+						decoding="async"
 					/>
 				</div>
 			</FadeUp>

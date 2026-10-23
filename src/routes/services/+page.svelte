@@ -11,7 +11,7 @@
 
 	const standard = services.filter((s) => !s.feature);
 	const feature = services.find((s) => s.feature);
-	const HERO = 'pages/about-hero';
+	const HERO = 'pages/services-hero';
 
 	const RULE_ITEM =
 		'relative pl-6 text-body leading-[1.5] text-jbc-obsidian/80 ' +

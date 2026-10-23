@@ -54,14 +54,18 @@ export async function getFromStorage(
 	const normalizedKey = key.replace(/^\/+/, '');
 
 	if (bucket) {
-		const object = await bucket.get(normalizedKey);
-		if (!object) return null;
-
-		return {
-			data: object.body,
-			contentType: object.httpMetadata?.contentType || 'image/webp',
-			size: object.size
-		};
+		try {
+			const object = await bucket.get(normalizedKey);
+			if (object) {
+				return {
+					data: object.body,
+					contentType: object.httpMetadata?.contentType || 'image/webp',
+					size: object.size
+				};
+			}
+		} catch (err) {
+			console.warn('Failed reading from bucket, falling back to local storage:', err);
+		}
 	}
 
 	// Local filesystem fallback

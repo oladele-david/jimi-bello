@@ -1,8 +1,12 @@
 import { getProjects, getProjectBySlug } from '$lib/server/db';
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params, platform }) => {
+	if (params.slug === 'bello-sofa-series') {
+		redirect(301, '/portfolio/bello-accent-chair-series');
+	}
+
 	const project = await getProjectBySlug(params.slug, platform);
 
 	if (!project) {

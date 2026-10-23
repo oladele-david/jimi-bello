@@ -46,18 +46,21 @@ export interface Product {
 
 export const products: Product[] = [
 	{
-		slug: 'bello-sofa-series',
-		title: 'Bello Sofa Series',
+		slug: 'bello-accent-chair-series',
+		title: 'Bello Accent Chair Series',
 		category: 'Living',
 		price: '₦2,400,000',
 		priceNote: 'Made to order · Custom sizing & upholstery available',
 		description:
-			'A considered collection of bespoke sofas, shaped with refined proportions and crafted to bring comfort, character, and quiet presence to the spaces they inhabit. Designed and crafted entirely in our Lagos workshop.',
-		image: 'projects/ikoyi-residence/hero',
-		material: 'Solid hardwood frame, bespoke linen-blend upholstery',
-		dimensions: 'W: 2400mm · D: 980mm · H: 780mm',
+			'A considered collection of bespoke accent chairs, shaped with refined proportions and crafted to bring comfort, character, and quiet presence to the spaces they inhabit. Designed and crafted entirely in our Lagos workshop.',
+		image: '/api/images/projects/bello-accent-chair-series/hero.webp',
+		material: 'Solid hardwood frame, bespoke monogram & linen upholstery',
+		dimensions: 'W: 820mm · D: 780mm · H: 760mm',
 		leadTime: '4–6 weeks',
-		gallery: ['projects/four-poster-series/01', 'projects/iroko-dining-collection/01', 'projects/four-poster-series/02'],
+		gallery: [
+			'/api/images/projects/bello-accent-chair-series/01-chairs.webp',
+			'/api/images/projects/bello-accent-chair-series/02-workshop-showcase.webp'
+		],
 		featured: true,
 		details: [
 			{ label: 'Origin', value: 'Handcrafted in JBC Workshop, Lagos' },
@@ -74,11 +77,11 @@ export const products: Product[] = [
 		priceNote: 'Available in Queen & King · Built to room ceiling height',
 		description:
 			'Redrawn for standard room heights — strong vertical posts with joinery-first construction. The frame carries the visual height without requiring high ceilings or canopies.',
-		image: 'projects/four-poster-series/hero',
+		image: '/api/images/projects/products/four-poster-bed.webp',
 		material: 'Solid Iroko / Seasoned West African Walnut',
 		dimensions: 'L: 2150mm · W: 1950mm · H: 2100mm',
 		leadTime: '4–5 weeks',
-		gallery: ['projects/four-poster-series/01', 'projects/four-poster-series/02', 'projects/four-poster-series/03'],
+		gallery: ['/api/images/projects/products/four-poster-bed.webp'],
 		featured: true,
 		details: [
 			{ label: 'Timber', value: 'Solid Iroko or Walnut, sustainably sourced' },
@@ -95,11 +98,11 @@ export const products: Product[] = [
 		priceNote: 'Single-slab timber run · Custom lengths from 8 to 14 seats',
 		description:
 			'Single-slab top on a knocked-down trestle base, built to the exact millimetre your room needs. Cut from single log runs so grain and tone remain continuous across the expanse.',
-		image: 'projects/iroko-dining-collection/hero',
+		image: '/api/images/projects/products/iroko-dining-table.webp',
 		material: 'Solid Iroko Timber, matte architectural oil',
 		dimensions: 'L: 3000mm · W: 1100mm · H: 750mm',
 		leadTime: '5–7 weeks',
-		gallery: ['projects/iroko-dining-collection/01', 'projects/iroko-dining-collection/02'],
+		gallery: ['/api/images/projects/products/iroko-dining-table.webp'],
 		featured: true,
 		details: [
 			{ label: 'Wood Selection', value: 'Single log run solid Iroko slab' },
@@ -116,11 +119,11 @@ export const products: Product[] = [
 		priceNote: 'Integrated soft-closing hardware',
 		description:
 			'Handcrafted cabinetry with integrated flush pulls and soft-closing joinery. Generous interior storage configured for home audio, glassware, or curated essentials.',
-		image: 'projects/ikoyi-residence/04',
+		image: '/api/images/projects/products/woodwolves-credenza.webp',
 		material: 'Smoked Oak, hand-turned brass hardware',
 		dimensions: 'W: 2000mm · D: 500mm · H: 800mm',
 		leadTime: '4–6 weeks',
-		gallery: ['projects/ikoyi-residence/01', 'projects/ikoyi-residence/03'],
+		gallery: ['/api/images/projects/products/woodwolves-credenza.webp'],
 		featured: false,
 		details: [
 			{ label: 'Hardware', value: 'Concealed Blum soft-close hinges, brass pulls' },
@@ -136,11 +139,11 @@ export const products: Product[] = [
 		priceNote: 'Sold individually or in tailored sets',
 		description:
 			'Curved back support with seat height calibrated directly to our dining collection. Engineered using traditional steam-bending techniques for ergonomic comfort and structural resilience.',
-		image: 'projects/iroko-dining-collection/02',
+		image: '/api/images/projects/products/steam-bent-dining-chair.webp',
 		material: 'Steam-bent solid hardwood, natural linen seat pad',
 		dimensions: 'W: 520mm · D: 540mm · H: 820mm (Seat H: 460mm)',
 		leadTime: '3–4 weeks',
-		gallery: ['projects/iroko-dining-collection/01'],
+		gallery: ['/api/images/projects/products/steam-bent-dining-chair.webp'],
 		featured: false,
 		details: [
 			{ label: 'Craft Technique', value: 'Steam-bent solid timber curve' },
@@ -156,11 +159,11 @@ export const products: Product[] = [
 		priceNote: 'Each slab features unique natural edge grain',
 		description:
 			'Low-profile solid wood coffee table with organic edge treatment and recessed architectural base. Designed to ground open living rooms with warmth and tactile presence.',
-		image: 'projects/four-poster-series/02',
+		image: '/api/images/projects/products/loft-coffee-table.webp',
 		material: 'Natural Walnut, satin protective seal',
 		dimensions: 'L: 1400mm · W: 750mm · H: 380mm',
 		leadTime: '3–4 weeks',
-		gallery: ['projects/four-poster-series/03'],
+		gallery: ['/api/images/projects/products/loft-coffee-table.webp'],
 		featured: false,
 		details: [
 			{ label: 'Profile', value: 'Chamfered edge with recessed shadowline base' },
@@ -265,24 +268,24 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
-		slug: 'bello-sofa-series',
-		title: 'Bello Sofa Series',
+		slug: 'bello-accent-chair-series',
+		title: 'Bello Accent Chair Series',
 		category: 'Furniture',
 		year: '2025',
 		location: 'JBC Workshop, Lagos',
 		scope: 'Furniture design · Bespoke upholstery · Small-batch production',
 		excerpt:
-			'A considered collection of bespoke sofas, shaped with refined proportions and crafted to bring comfort, character, and quiet presence to the spaces they inhabit.',
+			'A considered collection of bespoke accent chairs, shaped with refined proportions, monogram detailing, and crafted to bring comfort, character, and quiet presence to the spaces they inhabit.',
 		body: [
-			'The Bello Sofa Series began with a single design principle: seating should define a space without overwhelming it. Designed and crafted entirely within our Lagos workshop, each piece balances generous proportions with architectural restraint.',
+			'The Bello Accent Chair Series began with a single design principle: seating should define a space without overwhelming it. Designed and crafted entirely within our Lagos workshop, each piece balances generous proportions with architectural restraint.',
 			'We construct every frame in-house using seasoned hardwood joinery, paired with layered foam densities and tailored upholstery selected to age with grace and character.',
-			'Available in bespoke configurations, from intimate two-seaters to expansive modular arrangements, sized precisely to each room.'
+			'Available in bespoke configurations, custom timber finishes, and signature monogram textile options, sized precisely to each room.'
 		],
-		hero: 'projects/four-poster-series/hero',
+		hero: '/api/images/projects/bello-accent-chair-series/hero.webp',
 		gallery: [
-			{ id: 'projects/four-poster-series/01', caption: 'Frame construction and joinery detail' },
-			{ id: 'projects/iroko-dining-collection/01', caption: 'Material selection and upholstery finish' },
-			{ id: 'projects/four-poster-series/02', caption: 'Bello sofa in situ' }
+			{ id: '/api/images/projects/bello-accent-chair-series/01-chairs.webp', caption: 'Monogram accent chairs and solid timber side table' },
+			{ id: '/api/images/projects/bello-accent-chair-series/02-workshop-showcase.webp', caption: 'Workshop frame construction and finished upholstery showcase' },
+			{ id: '/api/images/projects/bello-accent-chair-series/03-dining-interior.webp', caption: 'Bespoke seating in contemporary dining and living setting' }
 		],
 		shape: 'tall'
 	},
@@ -300,12 +303,12 @@ export const projects: Project[] = [
 			'The open floor plate required precise zoning. Bespoke partition joinery and furniture groupings articulate distinct areas for living, dining, and working without severing visual connection or blocking natural light.',
 			'Every bespoke element, from the low-slung lounge seating to the recessed kitchen joinery, was manufactured in our workshop to fit the exact millimetre of the loft.'
 		],
-		hero: 'projects/ikoyi-residence/hero',
+		hero: '/api/images/projects/pats-loft/hero.webp',
 		gallery: [
-			{ id: 'projects/ikoyi-residence/01', caption: 'Open-plan living space with custom joinery' },
-			{ id: 'projects/ikoyi-residence/02', caption: 'Kitchen and dining zone' },
-			{ id: 'projects/ikoyi-residence/03', caption: 'Principal bedroom suite' },
-			{ id: 'projects/ikoyi-residence/04', caption: 'Built-in storage and details' }
+			{ id: '/api/images/projects/pats-loft/01-living.webp', caption: 'Lounge and entertainment living space with bespoke timber panelling' },
+			{ id: '/api/images/projects/pats-loft/02-bar-dining.webp', caption: 'Custom timber breakfast bar and partition joinery' },
+			{ id: '/api/images/projects/pats-loft/03-kitchen.webp', caption: 'Full kitchen cabinetry with integrated appliances and under-cabinet lighting' },
+			{ id: '/api/images/projects/pats-loft/04-kitchen-bar.webp', caption: 'Breakfast bar counter seating and corridor view' }
 		],
 		shape: 'square'
 	},
@@ -323,11 +326,11 @@ export const projects: Project[] = [
 			'Acoustic comfort and sightline integrity guided the spatial planning. In-house custom joinery walls double as subtle division markers, dampening sound while maintaining openness and flow.',
 			'Finished with durable yet warm materials, Nest demonstrates that commercial interiors can be efficient, enduring, and deeply characterful.'
 		],
-		hero: 'projects/victoria-island-studio/hero',
+		hero: '/api/images/projects/nest/hero.webp',
 		gallery: [
-			{ id: 'projects/victoria-island-studio/01', caption: 'Main collaborative workspace' },
-			{ id: 'projects/victoria-island-studio/02', caption: 'Quiet meeting room and breakout pod' },
-			{ id: 'projects/victoria-island-studio/03', caption: 'Acoustic joinery wall detail' }
+			{ id: '/api/images/projects/nest/01-reception.webp', caption: 'Reception lounge with branded signage and glass partition' },
+			{ id: '/api/images/projects/nest/02-corridor.webp', caption: 'Illuminated walkway corridor and lounge breakout' },
+			{ id: '/api/images/projects/nest/03-stairwell.webp', caption: 'Feature staircase with vertical garden and bamboo detail' }
 		],
 		shape: 'wide'
 	}

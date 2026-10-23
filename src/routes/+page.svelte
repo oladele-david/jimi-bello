@@ -18,7 +18,7 @@
 	let allProjects = $derived(data?.projects && data.projects.length > 0 ? data.projects : defaultProjects);
 
 	let pair = $derived.by(() => {
-		const found = allProjects.filter((p) => ['bello-sofa-series', 'pats-loft'].includes(p.slug));
+		const found = allProjects.filter((p) => ['bello-accent-chair-series', 'pats-loft'].includes(p.slug));
 		return found.length >= 2 ? found.slice(0, 2) : allProjects.slice(0, 2);
 	});
 
@@ -85,14 +85,16 @@
 			<FadeUp class="lg:col-span-5">
 				<div class="relative aspect-[4/5] overflow-hidden bg-jbc-obsidian/10 shadow-md">
 					<img
-						src={img('projects/ikoyi-residence/01', { w: 900, q: 85 })}
-						alt="Curated interior living space by JimiBello & Co."
+						src={img('pages/home-who-we-are', 1024, { ratio: 4 / 5 })}
+						srcset={srcset('pages/home-who-we-are', { ratio: 4 / 5 })}
+						sizes="(min-width: 64rem) 42vw, 100vw"
+						alt="Warm modern walnut dining interior by JimiBello & Co."
 						class="h-full w-full object-cover"
+						width="1024"
+						height="1280"
 						loading="lazy"
+						decoding="async"
 					/>
-					<div class="absolute bottom-4 left-4 bg-jbc-obsidian/85 px-3 py-1 text-eyebrow text-jbc-white backdrop-blur-sm">
-						Ikoyi Residence
-					</div>
 				</div>
 			</FadeUp>
 
