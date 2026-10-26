@@ -43,7 +43,7 @@
 <!-- Hero Section -->
 <section class="dark-bg relative flex min-h-svh flex-col justify-end overflow-hidden bg-jbc-obsidian pt-28 pb-16 lg:pt-36 lg:pb-24">
 	<img
-		class="absolute inset-0 h-full w-full object-cover"
+		class="absolute inset-x-0 bottom-0 -top-[8%] h-[108%] w-full object-cover lg:top-0 lg:h-full"
 		src={img(HERO, 1920, { ratio: 16 / 10 })}
 		srcset={srcset(HERO, { ratio: 16 / 10 })}
 		sizes="100vw"
